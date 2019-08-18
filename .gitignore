@@ -1,0 +1,8 @@
+# Build Directory
+/build/
+
+# Zip Directory
+/zip/
+
+# Node Modules
+/node_modules/
