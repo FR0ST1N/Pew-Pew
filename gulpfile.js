@@ -3,6 +3,14 @@ const gulp = require('gulp');
 const htmlLint = require('gulp-htmllint');
 const cssLint = require('gulp-stylelint');
 const jsLint = require('gulp-eslint');
+const concat = require('gulp-concat');
+const htmlMin = require('gulp-htmlmin');
+const cssMin = require('gulp-clean-css');
+const jsMin = require('gulp-uglify');
+const zip = require('gulp-zip');
+const rimraf = require('gulp-rimraf');
+const checkSize = require('gulp-check-filesize');
+const imageMin = require('gulp-imagemin');
 
 gulp.task('htmlLint', function() {
   return gulp.src('src/index.html')
@@ -22,8 +30,69 @@ gulp.task('jsLint', function() {
       .pipe(jsLint.format());
 });
 
+gulp.task('htmlBuild', function() {
+  return gulp.src('src/index.html')
+      .pipe(htmlMin({
+        collapseWhitespace: true,
+        removeComments: true,
+        html5: true,
+      }))
+      .pipe(gulp.dest('build'));
+});
+
+gulp.task('cssBuild', function() {
+  return gulp.src('src/css/*.css')
+      .pipe(concat('style.min.css'))
+      .pipe(cssMin())
+      .pipe(gulp.dest('build/css'));
+});
+
+gulp.task('jsBuild', function() {
+  return gulp.src('src/js/*js')
+      .pipe(concat('main.min.js'))
+      .pipe(jsMin())
+      .pipe(gulp.dest('build/js'));
+});
+
+gulp.task('imageMin', function() {
+  return gulp.src('src/images/*')
+      .pipe(imageMin({optimizationLevel: 5}))
+      .pipe(gulp.dest('build/images'));
+});
+
+gulp.task('clean', function() {
+  return gulp.src(['build/*', 'zip/*'], {read: false})
+      .pipe(rimraf());
+});
+
+gulp.task('zip', function() {
+  const maxSize = 1024 * 13;
+
+  return gulp.src('build/**')
+      .pipe(zip('PewPew.zip'))
+      .pipe(gulp.dest('zip'))
+      .pipe(checkSize({fileSizeLimit: maxSize}));
+});
+
+gulp.task('watch', function() {
+  gulp.watch('src/index.html', gulp.series('htmlLint', 'htmlBuild'));
+  gulp.watch('src/css/*.css', gulp.series('cssLint', 'cssBuild'));
+  gulp.watch('src/js/*.js', gulp.series('jsLint', 'jsBuild'));
+  gulp.watch('src/images/*', gulp.series('imageMin'));
+});
+
 gulp.task('lint', gulp.parallel(
     'htmlLint',
     'cssLint',
     'jsLint'
+));
+
+gulp.task('build', gulp.series(
+    'lint',
+    'clean',
+    'htmlBuild',
+    'cssBuild',
+    'jsBuild',
+    'imageMin',
+    'zip'
 ));
