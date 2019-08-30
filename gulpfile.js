@@ -6,7 +6,7 @@ const jsLint = require('gulp-eslint');
 const concat = require('gulp-concat');
 const htmlMin = require('gulp-htmlmin');
 const cssMin = require('gulp-clean-css');
-const jsMin = require('gulp-uglify');
+const jsMin = require('gulp-minify');
 const zip = require('gulp-zip');
 const rimraf = require('gulp-rimraf');
 const checkSize = require('gulp-check-filesize');
@@ -48,9 +48,9 @@ gulp.task('cssBuild', function() {
 });
 
 gulp.task('jsBuild', function() {
-  return gulp.src('src/js/*js')
-      .pipe(concat('main.min.js'))
-      .pipe(jsMin())
+  return gulp.src('src/js/*.js')
+      .pipe(concat('main.js'))
+      .pipe(jsMin({noSource: true}))
       .pipe(gulp.dest('build/js'));
 });
 
