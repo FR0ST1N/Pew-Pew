@@ -41,9 +41,6 @@
     "stylelint-config-standard": "^18.3.0"
   },
   "eslintConfig": {
-    "parserOptions": {
-      "sourceType": "module"
-    },
     "env": {
       "browser": true,
       "node": true,

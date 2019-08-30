@@ -26,6 +26,7 @@ gulp.task('cssLint', function() {
 
 gulp.task('jsLint', function() {
   return gulp.src('src/js/*.js')
+      .pipe(concat('main.js'))
       .pipe(jsLint())
       .pipe(jsLint.format());
 });
@@ -50,7 +51,12 @@ gulp.task('cssBuild', function() {
 gulp.task('jsBuild', function() {
   return gulp.src('src/js/*.js')
       .pipe(concat('main.js'))
-      .pipe(jsMin({noSource: true}))
+      .pipe(jsMin({
+        noSource: true,
+        ext: {
+          min: '.min.js',
+        },
+      }))
       .pipe(gulp.dest('build/js'));
 });
 
