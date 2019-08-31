@@ -31,6 +31,12 @@ gulp.task('jsLint', function() {
       .pipe(jsLint.format());
 });
 
+gulp.task('jsLintNoConcat', function() {
+  return gulp.src('src/js/*.js')
+      .pipe(jsLint())
+      .pipe(jsLint.format());
+});
+
 gulp.task('htmlBuild', function() {
   return gulp.src('src/index.html')
       .pipe(htmlMin({
