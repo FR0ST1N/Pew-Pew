@@ -125,19 +125,23 @@ class BulletPattern {
   }
 }
 
+
 /**
  *  Each bullet has its own behaviour,
  *  @todo after bulletCreation, bullet should move towards its targetPosition,
  *
 */
-class Bullet {
+class Bullet extends BulletMovement {
   /**
+   * @param {string} bulletImage
    * @param {Position} startposition
    * @param {Enumerator.BulletPattern} pattern
    * @param {number} speed
    * @param {number} damage
    */
-  constructor(startposition = null, pattern = BulletPattern.DEFAULT, speed = 1, damage = 1) {
+  constructor(bulletImage = 'bullet.png', startposition = null, pattern = BulletPattern.DEFAULT, speed = Speed.ONE, damage = 1) {
+    super(speed);
+    this.image = new BulletImage(bulletImage);
     this.position = startposition;
     this.pattern = pattern;
     this.speed = speed;
@@ -179,6 +183,11 @@ class Bullet {
      * @return {boolean}
      */
   fire() {
+    if (this.released) {
+      /** @todo  */
+    }
+    /** @todo */
+    this.straight(); /** currently for test purposes. */
     return true;
   }
 }
