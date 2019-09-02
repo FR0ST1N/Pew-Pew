@@ -1,3 +1,9 @@
 html {
-  background-color: white;
+  background-color: #daf3ec;
+}
+
+#game {
+  display: block;
+  margin: 0 auto;
+  border: 1px solid #ed008c;
 }
