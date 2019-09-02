@@ -31,13 +31,16 @@ class EnemyImage {
 }
 
 /** base class for enemy */
-class Enemy {
+class Enemy extends animationHelper {
   /**
+   * @param {string} imagename
    * @param {Position} position
    * @param {Bullet} bullet
    * @param {number} health
    */
-  constructor(position = null, bullet = Bullet.DEFAULT, health = 1 ) {
+  constructor(imagename = 'enemy.png', position = null, bullet = Bullet.DEFAULT, health = 1 ) {
+    super();
+    this.image = new EnemyImage(imagename);
     this.position = position;
     this.bullet = bullet;
     this.health = health;
