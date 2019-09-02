@@ -105,7 +105,7 @@ class BulletPattern {
    * @return {string}
    */
   static get DEFAULT() {
-    return Pattern.SCATTER;
+    return BulletPattern.STRAIGHT;
   }
 
   /**
