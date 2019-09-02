@@ -16,6 +16,6 @@ class Game {
    */
   init() {
     this.ctx.font = 'bold 48px serif';
-    this.ctx.fillText('Hello World!', 50, 100);
+    new EnemySpawner(this.ctx);
   }
 }
