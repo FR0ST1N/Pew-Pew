@@ -1,3 +1,99 @@
+/** basic animation wrapper for making life simpler */
+class animationHelper {
+  /**
+   * @param {context} context
+   */
+  wDraw() {
+    this.context.drawImage(this.image, this.position.x, this.position.y);
+  }
+
+  /**
+   * set context before using drawImage
+   * @param {context} context
+   */
+  setContext(context) {
+    this.context = context;
+  }
+}
+
+
+/** speed interms of setInterval,
+ * @todo change speeds after actual testing.
+ */
+class Speed {
+/**
+ * slow
+ * @return {number}
+ */
+  static get ONE() {
+    return 30;
+  }
+  /**
+   * medium
+   * @return {number}
+   */
+  static get TWO() {
+    return 20;
+  }
+
+  /**
+   * fast
+   * @return {number}
+   */
+  static get THREE() {
+    return 10;
+  }
+
+  /**
+   * noob level
+   * @return {number}
+   */
+  static get EXTREMESLOW() {
+    return 300;
+  }
+}
+
+
+/** helper for moving the bullets. */
+class BulletMovement extends animationHelper {
+  /**
+   * @param {number} timeout
+   */
+  constructor(timeout) {
+    super();
+    this.released = false;
+    const obj = this;
+    this.setInterval = setInterval( function() {
+      obj.fire();
+    }, timeout);
+  }
+
+  /** override this method in inherited class */
+  fire() { }
+
+  /**
+   * Straight along the x axis.
+   */
+  straight() {
+    this.position.x = this.position.x - 10;
+  }
+}
+
+
+/** builds different types of bullet */
+class BulletImage {
+  /**
+   * @param {string} name
+   */
+  constructor(name) {
+    const image = new Image();
+    image.src = 'images/'+name;
+    return image;
+  }
+}
+
+
+
 /** since enums are not available at disposable, enum alternative
  *  var/const pattern = {}; Object.freeze(pattern); could also work.
  * @readonly
