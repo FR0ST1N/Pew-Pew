@@ -1,55 +1,12 @@
-/** basic animation wrapper for making life simpler */
-class animationHelper {
+/** builds different types of bullet */
+class BulletImage {
   /**
-   * @param {context} context
+   * @param {string} name
    */
-  wDraw() {
-    this.context.drawImage(this.image, this.position.x, this.position.y);
-  }
-
-  /**
-   * set context before using drawImage
-   * @param {context} context
-   */
-  setContext(context) {
-    this.context = context;
-  }
-}
-
-
-/** speed interms of setInterval,
- * @todo change speeds after actual testing.
- */
-class Speed {
-/**
- * slow
- * @return {number}
- */
-  static get ONE() {
-    return 30;
-  }
-  /**
-   * medium
-   * @return {number}
-   */
-  static get TWO() {
-    return 20;
-  }
-
-  /**
-   * fast
-   * @return {number}
-   */
-  static get THREE() {
-    return 10;
-  }
-
-  /**
-   * noob level
-   * @return {number}
-   */
-  static get EXTREMESLOW() {
-    return 300;
+  constructor(name) {
+    const image = new Image();
+    image.src = 'images/'+name;
+    return image;
   }
 }
 
@@ -79,53 +36,6 @@ class BulletMovement extends animationHelper {
   }
 }
 
-
-/** builds different types of bullet */
-class BulletImage {
-  /**
-   * @param {string} name
-   */
-  constructor(name) {
-    const image = new Image();
-    image.src = 'images/'+name;
-    return image;
-  }
-}
-
-
-
-/** since enums are not available at disposable, enum alternative
- *  var/const pattern = {}; Object.freeze(pattern); could also work.
- * @readonly
- * @enum {string}
- */
-class BulletPattern {
-  /**
-   * bullet pattern default.
-   * @return {string}
-   */
-  static get DEFAULT() {
-    return BulletPattern.STRAIGHT;
-  }
-
-  /**
-   * bullet pattern stright
-   * @return {string}
-   */
-  static get STRAIGHT() {
-    return 'straight';
-  }
-
-  /**
-   * bullet pattern scatter
-   * @return {string}
-   */
-  static get SCATTER() {
-    return 'scatter';
-  }
-}
-
-
 /**
  *  Each bullet has its own behaviour,
  *  @todo after bulletCreation, bullet should move towards its targetPosition,
@@ -139,7 +49,7 @@ class Bullet extends BulletMovement {
    * @param {number} speed
    * @param {number} damage
    */
-  constructor(bulletImage = 'bullet.png', startposition = null, pattern = BulletPattern.DEFAULT, speed = Speed.ONE, damage = 1) {
+  constructor(bulletImage = 'bullet.png', startposition = null, pattern = BulletPattern.DEFAULT, speed = BulletSpeed.ONE, damage = 1) {
     super(speed);
     this.image = new BulletImage(bulletImage);
     this.position = startposition;
