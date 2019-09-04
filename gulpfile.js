@@ -12,6 +12,13 @@ const rimraf = require('gulp-rimraf');
 const checkSize = require('gulp-check-filesize');
 const imageMin = require('gulp-imagemin');
 
+const jsConcat = [
+  'src/js/sprite_sheet.js',
+  'src/js/player.js',
+  'src/js/game.js',
+  'src/js/main.js',
+];
+
 gulp.task('htmlLint', function() {
   return gulp.src('src/index.html')
       .pipe(htmlLint());
@@ -55,7 +62,7 @@ gulp.task('cssBuild', function() {
 });
 
 gulp.task('jsBuild', function() {
-  return gulp.src('src/js/*.js')
+  return gulp.src(jsConcat)
       .pipe(concat('main.js'))
       .pipe(jsMin({
         noSource: true,
@@ -87,6 +94,7 @@ gulp.task('zip', function() {
 });
 
 gulp.task('watch', function() {
+  console.log('Now Watching!');
   gulp.watch('src/index.html', gulp.series('htmlLint', 'htmlBuild'));
   gulp.watch('src/css/*.css', gulp.series('cssLint', 'cssBuild'));
   gulp.watch('src/js/*.js', gulp.series('jsLint', 'jsBuild'));
