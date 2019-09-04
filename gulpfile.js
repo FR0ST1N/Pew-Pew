@@ -62,7 +62,7 @@ gulp.task('cssBuild', function() {
 });
 
 gulp.task('jsBuild', function() {
-  return gulp.src(jsConcat)
+  return gulp.src(jsConcat, {allowEmpty: true})
       .pipe(concat('main.js'))
       .pipe(jsMin({
         noSource: true,
