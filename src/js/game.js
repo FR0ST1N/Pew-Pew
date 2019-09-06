@@ -25,6 +25,26 @@ class Game {
 
   /** Start Game. */
   start() {
+    const P_SS = {
+      image: 'images/player.png',
+      spriteSize: 32,
+      rows: 4,
+      columns: 2,
+    };
+    const SPRITE_NAMES = [
+      'idle1',
+      'idle2',
+      'pop1',
+      'pop2',
+      'push1',
+      'push2',
+      'shield',
+      'blank',
+    ];
+    const CANVAS_SIZE = {
+      width: this.width,
+      height: this.height,
+    };
     const KEYS = {
       left: 37,
       up: 38,
@@ -33,17 +53,7 @@ class Game {
       pew: 88,
       absorb: 90,
     };
-    const P_SS = {
-      image: 'images/player.png',
-      spriteSize: 32,
-      rows: 3,
-      columns: 2,
-    };
-    const CANVAS_SIZE = {
-      width: this.width,
-      height: this.height,
-    };
-    const PLAYER = new Player(P_SS, this.ctx, CANVAS_SIZE, KEYS);
+    const PLAYER = new Player(P_SS, SPRITE_NAMES, this.ctx, CANVAS_SIZE, KEYS);
     PLAYER.init();
   }
 }
