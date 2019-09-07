@@ -1,37 +1,48 @@
 
 /**
- * enemyImage Object.
+ * all the enemy movement logic goes here
  */
-class EnemyImage {
+class EnemyMovement extends EnemyAnimationHelper {
+
   /**
-   * @param {string} name
-   * @return {object} image
+   * @param {Sprite} sprite
+   * @param {SpriteConfig} spriteConfig
+   * @param {Position} position
    */
-  constructor(name) {
-    const image= new Image();
-    image.width = '50';
-    image.height = '50';
-    image.src = 'images/'+name;
-    return image;
+  constructor(sprite, spriteConfig, position) {
+    super(60, 30); /* this is the config, that defines frames per second */
+    this.sprite = sprite;
+    this.spriteConfig = spriteConfig;
+    this.position = position;
+  }
+
+  /**
+   * @param {context} context
+   */
+  startAnimation(context) {
+    this.setContext(context);
+    this.objectAnimation();
   }
 }
 
 /** base class for enemy */
-class Enemy extends animationHelper {
-  /**
-   * @param {string} imagename
-   * @param {Position} position
-   * @param {Bullet} bullet
-   * @param {number} health
-   */
-  constructor(imagename = 'enemy.png', position = null, bullet = Bullet.DEFAULT, health = 1 ) {
-    super();
-    this.image = new EnemyImage(imagename);
-    this.position = position;
+class Enemy extends EnemyMovement {
+/**
+ * 
+ * @param {Sprite} sprite
+ * @param {SpriteConfig} spriteConfig
+ * @param {Position} position
+ * @param {Bullet} bullet
+ * @param {number} health
+ */
+  constructor(sprite, spriteConfig, position = null,
+      bullet = Bullet.DEFAULT, health = 1 ) {
+    super(sprite, spriteConfig, position);
     this.bullet = bullet;
     this.health = health;
   }
 }
+
 
 /**
  * enemy creator
