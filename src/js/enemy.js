@@ -54,16 +54,11 @@ class EnemySpawner {
    * @param {context} context
    */
   constructor(context) {
-    const enemyPosition = new Position(300, 200);
-    const bullet = Bullet.DEFAULT; /* straight bullet*/
-    bullet.setBulletPostition(new Position(enemyPosition.x-20, enemyPosition.y));
-    const enemy = new Enemy('enemy.png', enemyPosition, bullet, 1);
-    enemy.setContext(context);
-    enemy.bullet.setContext(context);
-    setInterval(function() {
-      context.clearRect(0,0,800,600);
-      enemy.wDraw();
-      enemy.bullet.wDraw();
-    }, 10);
+    const sprite = new Sprite('placeholder.png',96,32,32,0,3,3);
+    const spriteConfig = new SpriteConfig([0, 1], [2, 3]);
+    const position = new Position(10,0);
+    const enemy1 = new Enemy(sprite, spriteConfig, position, null, 1);
+    enemy1.startAnimation(context);
   }
+
 }

@@ -15,7 +15,10 @@ const imageMin = require('gulp-imagemin');
 const jsConcat = [
   'src/js/sprite_sheet.js',
   'src/js/position.js',
+  'src/js/sprite.js',
+  'src/js/animationTimer.js',
   'src/js/animationHelper.js',
+  'src/js/enemyAnimationHelper.js',
   'src/js/bulletSpeed.js',
   'src/js/bulletPattern.js',
   'src/js/bullet.js',
