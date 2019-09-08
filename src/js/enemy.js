@@ -10,7 +10,7 @@ class EnemyMovement extends EnemyAnimationHelper {
    * @param {Position} position
    */
   constructor(sprite, spriteConfig, position) {
-    super(60, 30); /* this is the config, that defines frames per second */
+    super(15); /* this is the config, that defines frames per second */
     this.sprite = sprite;
     this.spriteConfig = spriteConfig;
     this.position = position;
@@ -54,11 +54,10 @@ class EnemySpawner {
    * @param {context} context
    */
   constructor(context) {
-    const sprite = new Sprite('placeholder.png',96,32,32,0,3,3);
-    const spriteConfig = new SpriteConfig([0, 1], [2, 3]);
-    const position = new Position(10,0);
+    const sprite = new Sprite('enemy1.png',2, 2, 128, 32, new Position(0, 0), 3, 3);
+    const spriteConfig = new SpriteConfig(['idle1', 'idle2'], ['fire1', 'fire2'], sprite);
+    const position = new Position(10, 0);
     const enemy1 = new Enemy(sprite, spriteConfig, position, null, 1);
     enemy1.startAnimation(context);
   }
-
 }
