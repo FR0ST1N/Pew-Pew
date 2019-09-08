@@ -14,15 +14,15 @@ const imageMin = require('gulp-imagemin');
 
 const jsConcat = [
   'src/js/sprite_sheet.js',
-  'src/js/position.js',
-  'src/js/sprite.js',
-  'src/js/timer.js',
-  'src/js/animationHelper.js',
-  'src/js/enemyAnimationHelper.js',
-  'src/js/bulletSpeed.js',
-  'src/js/bulletPattern.js',
-  'src/js/bullet.js',
-  'src/js/enemy.js',
+  'src/js/enemy/position.js',
+  'src/js/enemy/sprite.js',
+  'src/js/enemy/timer.js',
+  'src/js/enemy/animationHelper.js',
+  'src/js/enemy/enemyAnimationHelper.js',
+  'src/js/enemy/bulletSpeed.js',
+  'src/js/enemy/bulletPattern.js',
+  'src/js/enemy/bullet.js',
+  'src/js/enemy/enemy.js',
   'src/js/player.js',
   'src/js/game.js',
   'src/js/main.js',
@@ -41,14 +41,14 @@ gulp.task('cssLint', function() {
 });
 
 gulp.task('jsLint', function() {
-  return gulp.src('src/js/*.js')
+  return gulp.src('src/js/**/*.js')
       .pipe(concat('main.js'))
       .pipe(jsLint())
       .pipe(jsLint.format());
 });
 
 gulp.task('jsLintNoConcat', function() {
-  return gulp.src('src/js/*.js')
+  return gulp.src('src/js/**/*.js')
       .pipe(jsLint())
       .pipe(jsLint.format());
 });
@@ -106,7 +106,7 @@ gulp.task('watch', function() {
   console.log('Now Watching!');
   gulp.watch('src/index.html', gulp.series('htmlLint', 'htmlBuild'));
   gulp.watch('src/css/*.css', gulp.series('cssLint', 'cssBuild'));
-  gulp.watch('src/js/*.js', gulp.series('jsLint', 'jsBuild'));
+  gulp.watch('src/js/**/*.js', gulp.series('jsLint', 'jsBuild'));
   gulp.watch('src/images/*', gulp.series('imageMin'));
 });
 

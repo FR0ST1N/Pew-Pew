@@ -43,7 +43,7 @@ class EnemyMovement extends EnemyAnimationHelper {
 /** base class for enemy */
 class Enemy extends EnemyMovement {
 /**
- * 
+ *
  * @param {Sprite} sprite
  * @param {SpriteConfig} spriteConfig
  * @param {Position} position
