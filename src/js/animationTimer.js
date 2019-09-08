@@ -1,21 +1,18 @@
 /** Animation properties that all object in canvas should have,
  * ex |------------------------| represent total time
  *    |-----x------x------x-----| represent time to next frame.
- *    |-----x------x---|
  * */
 class AnimationTimer {
-/**
- * @param {*} totalTime
- * @param {*} timeIntervalToUpdate
- */
-  constructor(totalTime, timeIntervalToUpdate) {
+  /**
+   * @param {*} totalTime 
+   */
+  constructor(totalTime) {
     this.totalTime = totalTime;
-    this.timeIntervalToUpdate = timeIntervalToUpdate;
     this.timer = 0;
   }
 
   /**
-   * reset the timer, Object framesPersecond.
+   * reset the timer,
    */
   _resetTimer() {
     this.timer = 0;
@@ -26,17 +23,12 @@ class AnimationTimer {
    */
   stepTimer() {
     this.timer += 1;
-    if (this.timer == this.timeIntervalToUpdate || this.timer == 1)
-      return true;
-    else if (this.timer == this.totalTime)
+    if (this.timer == this.totalTime) {
       this._resetTimer();
-    return false;
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  /**
-   * check if frame initiated.
-   */
-  static get NOFRAME() {
-    return 0;
-  }
 }
