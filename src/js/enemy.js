@@ -3,17 +3,32 @@
  * all the enemy movement logic goes here
  */
 class EnemyMovement extends EnemyAnimationHelper {
-
   /**
    * @param {Sprite} sprite
    * @param {SpriteConfig} spriteConfig
    * @param {Position} position
    */
   constructor(sprite, spriteConfig, position) {
-    super(15); /* this is the config, that defines frames per second */
+    super(14); /* this is the config, that defines frames per second */
     this.sprite = sprite;
     this.spriteConfig = spriteConfig;
     this.position = position;
+  }
+
+  /**
+   *
+   */
+  _enemyMovement() {
+
+  }
+
+  /**
+   * enenmy changing position.
+   * @param {*} position 
+   */
+  _enemyPositionUpdate(position) {
+    this.position.x = position.x;
+    this.position.y = position.y;
   }
 
   /**
@@ -48,16 +63,21 @@ class Enemy extends EnemyMovement {
  * enemy creator
  */
 class EnemySpawner {
-
   /**
    * currently used as testing enemies
    * @param {context} context
    */
   constructor(context) {
-    const sprite = new Sprite('enemy1.png',2, 2, 128, 32, new Position(0, 0), 3, 3);
-    const spriteConfig = new SpriteConfig(['idle1', 'idle2'], ['fire1', 'fire2'], sprite);
-    const position = new Position(10, 0);
-    const enemy1 = new Enemy(sprite, spriteConfig, position, null, 1);
+    const sprite_enemy1 = new Sprite('enemy1.png', 2, 2, 128, 32, new Position(0, 0), 3, 3);
+    const spriteConfig_enemy1 = new SpriteConfig(['idle1', 'idle2'], ['fire1', 'fire2'], sprite_enemy1);
+    const position_enemy1 = new Position(100, 400);
+    const enemy1 = new Enemy(sprite_enemy1, spriteConfig_enemy1, position_enemy1, null, 1);
+    const sprite_enemy2 = new Sprite('enemy2.png', 2, 2, 128, 32, new Position(0, 0), 4, 4);
+    const spriteConfig_enemy2 = new SpriteConfig(['idle1', 'idle2'], ['fire1', 'fire2'], sprite_enemy2);
+    const position_enemy2 = new Position(100, 0);
+    const enemy2 = new Enemy(sprite_enemy2, spriteConfig_enemy2, position_enemy2, null, 1);
+
     enemy1.startAnimation(context);
+    enemy2.startAnimation(context);
   }
 }

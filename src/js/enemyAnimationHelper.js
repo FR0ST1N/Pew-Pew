@@ -20,6 +20,7 @@ class EnemyAnimationHelper extends animationHelper {
    * @override
    */
   objectUpdate() {
+    this._enemyMovement();
     if (this.fireState) {
       this._fireAnimation();
     } else {
@@ -34,7 +35,7 @@ class EnemyAnimationHelper extends animationHelper {
    */
   _fireAnimation() {
     if (!this._subAnimationState) {
-      this._workingState = this.spriteConfig.MOTION_1.slice(0);
+      this._workingState = this.spriteConfig.MOTION_2.slice(0);
     }
     if (Array.isArray(this._workingState) && this._workingState.length) {
       this.sprite.position = this.spriteConfig

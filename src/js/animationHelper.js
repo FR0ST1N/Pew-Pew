@@ -1,5 +1,5 @@
 /** basic animation wrapper for making life simpler */
-class animationHelper extends AnimationTimer {
+class animationHelper extends Timer {
   /**
    * @param {number} totalFrames
    * @param {number} fpsOfEnemy

@@ -2,7 +2,7 @@
  * ex |------------------------| represent total time
  *    |-----x------x------x-----| represent time to next frame.
  * */
-class AnimationTimer {
+class Timer {
   /**
    * @param {*} totalTime 
    */
@@ -24,6 +24,7 @@ class AnimationTimer {
   stepTimer() {
     this.timer += 1;
     if (this.timer == this.totalTime) {
+      console.log(this.timer);
       this._resetTimer();
       return true;
     } else {
