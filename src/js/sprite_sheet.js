@@ -63,4 +63,17 @@ class SpriteSheet {
       }
     }
   }
+
+  /**
+   * Get the position for sprite.
+   * @param {string} name Sprite name.
+   * @return {Position}
+   */
+  getSpritePosition(name) {
+    for (const S of this.sprites) {
+      if (S.name === name) {
+        return new Position(S.x, S.y);
+      }
+    }
+  }
 }
