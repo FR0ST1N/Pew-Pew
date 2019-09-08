@@ -13,8 +13,9 @@ const checkSize = require('gulp-check-filesize');
 const imageMin = require('gulp-imagemin');
 
 const jsConcat = [
-  'src/js/sprite_sheet.js',
-  'src/js/player.js',
+  'src/js/player/spriteSheet.js',
+  'src/js/player/playerUtil.js',
+  'src/js/player/player.js',
   'src/js/game.js',
   'src/js/main.js',
 ];
@@ -39,7 +40,7 @@ gulp.task('jsLint', function() {
 });
 
 gulp.task('jsLintNoConcat', function() {
-  return gulp.src('src/js/*.js')
+  return gulp.src('src/js/**/*.js')
       .pipe(jsLint())
       .pipe(jsLint.format());
 });
@@ -97,7 +98,7 @@ gulp.task('watch', function() {
   console.log('Now Watching!');
   gulp.watch('src/index.html', gulp.series('htmlLint', 'htmlBuild'));
   gulp.watch('src/css/*.css', gulp.series('cssLint', 'cssBuild'));
-  gulp.watch('src/js/*.js', gulp.series('jsLint', 'jsBuild'));
+  gulp.watch('src/js/**/*.js', gulp.series('jsLint', 'jsBuild'));
   gulp.watch('src/images/*', gulp.series('imageMin'));
 });
 

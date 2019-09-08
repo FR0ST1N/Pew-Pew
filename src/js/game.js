@@ -11,6 +11,7 @@ class Game {
     this.width = width;
     this.height = height;
     this.ctx = canvas.getContext('2d');
+    this.globalObject = {player: null};
   }
 
   /** Game initialization. */
@@ -19,12 +20,36 @@ class Game {
     this.ctx.imageSmoothingEnabled = false;
     /* Make movements smooth */
     this.ctx.globalCompositeOperation = 'source-over';
-    /* Invoke start method to start the game */
-    this.start();
+    /* Create and init player */
+    this.globalObject.player = this._createPlayer();
+    this.globalObject.player.init();
+    /* Render game */
+    this._render();
   }
 
-  /** Start Game. */
-  start() {
+  /** Main render method. */
+  _render() {
+    /* Clear canvas */
+    this.ctx.clearRect(0, 0, this.width, this.height);
+    /* Assign player obj to a temp const and increment player frame. */
+    const PLAYER = this.globalObject.player;
+    PLAYER.frameCounter++;
+    /* Paint BG */
+    this.ctx.fillStyle = '#260016';
+    this.ctx.fillRect(0, 0, this.width, this.height);
+    /* Change player position */
+    PLAYER.playerMovement();
+    /* Draw player */
+    PLAYER._drawFrame();
+    /* Refresh frame */
+    window.requestAnimationFrame(this._render.bind(this));
+  }
+
+  /**
+   * Create new player.
+   * @return {Player} A Player instance.
+   */
+  _createPlayer() {
     const P_SS = {
       image: 'images/player.png',
       spriteSize: 32,
@@ -54,6 +79,6 @@ class Game {
       absorb: 90,
     };
     const PLAYER = new Player(P_SS, SPRITE_NAMES, this.ctx, CANVAS_SIZE, KEYS);
-    PLAYER.init();
+    return PLAYER;
   }
 }

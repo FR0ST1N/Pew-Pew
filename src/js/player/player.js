@@ -58,18 +58,19 @@ class Player {
       pew: false,
       absorb: false,
     };
+    this.scale = {
+      player: 3,
+      barrier: 3.5,
+    };
     this.position = {
-      x: 30,
-      y: 30,
+      x: 15,
+      y: (canvasSize.height / 2) -
+          (spriteSheet.spriteSize * this.scale.player) / 2,
     };
     this.playerSpriteSheet = new SpriteSheet(
         spriteSheet.image,
         spriteSheet.spriteSize
     );
-    this.scale = {
-      player: 3,
-      barrier: 3.5,
-    };
     this.animState = 0;
     this.frameCounter = 0;
   }
@@ -82,65 +83,68 @@ class Player {
         this.spriteSheet.columns
     );
     this._startInputListeners();
-    this._render();
-  }
-
-  /** Main render function for player. */
-  _render() {
-    this.frameCounter++;
-    this.ctx.clearRect(0, 0, this.canvasSize.width, this.canvasSize.height);
-    /* Paint BG */
-    this.ctx.fillStyle = '#260016';
-    this.ctx.fillRect(0, 0, this.canvasSize.width, this.canvasSize.height);
-    /* Change player position */
-    const MOVE = 4;
-    const BOUND = 10;
-    if (this.pressed.left && this._bound('left', MOVE, BOUND)) {
-      this.position.x -= MOVE;
-    } else if (this.pressed.right && this._bound('right', MOVE, BOUND)) {
-      this.position.x += MOVE;
-    } else if (this.pressed.up && this._bound('up', MOVE, BOUND)) {
-      this.position.y -= MOVE;
-    } else if (this.pressed.down && this._bound('down', MOVE, BOUND)) {
-      this.position.y += MOVE;
-    }
-    this._drawFrame();
-    window.requestAnimationFrame(this._render.bind(this));
   }
 
   /**
-   * Ensures player stays inside the canvas.
-   * @param {string} direction Move Direction.
-   * @param {number} move Distance.
-   * @param {number} bound Bound value to stay inside.
-   * @return {boolean}
+   * Handle player movement.
+   * Called in render method.
    */
-  _bound(direction, move, bound) {
-    let result = false;
-    const MAX_BOUND = bound + (this.spriteSheet.spriteSize * this.scale.player);
-    switch (direction) {
-      case 'left':
-        result = this.position.x - move > (0 + bound) ?
-          true :
-          false;
-        break;
-      case 'right':
-        result = this.position.x + move < (this.canvasSize.width - MAX_BOUND) ?
-          true :
-          false;
-        break;
-      case 'up':
-        result = this.position.y - move > (0 + bound) ?
-          true :
-          false;
-        break;
-      case 'down':
-        result = this.position.y + move < (this.canvasSize.height - MAX_BOUND) ?
-          true :
-          false;
-        break;
+  playerMovement() {
+    const MOVE = 4;
+    const BOUND = 10;
+    if (
+      this.pressed.left &&
+        PlayerUtil.bound(
+            'left',
+            MOVE,
+            BOUND,
+            this.spriteSheet.spriteSize,
+            this.scale.player,
+            this.position,
+            this.canvasSize
+        )
+    ) {
+      this.position.x -= MOVE;
+    } else if (
+      this.pressed.right &&
+        PlayerUtil.bound(
+            'right',
+            MOVE,
+            BOUND,
+            this.spriteSheet.spriteSize,
+            this.scale.player,
+            this.position,
+            this.canvasSize
+        )
+    ) {
+      this.position.x += MOVE;
+    } else if (
+      this.pressed.up &&
+        PlayerUtil.bound(
+            'up',
+            MOVE,
+            BOUND,
+            this.spriteSheet.spriteSize,
+            this.scale.player,
+            this.position,
+            this.canvasSize
+        )
+    ) {
+      this.position.y -= MOVE;
+    } else if (
+      this.pressed.down &&
+        PlayerUtil.bound(
+            'down',
+            MOVE,
+            BOUND,
+            this.spriteSheet.spriteSize,
+            this.scale.player,
+            this.position,
+            this.canvasSize
+        )
+    ) {
+      this.position.y += MOVE;
     }
-    return result;
   }
 
   /** Draw a single player frame. */
@@ -149,13 +153,14 @@ class Player {
       this._absorbAnimation();
     } else if (this.pressed.pew) {
       this._fireAnimation();
-    } else if (this._isIdleAnim()) {
+    } else if (PlayerUtil.isIdleAnim(this.animState)) {
       this._idleAnimation();
     }
     /* Draw player in canvas */
-    this._imgDrawCall(
-        this.spriteSheet.image,
-        this.animState,
+    PlayerUtil.imgDrawCall(
+        this.ctx,
+        this.playerSpriteSheet,
+        this.spriteNames[this.animState],
         this.spriteSheet.spriteSize,
         this.position.x,
         this.position.y,
@@ -163,72 +168,22 @@ class Player {
     );
     /* Draw barrier on absorb */
     if (this.pressed.absorb) {
-      const CORRECTION = this._getBarrierPosition(
+      const CORRECTION = PlayerUtil.getBarrierPosition(
           this.scale.player,
           this.scale.barrier,
           this.spriteSheet.spriteSize
       );
       const X = this.position.x - CORRECTION;
       const Y = this.position.y - CORRECTION;
-      this._imgDrawCall(
-          this.spriteSheet.image,
-          6,
+      PlayerUtil.imgDrawCall(
+          this.ctx,
+          this.playerSpriteSheet,
+          this.spriteNames[6],
           this.spriteSheet.spriteSize,
           X,
           Y,
           this.scale.barrier
       );
-    }
-  }
-
-  /**
-   * @param {number} playerScale Player Scale.
-   * @param {number} barrierScale Barrier Scale.
-   * @param {number} size Sprite Size.
-   * @return {number} Size difference between barrier and player.
-   */
-  _getBarrierPosition(playerScale, barrierScale, size) {
-    const DIFF = barrierScale - playerScale;
-    return (size * DIFF) / 2;
-  }
-
-  /**
-   * drawImage() Helper.
-   * @param {string} img
-   * @param {number} spriteIndex
-   * @param {number} size
-   * @param {number} x
-   * @param {number} y
-   * @param {number} scale
-   */
-  _imgDrawCall(img, spriteIndex, size, x, y, scale) {
-    const SPRITE = this.playerSpriteSheet.getSprite(
-        this.spriteNames[spriteIndex]
-    );
-    const SPRITE_IMG = new Image();
-    SPRITE_IMG.src = img;
-    this.ctx.drawImage(
-        SPRITE_IMG,
-        SPRITE.x,
-        SPRITE.y,
-        size,
-        size,
-        x,
-        y,
-        size * scale,
-        size * scale
-    );
-  }
-
-  /**
-   * Checks if idle animation is playing.
-   * @return {boolean}
-   */
-  _isIdleAnim() {
-    if (this.animState === 0 || this.animState === 1) {
-      return true;
-    } else {
-      return false;
     }
   }
 
