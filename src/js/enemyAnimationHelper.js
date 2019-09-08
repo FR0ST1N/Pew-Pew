@@ -8,8 +8,8 @@ class EnemyAnimationHelper extends animationHelper {
    * @param {*} totalFrames
    * @param {*} framesForNextAnimation
    */
-  constructor(totalFrames, framesForNextAnimation) {
-    super(totalFrames, framesForNextAnimation);
+  constructor(totalFrames) {
+    super(totalFrames);
     this.fireState = false;
     this._subAnimationState =false;
     this._workingState = null;
@@ -20,13 +20,11 @@ class EnemyAnimationHelper extends animationHelper {
    * @override
    */
   objectUpdate() {
-    if (AnimationTimer.NOFRAME) 
-      this.currentFrame = 0;
-    else if (this.fireState) 
+    if (this.fireState) {
       this._fireAnimation();
-    else
+    } else {
       this._idleAnimation();
-    this.postObjectUpdate();
+    }
   }
 
   /**  
@@ -36,15 +34,13 @@ class EnemyAnimationHelper extends animationHelper {
    */
   _fireAnimation() {
     if (!this._subAnimationState) {
-      this._subAnimationState = true;
-      this._workingState = this.spriteConfig.motion_2.slice(0);
+      this._workingState = this.spriteConfig.MOTION_1.slice(0);
     }
     if (Array.isArray(this._workingState) && this._workingState.length) {
-      this.currentFrame = this._workingState.shift();
-    }
-    else {
-      this._subAnimationState = false;
-      this.fireState = false;
+      this.sprite.position = this.spriteConfig
+          .spriteSheet.getSpritePosition(this._workingState.shift());
+      this._subAnimationState = this.fireState = (
+        Array.isArray(this._workingState) && this._workingState.length);
     }
   }
 
@@ -53,14 +49,12 @@ class EnemyAnimationHelper extends animationHelper {
    */
   _idleAnimation() {
     if (!this._subAnimationState) {
-      this._subAnimationState = true;
-      this._workingState = this.spriteConfig.motion_1.slice(0);
+      this._workingState = this.spriteConfig.MOTION_1.slice(0);
     }
     if (Array.isArray(this._workingState) && this._workingState.length) {
-      this.currentFrame = this._workingState.shift();
-    }
-    else {
-      this._subAnimationState = false;
+      this.sprite.position = this.spriteConfig
+          .spriteSheet.getSpritePosition(this._workingState.shift());
+      this._subAnimationState = (Array.isArray(this._workingState) && this._workingState.length);
     }
   }
 

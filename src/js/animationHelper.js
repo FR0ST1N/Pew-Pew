@@ -5,7 +5,7 @@ class animationHelper extends AnimationTimer {
    * @param {number} fpsOfEnemy
    */
   constructor(totalFrames, fpsOfEnemy) {
-    super(totalFrames, fpsOfEnemy);
+    super(totalFrames);
   }
 
   /**
@@ -14,8 +14,8 @@ class animationHelper extends AnimationTimer {
   wDraw() {
     this.context.drawImage(
         this.sprite.image,
-        this.sprite.individualSpriteX * this.currentFrame,
-        this.sprite.individualSpriteY * this.currentFrame,
+        this.sprite.position.x,
+        this.sprite.position.y,
         this.sprite.individualSpriteSize,
         this.sprite.individualSpriteSize,
         this.position.x, this.position.y,
@@ -26,12 +26,10 @@ class animationHelper extends AnimationTimer {
 
   /**
    * override this method in child classe,
-   * but should follow same behaviour
-   * (i.e) call postObjectUpdate() after
-   * everything is done
+   * for animation logic, when it is time for
+   * next frame, this method will be called.
    */
   objectUpdate() {
-    postObjectUpdate();
   }
 
   /**
@@ -39,9 +37,12 @@ class animationHelper extends AnimationTimer {
    * based on the fps defined.
    */
   postObjectUpdate() {
-    if (this.stepTimer())
+    if (this.stepTimer()) {
+      this.objectUpdate();
       this.wDraw();
-    this.objectAnimation();
+      
+    }
+    requestAnimationFrame(this.objectAnimation.bind(this));
   }
 
   /**
@@ -56,6 +57,6 @@ class animationHelper extends AnimationTimer {
    * object movement loop.
    */
   objectAnimation() {
-    requestAnimationFrame(this.objectUpdate.bind(this));
+    requestAnimationFrame(this.postObjectUpdate.bind(this));
   }
 }
