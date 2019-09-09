@@ -16,6 +16,7 @@ const jsConcat = [
   'src/js/player/spriteSheet.js',
   'src/js/player/playerUtil.js',
   'src/js/player/player.js',
+  'src/js/collision/collisionDetection.js',
   'src/js/game.js',
   'src/js/main.js',
 ];
