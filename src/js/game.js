@@ -29,6 +29,8 @@ class Game {
     /* Create and init UI */
     this.globalObject.ui = new UserInterface(this.ctx);
     this.globalObject.ui.init();
+    this.enemySpawner = new EnemySpawner(this);
+
     /* Render game */
     this._render();
   }
@@ -47,6 +49,8 @@ class Game {
     PLAYER.playerMovement();
     /* Draw player */
     PLAYER._drawFrame();
+    /* Draw enemy */
+    this.enemySpawner.draw();
     /* Draw UI */
     this.globalObject.ui.draw(PLAYER.lives, PLAYER.bulletStack.length);
     /* Refresh frame */

@@ -14,10 +14,20 @@ const imageMin = require('gulp-imagemin');
 
 const jsConcat = [
   'src/js/player/spriteSheet.js',
+  'src/js/enemy/sprite.js',
+  'src/js/enemy/position.js',
+  'src/js/enemy/timer.js',
   'src/js/player/playerUtil.js',
   'src/js/player/player.js',
   'src/js/ui/userInterface.js',
   'src/js/collision/collisionDetection.js',
+  'src/js/enemy/animationHelper.js',
+  'src/js/enemy/bulletSpeed.js',
+  'src/js/enemy/bulletPattern.js',
+  'src/js/enemy/bulletAnimationHelper.js',
+  'src/js/enemy/bullet.js',
+  'src/js/enemy/enemyAnimationHelper.js',
+  'src/js/enemy/enemy.js',
   'src/js/game.js',
   'src/js/main.js',
 ];
@@ -35,7 +45,7 @@ gulp.task('cssLint', function() {
 });
 
 gulp.task('jsLint', function() {
-  return gulp.src('src/js/*.js')
+  return gulp.src('src/js/**/*.js')
       .pipe(concat('main.js'))
       .pipe(jsLint())
       .pipe(jsLint.format());
@@ -65,7 +75,7 @@ gulp.task('cssBuild', function() {
 });
 
 gulp.task('jsBuild', function() {
-  return gulp.src(jsConcat)
+  return gulp.src(jsConcat, {allowEmpty: true})
       .pipe(concat('main.js'))
       .pipe(jsMin({
         noSource: true,
