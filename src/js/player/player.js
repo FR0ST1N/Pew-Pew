@@ -30,7 +30,7 @@ class Player {
    * @param {CanvasRenderingContext2D} ctx Canvas context.
    * @param {canvasSize} canvasSize Canvas width and height.
    * @param {playerKeys} keys Keys for player control and action.
-   * @param {number} [lives=1] Player's life count.
+   * @param {number} [lives=3] Player's life count.
    * @param {number} [maxStackSize=5] Max bullets stack can hold.
    */
   constructor(
@@ -39,7 +39,7 @@ class Player {
       ctx,
       canvasSize,
       keys,
-      lives = 1,
+      lives = 3,
       maxStackSize = 5
   ) {
     this.spriteSheet = spriteSheet;

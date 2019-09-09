@@ -11,7 +11,10 @@ class Game {
     this.width = width;
     this.height = height;
     this.ctx = canvas.getContext('2d');
-    this.globalObject = {player: null};
+    this.globalObject = {
+      player: null,
+      ui: null,
+    };
   }
 
   /** Game initialization. */
@@ -23,6 +26,9 @@ class Game {
     /* Create and init player */
     this.globalObject.player = this._createPlayer();
     this.globalObject.player.init();
+    /* Create and init UI */
+    this.globalObject.ui = new UserInterface(this.ctx);
+    this.globalObject.ui.init();
     /* Render game */
     this._render();
   }
@@ -41,6 +47,8 @@ class Game {
     PLAYER.playerMovement();
     /* Draw player */
     PLAYER._drawFrame();
+    /* Draw UI */
+    this.globalObject.ui.draw(PLAYER.lives, PLAYER.bulletStack.length);
     /* Refresh frame */
     window.requestAnimationFrame(this._render.bind(this));
   }
