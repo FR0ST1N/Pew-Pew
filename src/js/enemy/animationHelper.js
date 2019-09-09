@@ -25,9 +25,8 @@ class animationHelper extends Timer {
   }
 
   /**
-   * override this method in child classe,
-   * for animation logic, when it is time for
-   * next frame, this method will be called.
+   * override this method in child classe, for animation logic.
+   * when it is time for next frame, this method will be called.
    */
   objectUpdate() {
   }

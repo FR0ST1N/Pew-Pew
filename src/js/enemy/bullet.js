@@ -12,17 +12,13 @@ class BulletImage {
 
 
 /** helper for moving the bullets. */
-class BulletMovement extends animationHelper {
+class BulletMovement extends BulletAnimationHelper {
   /**
    * @param {number} timeout
    */
-  constructor(timeout) {
+  constructor() {
     super();
     this.released = false;
-    const obj = this;
-    this.setInterval = setInterval( function() {
-      obj.fire();
-    }, timeout);
   }
 
   /** override this method in inherited class */
@@ -32,7 +28,7 @@ class BulletMovement extends animationHelper {
    * Straight along the x axis.
    */
   straight() {
-    this.position.x = this.position.x - 10;
+    this.position.x = this.position.x - 30;
   }
 }
 
@@ -49,8 +45,8 @@ class Bullet extends BulletMovement {
    * @param {number} speed
    * @param {number} damage
    */
-  constructor(bulletImage = 'bullet.png', startposition = null, pattern = BulletPattern.DEFAULT, speed = BulletSpeed.ONE, damage = 1) {
-    super(speed);
+  constructor(bulletImage = 'bullet1.png' ,startposition = null, pattern = BulletPattern.DEFAULT, speed = BulletSpeed.ONE, damage = 1) {
+    super();
     this.image = new BulletImage(bulletImage);
     this.position = startposition;
     this.pattern = pattern;
@@ -92,12 +88,13 @@ class Bullet extends BulletMovement {
      *  triggers animation
      * @return {boolean}
      */
-  fire() {
+  fire(context) {
+    this.context = context;
     if (this.released) {
       /** @todo  */
     }
     /** @todo */
-    this.straight(); /** currently for test purposes. */
+    this.objectAnimation(this.context);
     return true;
   }
 }
