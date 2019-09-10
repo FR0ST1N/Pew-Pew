@@ -12,6 +12,8 @@ class animationHelper extends Timer {
    * wrapper Draw.
    */
   wDraw() {
+    if (this.context == undefined)
+      return;
     this.context.drawImage(
         this.sprite.image,
         this.sprite.position.x,

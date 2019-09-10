@@ -15,6 +15,8 @@ class BulletAnimationHelper extends animationHelper   {
    * @override
    */
   wDraw() {
+    if (this.context == undefined)
+      return;
     this.context.drawImage(
         this.image,
         this.position.x,

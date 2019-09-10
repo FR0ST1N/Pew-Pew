@@ -22,7 +22,7 @@ class Sprite {
     this.image = image;
     this.rows = rows;
     this.columns = columns;
-    this.individualSpriteSize = 32;
+    this.individualSpriteSize = individualSpriteSize;
     this.totalSpriteSize = totalSpriteSize;
     this.position = position;
     this.scaleFactorX = scaleFactorX;
