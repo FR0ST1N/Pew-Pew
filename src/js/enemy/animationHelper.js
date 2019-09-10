@@ -4,7 +4,7 @@ class animationHelper extends Timer {
    * @param {number} totalFrames
    * @param {number} fpsOfEnemy
    */
-  constructor(totalFrames, fpsOfEnemy) {
+  constructor(totalFrames) {
     super(totalFrames);
   }
 
@@ -41,7 +41,7 @@ class animationHelper extends Timer {
     if (this.stepTimer()) {
       this.objectUpdate();
     }
-    requestAnimationFrame(this.objectAnimation.bind(this));
+    this.objectAnimation();
   }
 
   /**
@@ -53,9 +53,12 @@ class animationHelper extends Timer {
   }
 
   /**
-   * object movement loop.
+   * object movement loop,
+   * increased settimeout loop & decreased timer counter
    */
   objectAnimation() {
-    requestAnimationFrame(this.postObjectUpdate.bind(this));
+    setTimeout(() => {
+      this.postObjectUpdate();
+    }, 100);
   }
 }

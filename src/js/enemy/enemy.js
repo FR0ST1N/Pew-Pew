@@ -9,7 +9,7 @@ class EnemyMovement extends EnemyAnimationHelper {
    * @param {Position} position
    */
   constructor(sprite, spriteConfig, position) {
-    super(14); /* this is the config, that defines frames per second */
+    super(4); /** defines fps per 100ms */
     this.sprite = sprite;
     this.spriteConfig = spriteConfig;
     this.position = position;
@@ -106,7 +106,6 @@ class EnemySpawner {
     this.drawableObjects.forEach((enemy) => {
       enemy.wDraw();
       enemy.bullet.forEach((Enemybullet) => {
-        console.log(Enemybullet);
         //Enemybullet.wDraw();
       });
     });
