@@ -14,6 +14,7 @@ class Game {
     this.globalObject = {
       player: null,
       ui: null,
+      score: 0,
     };
   }
 
@@ -29,8 +30,8 @@ class Game {
     /* Create and init UI */
     this.globalObject.ui = new UserInterface(this.ctx);
     this.globalObject.ui.init();
+    /* Init enemy spawn */
     this.enemySpawner = new EnemySpawner(this);
-
     /* Render game */
     this._render();
   }
@@ -52,7 +53,11 @@ class Game {
     /* Draw enemy */
     this.enemySpawner.draw();
     /* Draw UI */
-    this.globalObject.ui.draw(PLAYER.lives, PLAYER.bulletStack.length);
+    this.globalObject.ui.draw(
+        PLAYER.lives,
+        PLAYER.bulletStack.length,
+        this.globalObject.score
+    );
     /* Refresh frame */
     window.requestAnimationFrame(this._render.bind(this));
   }

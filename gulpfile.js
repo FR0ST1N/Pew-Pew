@@ -19,6 +19,7 @@ const jsConcat = [
   'src/js/enemy/timer.js',
   'src/js/player/playerUtil.js',
   'src/js/player/player.js',
+  'src/js/font/font.js',
   'src/js/ui/userInterface.js',
   'src/js/collision/collisionDetection.js',
   'src/js/enemy/animationHelper.js',

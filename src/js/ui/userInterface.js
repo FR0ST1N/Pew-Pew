@@ -32,12 +32,14 @@ class UserInterface {
    * Draw UI.
    * @param {number} currHealth Player's current health/lives.
    * @param {number} stackLen Bullet stack length.
+   * @param {number} score Current score.
    */
-  draw(currHealth, stackLen) {
+  draw(currHealth, stackLen, score) {
     this.ctx.save();
     this.ctx.globalAlpha = 0.5;
     this._drawHealth(currHealth);
     this._drawBulletStack(stackLen);
+    this._drawScore(score.toString(), 5);
     this.ctx.restore();
   }
 
@@ -71,5 +73,16 @@ class UserInterface {
         540,
         7
     );
+  }
+
+  /**
+   * Draw current score.
+   * @param {number} value Score.
+   * @param {number} size Font size.
+   */
+  _drawScore(value, size) {
+    this.ctx.fillStyle = '#00bff3';
+    const CORRECTION = (value.length - 1) * 20;
+    Font.draw(value, size, this.ctx, 775 - CORRECTION, 10);
   }
 }
