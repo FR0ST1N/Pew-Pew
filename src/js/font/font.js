@@ -1,4 +1,9 @@
 /**
+ * @file Contains method to draw strings in canvas.
+ * @author Frostin<iamfrostin@gmail.com>
+ */
+
+/**
  * Pixel art font lib for canvas.
  * Modified ver. of PaulBGD's PixelFont repo.
  */
@@ -12,14 +17,14 @@ class Font {
    * @param {number} y
    */
   static draw(string, size, ctx, x, y) {
-    const charArr = this._getChars(string);
+    const CHAR_ARR = this._getChars(string);
     let currX = x;
-    for (let i = 0; i < charArr.length; i++) {
-      const letter = charArr[i];
+    for (let i = 0; i < CHAR_ARR.length; i++) {
+      const LETTER = CHAR_ARR[i];
       let currY = y;
       let addX = 0;
-      for (let y = 0; y < letter.length; y++) {
-        const row = letter[y];
+      for (let y = 0; y < LETTER.length; y++) {
+        const row = LETTER[y];
         for (let x = 0; x < row.length; x++) {
           if (row[x]) {
             ctx.fillRect(currX + x * size, currY, size, size);
@@ -38,7 +43,7 @@ class Font {
    * @return {Array.<boolean[]>}
    */
   static _getChars(string) {
-    const letters = {
+    const LETTERS = {
       'A': [
         [, 1],
         [1, , 1],
@@ -299,14 +304,14 @@ class Font {
         [0],
       ],
     };
-    const charArr = [];
+    const CHAR_ARR = [];
     string = string.toUpperCase();
     for (let i = 0; i < string.length; i++) {
-      const letter = letters[string.charAt(i)];
-      if (letter) {
-        charArr.push(letter);
+      const LETTER = LETTERS[string.charAt(i)];
+      if (LETTER) {
+        CHAR_ARR.push(LETTER);
       }
     }
-    return charArr;
+    return CHAR_ARR;
   }
 }
