@@ -7,7 +7,7 @@ class BulletAnimationHelper extends animationHelper   {
    * 
    */
   constructor() {
-    super(5); /* fps */
+    super(5); /* bullet movement timer */
     this.explodeState = false;
   }
 
@@ -40,8 +40,9 @@ class BulletAnimationHelper extends animationHelper   {
 
   /**
    * @override
+   * based on the defined pattern, that specific function is called.
    */
   objectUpdate() {
-    this.straight();
+    eval('this.'+this.pattern+'()');
   }
 }

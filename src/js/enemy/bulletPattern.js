@@ -25,7 +25,7 @@ class BulletPattern {
    * bullet pattern scatter
    * @return {string}
    */
-  static get SCATTER() {
-    return 'scatter';
+  static get FOLLOW() {
+    return 'follow';
   }
 }

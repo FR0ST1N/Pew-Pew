@@ -16,7 +16,7 @@ class BulletMovement extends BulletAnimationHelper {
    * Straight along the x axis.
    */
   straight() {
-    this.position.x = this.position.x - 10;
+    this.position.x = this.position.x - this.speed;
   }
 }
 
@@ -27,7 +27,7 @@ class BulletMovement extends BulletAnimationHelper {
 */
 class Bullet extends BulletMovement {
   /** */
-  constructor(sprite = null, startposition = null, pattern = BulletPattern.DEFAULT, speed = BulletSpeed.ONE, damage = 1) {
+  constructor(sprite = null, startposition = null, pattern = BulletPattern.DEFAULT, speed = 10, damage = 1) {
     super();
     this.sprite = sprite;
     this.position = startposition;
