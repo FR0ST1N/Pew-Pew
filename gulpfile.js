@@ -13,6 +13,7 @@ const checkSize = require('gulp-check-filesize');
 const imageMin = require('gulp-imagemin');
 
 const jsConcat = [
+  'src/js/audio/audioEffects.js',
   'src/js/player/spriteSheet.js',
   'src/js/enemy/sprite.js',
   'src/js/enemy/position.js',
@@ -108,6 +109,13 @@ gulp.task('zip', function() {
       .pipe(checkSize({fileSizeLimit: maxSize}));
 });
 
+gulp.task('jsfxr', function() {
+  console.log('Added jsfxr to build!');
+
+  return gulp.src('src/jsfxr/jsfxr.min.js', {allowEmpty: true})
+      .pipe(gulp.dest('build/jsfxr/'));
+});
+
 gulp.task('watch', function() {
   console.log('Now Watching!');
   gulp.watch('src/index.html', gulp.series('htmlLint', 'htmlBuild'));
@@ -128,6 +136,7 @@ gulp.task('build', gulp.series(
     'htmlBuild',
     'cssBuild',
     'jsBuild',
+    'jsfxr',
     'imageMin',
     'zip'
 ));
