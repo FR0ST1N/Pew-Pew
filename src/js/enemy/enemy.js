@@ -13,13 +13,14 @@ class EnemyMovement extends EnemyAnimationHelper {
     this.sprite = sprite;
     this.spriteConfig = spriteConfig;
     this.position = position;
-    this.playerPosition = null;;
+    this.playerPosition = null;
   }
 
   /**
    * enemy motion logic
+   * @override
    */
-  _enemyMovement() {
+  _Movement() {
     const self = this;
     let position = null;
     const getyAxisDiff = function(y) {
@@ -28,7 +29,7 @@ class EnemyMovement extends EnemyAnimationHelper {
         yaxisDiff = yaxisDiff*-1;
       } return yaxisDiff;
     };
-
+    /** move more toward player. */
     while (1) {
       position = this._directionDecision();
       if (getyAxisDiff(position.y) <= getyAxisDiff(this.position.y)) {
@@ -93,20 +94,18 @@ class EnemyMovement extends EnemyAnimationHelper {
 /** base class for enemy */
 class Enemy extends EnemyMovement {
 /**
- *
- * @param {Sprite} sprite
- * @param {SpriteConfig} spriteConfig
- * @param {Position} position
- * @param {Bullet} bullet
- * @param {number} health
- * @param {number} rateOfFire
+ * 
+ * @param {*} sprite
+ * @param {*} spriteConfig
+ * @param {*} position
+ * @param {*} health
+ * @param {*} rateOfFire - intervel between each bullet fire, multiplier by 500ms
  */
-  constructor(sprite, spriteConfig, position = null,
-      bullet = Bullet.DEFAULT, health = 1, rateOfFire = 2 ) {
+  constructor(sprite, spriteConfig, position = null, health = 1, rateOfFire = 2 ) {
     super(sprite, spriteConfig, position);
-    this.bullet = [bullet];
     this.health = health;
     this.rateOfFire = rateOfFire;
+    this.bullet = [];
   }
 
   /**
@@ -114,7 +113,15 @@ class Enemy extends EnemyMovement {
    */
   shoot() {
     setTimeout( () => {
-      const bullet = new Bullet('bullet1.png', new Position(this.x-170, this.y-80), BulletPattern.DEFAULT, 10, 1);
+      /* bullet sprite */
+      const bulletSprite = new Sprite('enemy_bullet.png', 1, 5,
+          5, 5, new Position(0, 0), 10, 10);
+      /* bullet creation */
+      const bullet = new Bullet(bulletSprite, new Position(this.position.x-170,
+          this.position.y-80), BulletPattern.DEFAULT, 10, 1);
+      /* bullet set context from enemy context to draw */
+      bullet.setContext(this.context);
+      /* push bullet to enemy's stack, used while EnemySpawner::draw */
       this.bullet.push(bullet);
     }, this.rateOfFire * 500);
   }
@@ -136,28 +143,29 @@ class Enemy extends EnemyMovement {
 class EnemySpawner {
   /**
    * currently used as testing enemies
-   * @param {context} context
+   * @param {Object} object
    */
   constructor(object) {
     const obj = object;
     const context = obj.ctx;
     this.player = obj.globalObject.player;
     this.drawableObjects = [];
-    const sprite_enemy1 = new Sprite('enemy1.png', 2, 2, 128, 32, new Position(0, 0), 3, 3);
-    const spriteConfig_enemy1 = new SpriteConfig(['idle1', 'idle2'], ['fire1', 'fire2'], sprite_enemy1);
-    const position_enemy1 = new Position(500, 500);
-    const bullet = new Bullet('bullet1.png', new Position(position_enemy1.x-170, position_enemy1.y-80), BulletPattern.DEFAULT, 10, 1);
-    const enemy1 = new Enemy(sprite_enemy1, spriteConfig_enemy1, position_enemy1, bullet, 1);
-    const sprite_enemy2 = new Sprite('enemy2.png', 2, 2, 128, 32, new Position(0, 0), 4, 4);
-    const spriteConfig_enemy2 = new SpriteConfig(['idle1', 'idle2'], ['fire1', 'fire2'], sprite_enemy2);
-    const position_enemy2 = new Position(700,200);
-    const enemy2 = new Enemy(sprite_enemy2, spriteConfig_enemy2, position_enemy2, null, 1);
-    enemy2.startAnimation(context);
+    /* enemy sprite */
+    const spriteEnemy1 = new Sprite('enemy1.png', 2, 2, 128, 32,
+        new Position(0, 0), 3, 3);
+    /* enemy sprite config */
+    const spriteConfigEnemy1 = new SpriteConfig(['idle1', 'idle2'],
+        ['fire1', 'fire2'], spriteEnemy1);
+    /* start spawn position of enemy */
+    const positionEnemy1 = new Position(500, 500);
+
+    /* enemy creation */
+    const enemy1 = new Enemy(spriteEnemy1, spriteConfigEnemy1,
+        positionEnemy1, 1);
+    /* start enemy process, bullet creation and everything is done inside this. */
     enemy1.startAnimation(context);
-    this.enemy1 = enemy1;
-    this.enemy2 = enemy2;
-    this.drawableObjects.push(enemy1, enemy2);
-    // enemy2.startAnimation(context);
+    /* push enemy into drawableObjects, used in EnemySpawner::draw */
+    this.drawableObjects.push(enemy1);
   }
 
   /** */
@@ -166,7 +174,9 @@ class EnemySpawner {
       enemy.setPlayerPosition(this.player.position.x, this.player.position.y);
       enemy.wDraw();
       enemy.bullet.forEach((Enemybullet) => {
-        //Enemybullet.wDraw();
+        if (Enemybullet != null || undefined) {
+          Enemybullet.wDraw();
+        }
       });
     });
   }

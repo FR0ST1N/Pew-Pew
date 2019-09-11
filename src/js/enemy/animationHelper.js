@@ -38,7 +38,7 @@ class animationHelper extends Timer {
   postObjectUpdate() {
     this.stepTimer();
     if (this.isTimeToMove()) {
-      this._enemyMovement();
+      this._Movement();
     } if (this.isTimeToAnimate()) {
       this.objectUpdate();
     } 

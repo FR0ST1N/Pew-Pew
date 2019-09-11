@@ -20,7 +20,7 @@ class EnemyAnimationHelper extends animationHelper {
    * @override
    */
   objectUpdate() {
-    this._enemyMovement();
+    this._Movement();
     if (this.fireState) {
       this._fireAnimation();
     } else {

@@ -7,21 +7,34 @@ class BulletAnimationHelper extends animationHelper   {
    * 
    */
   constructor() {
-    super(10); /* fps */
+    super(5); /* fps */
     this.explodeState = false;
   }
 
   /**
-   * @override
+   * wrapper Draw.
    */
   wDraw() {
     if (this.context == undefined)
       return;
     this.context.drawImage(
-        this.image,
-        this.position.x,
-        this.position.y
+        this.sprite.image,
+        this.sprite.position.x,
+        this.sprite.position.y,
+        this.sprite.individualSpriteSize,
+        this.sprite.individualSpriteSize,
+        this.position.x, this.position.y,
+        this.sprite.individualSpriteSize * this.sprite.scaleFactorX,
+        this.sprite.individualSpriteSize * this.sprite.scaleFactorY
     );
+  }
+
+
+  /**
+   * @override
+   */
+  _Movement() {
+    this.straight();
   }
 
   /**

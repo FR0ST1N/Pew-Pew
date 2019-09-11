@@ -7,7 +7,7 @@ class Sprite {
  * @param {*} columns
  * @param {*} totalSpriteSize
  * @param {*} individualSpriteSize
- * @param {*} position
+ * @param {Position} position - position of one image inside sprite. start is 0,0
  * @param {*} scaleFactorX
  * @param {*} scaleFactorY
  */
