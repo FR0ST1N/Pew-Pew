@@ -9,7 +9,7 @@ class EnemyMovement extends EnemyAnimationHelper {
    * @param {Position} position
    */
   constructor(sprite, spriteConfig, position) {
-    super(4); /** defines fps per 100ms */
+    super(4); /** defines fps per 100ms, available also for bullet*/
     this.sprite = sprite;
     this.spriteConfig = spriteConfig;
     this.position = position;
@@ -23,6 +23,7 @@ class EnemyMovement extends EnemyAnimationHelper {
   _Movement() {
     const self = this;
     let position = null;
+    /* diff between player and given position */
     const getyAxisDiff = function(y) {
       let yaxisDiff = self.playerPosition.y - y;
       if (yaxisDiff < 0) {
@@ -106,6 +107,7 @@ class Enemy extends EnemyMovement {
     this.health = health;
     this.rateOfFire = rateOfFire;
     this.bullet = [];
+    this.bulletpattern = BulletPattern.DEFAULT;
     this.autoshoot = false; /* enable this to auto fire based on rateOfFire */
   }
 
@@ -123,7 +125,7 @@ class Enemy extends EnemyMovement {
         5, 5, new Position(0, 0), 10, 10);
     /* bullet creation */
     const bullet = new Bullet(bulletSprite, new Position(this.position.x-30,
-        this.position.y+20), BulletPattern.FOLLOW, 30, 1);
+        this.position.y+20), this.bulletpattern, 30, 1);
     /* bullet set context from enemy context to draw */
     bullet.setContext(this.context);
     /**
@@ -159,6 +161,13 @@ class Enemy extends EnemyMovement {
   setPlayerPosition(x, y) {
     this.playerPosition = new Position(x, y);
   }
+  
+  /**
+   * @param {BulletPattern} bulletPattern
+   */
+  setBulletPattern(bulletPattern) {
+    this.bulletpattern = bulletPattern;
+  }
 }
 
 
@@ -167,7 +176,6 @@ class Enemy extends EnemyMovement {
  */
 class EnemySpawner {
   /**
-   * currently used as testing enemies
    * @param {Object} object
    */
   constructor(object) {
@@ -178,7 +186,7 @@ class EnemySpawner {
     /* enemy sprite, look into sprite.js for more info */
     const spriteEnemy1 = new Sprite('enemy1.png', 2, 2, 128, 32,
         new Position(0, 0), 3, 3);
-    /* enemy sprite config */
+    /* enemy sprite config, based on rows and columns */
     const spriteConfigEnemy1 = new SpriteConfig(['idle1', 'idle2'],
         ['fire1', 'fire2'], spriteEnemy1);
     /* start spawn position of enemy */
@@ -194,6 +202,9 @@ class EnemySpawner {
     /* enabling autofire for the enemy */
     enemy1.autoshoot = true;
 
+    /* overriding default bullet Pattern */
+    enemy1.setBulletPattern(BulletPattern.FOLLOW);
+
     /* shoot must be called only after setting the context  */
     enemy1.shoot();
 
@@ -205,17 +216,40 @@ class EnemySpawner {
   }
 
   /** responsible for drawing
-   *    enemies and bullets inside canvas.
+   *    enemies and bullets inside canvas from requestAnimationFrame.
   */
   draw() {
     this.drawableObjects.forEach((enemy) => {
       enemy.setPlayerPosition(this.player.position.x, this.player.position.y);
-      enemy.wDraw();
-      enemy.bullet.forEach((Enemybullet) => {
-        if (Enemybullet != null || undefined) {
-          Enemybullet.wDraw();
-        }
-      });
+      enemy.wDraw();/* filter omits bullet if bullet is outside canvas */
+      enemy.bullet = enemy.bullet.filter(this._bulletsDraw.bind(this));
     });
   }
+
+  /**
+   * filters only the bullets which are inside..
+   * @param {Bullet} Enemybullet
+   * @return {boolean}
+   */
+  _bulletsDraw(Enemybullet) {
+    if (Enemybullet != null || Enemybullet != undefined) {
+      if (!this.isBulletInsideCanvas(Enemybullet)) {
+        return false;
+      }Enemybullet.wDraw();
+      return true;
+    }
+  }
+
+  /**
+   * check bullets postion in-relattion to canvas.
+   * @param {Bullet} bullet
+   * @return {boolean}
+   */
+  isBulletInsideCanvas(bullet) {
+    if (bullet.getBulletPosition().x > 0
+     && bullet.getBulletPosition().y > 0) {
+      return true;
+    } return false;
+  }
+
 }

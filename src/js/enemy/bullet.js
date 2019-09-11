@@ -1,12 +1,9 @@
 
 /** helper for moving the bullets. */
 class BulletMovement extends BulletAnimationHelper {
-  /**
-   * @param {number} timeout
-   */
+  /** constructor*/
   constructor() {
     super();
-    this.released = false;
   }
 
   /** override this method in inherited class */
@@ -43,7 +40,14 @@ class BulletMovement extends BulletAnimationHelper {
  *
 */
 class Bullet extends BulletMovement {
-  /** */
+  /**
+   * 
+   * @param {Sprite} sprite
+   * @param {Position|null} startposition - where the bullet originates
+   * @param {BulletPattern|string} pattern
+   * @param {number} speed
+   * @param {number} damage
+   */
   constructor(sprite = null, startposition = null, pattern = BulletPattern.FOLLOW, speed = 10, damage = 1) {
     super();
     this.sprite = sprite;
@@ -89,6 +93,14 @@ class Bullet extends BulletMovement {
    */
   setPlayerPositionSnap(position) {
     this.playerPositionSnap = position;
+  }
+
+  /**
+   * getbulletPosition
+   * @return {Position}
+   */
+  getBulletPosition() {
+    return this.position;
   }
 
   /**
