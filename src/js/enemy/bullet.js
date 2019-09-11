@@ -1,15 +1,3 @@
-/** builds different types of bullet */
-class BulletImage {
-  /**
-   * @param {string} name
-   */
-  constructor(name) {
-    const image = new Image();
-    image.src = 'images/'+name;
-    return image;
-  }
-}
-
 
 /** helper for moving the bullets. */
 class BulletMovement extends BulletAnimationHelper {
