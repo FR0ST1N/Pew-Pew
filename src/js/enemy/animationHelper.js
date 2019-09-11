@@ -12,8 +12,6 @@ class animationHelper extends Timer {
    * wrapper Draw.
    */
   wDraw() {
-    if (this.context == undefined)
-      return;
     this.context.drawImage(
         this.sprite.image,
         this.sprite.position.x,
@@ -38,9 +36,12 @@ class animationHelper extends Timer {
    * based on the fps defined.
    */
   postObjectUpdate() {
-    if (this.stepTimer()) {
+    this.stepTimer();
+    if (this.isTimeToMove()) {
+      this._enemyMovement();
+    } if (this.isTimeToAnimate()) {
       this.objectUpdate();
-    }
+    } 
     this.objectAnimation();
   }
 
