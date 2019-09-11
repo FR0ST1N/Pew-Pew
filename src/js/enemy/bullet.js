@@ -78,18 +78,10 @@ class Bullet extends BulletMovement {
   }
 
   /**
-     * @todo calculations based on position and move towards targetposition,
-     *  triggers animation
-     * @return {boolean}
-     */
-  fire(context) {
-    this.context = context;
-    if (this.released) {
-      /** @todo  */
-    }
-    /** @todo */
+   * @override
+   */
+  fire() {
     this.objectAnimation(this.context);
-    return true;
   }
 }
 

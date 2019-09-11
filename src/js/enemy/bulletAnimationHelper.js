@@ -31,10 +31,11 @@ class BulletAnimationHelper extends animationHelper   {
 
 
   /**
+   * specific to bullet animation.
+   * if bullet has fancy animaton and stuff, it goes inside here.
    * @override
    */
   _Movement() {
-    this.straight();
   }
 
   /**

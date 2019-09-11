@@ -86,48 +86,70 @@ class EnemyMovement extends EnemyAnimationHelper {
   startAnimation(context) {
     this.setContext(context);
     this.objectAnimation();
-    this.shoot();
   }
-
 }
 
 /** base class for enemy */
 class Enemy extends EnemyMovement {
 /**
- * 
+ *
  * @param {*} sprite
  * @param {*} spriteConfig
  * @param {*} position
  * @param {*} health
- * @param {*} rateOfFire - intervel between each bullet fire, multiplier by 500ms
+ * @param {*} rateOfFire - intervel between each bullet fire,
+ *            multiplier by 500ms
  */
-  constructor(sprite, spriteConfig, position = null, health = 1, rateOfFire = 2 ) {
+  constructor(sprite, spriteConfig, position = null,
+      health = 1, rateOfFire = 2 ) {
     super(sprite, spriteConfig, position);
     this.health = health;
     this.rateOfFire = rateOfFire;
     this.bullet = [];
+    this.autoshoot = false; /* enable this to auto fire based on rateOfFire */
   }
 
   /**
-   * enemy shoots new bullets.
+   * enemy shoots new bullet.
    */
   shoot() {
+    /* if enemy is already in fire animation, just return */
+    if (this.getFireState()) {
+      return;
+    }
+
+    /* bullet sprite */
+    const bulletSprite = new Sprite('enemy_bullet.png', 1, 5,
+        5, 5, new Position(0, 0), 10, 10);
+    /* bullet creation */
+    const bullet = new Bullet(bulletSprite, new Position(this.position.x-30,
+        this.position.y+20), BulletPattern.DEFAULT, 10, 1);
+    /* bullet set context from enemy context to draw */
+    bullet.setContext(this.context);
+
+    /* set fire animation state for enemyObject, */
+    this.triggerFireState();
+
+    /* bullet object movement trigger, leaving enemy. */
+    bullet.fire();
+    /* push bullet to enemy's stack, used while EnemySpawner::draw */
+    this.bullet.push(bullet);
+    if (this.autoshoot) {
+      this._autoshoot();
+    }
+  }
+
+  /**
+   * automatic enemy shooting.
+   */
+  _autoshoot() {
     setTimeout( () => {
-      /* bullet sprite */
-      const bulletSprite = new Sprite('enemy_bullet.png', 1, 5,
-          5, 5, new Position(0, 0), 10, 10);
-      /* bullet creation */
-      const bullet = new Bullet(bulletSprite, new Position(this.position.x-170,
-          this.position.y-80), BulletPattern.DEFAULT, 10, 1);
-      /* bullet set context from enemy context to draw */
-      bullet.setContext(this.context);
-      /* push bullet to enemy's stack, used while EnemySpawner::draw */
-      this.bullet.push(bullet);
+      this.shoot();
     }, this.rateOfFire * 500);
   }
 
   /**
-   * 
+   *
    * @param {number} x
    * @param {number} y
    */
@@ -150,7 +172,7 @@ class EnemySpawner {
     const context = obj.ctx;
     this.player = obj.globalObject.player;
     this.drawableObjects = [];
-    /* enemy sprite */
+    /* enemy sprite, look into sprite.js for more info */
     const spriteEnemy1 = new Sprite('enemy1.png', 2, 2, 128, 32,
         new Position(0, 0), 3, 3);
     /* enemy sprite config */
@@ -161,14 +183,27 @@ class EnemySpawner {
 
     /* enemy creation */
     const enemy1 = new Enemy(spriteEnemy1, spriteConfigEnemy1,
-        positionEnemy1, 1);
-    /* start enemy process, bullet creation and everything is done inside this. */
+        positionEnemy1, 5);
+
+    /* start enemy process, all bullet related is handled inside. */
     enemy1.startAnimation(context);
-    /* push enemy into drawableObjects, used in EnemySpawner::draw */
+
+    /* enabling autofire for the enemy */
+    enemy1.autoshoot = true;
+
+    /* shoot must be called only after setting the context  */
+    enemy1.shoot();
+
+    /**
+     * push enemy into drawableObjects, used in EnemySpawner::draw,
+     * newly created enemies must be pushed into drawableObjects.
+     */
     this.drawableObjects.push(enemy1);
   }
 
-  /** */
+  /** responsible for drawing
+   *    enemies and bullets inside canvas.
+  */
   draw() {
     this.drawableObjects.forEach((enemy) => {
       enemy.setPlayerPosition(this.player.position.x, this.player.position.y);
