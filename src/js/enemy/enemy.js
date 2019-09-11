@@ -123,13 +123,16 @@ class Enemy extends EnemyMovement {
         5, 5, new Position(0, 0), 10, 10);
     /* bullet creation */
     const bullet = new Bullet(bulletSprite, new Position(this.position.x-30,
-        this.position.y+20), BulletPattern.DEFAULT, 10, 1);
+        this.position.y+20), BulletPattern.FOLLOW, 30, 1);
     /* bullet set context from enemy context to draw */
     bullet.setContext(this.context);
-
+    /**
+     * set players position at the point of relasing the bullet, this
+     * is only required if bulletPattern is set to follow.
+     */
+    bullet.setPlayerPositionSnap(this.playerPosition);
     /* set fire animation state for enemyObject, */
     this.triggerFireState();
-
     /* bullet object movement trigger, leaving enemy. */
     bullet.fire();
     /* push bullet to enemy's stack, used while EnemySpawner::draw */

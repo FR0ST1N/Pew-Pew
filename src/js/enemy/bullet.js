@@ -18,6 +18,23 @@ class BulletMovement extends BulletAnimationHelper {
   straight() {
     this.position.x = this.position.x - this.speed;
   }
+
+  /**
+   * follows enemie's position at the time of firing the bullet.
+   * @return {void}
+   */
+  follow() {
+    if (this.playerPositionSnap == null) {
+      return this.straight();
+    }
+    let xAxis = this.playerPositionSnap.x - this.position.x;
+    let yAxis = this.playerPositionSnap.y - this.position.y;
+    const length = Math.sqrt((yAxis*yAxis) + (xAxis*xAxis));
+    xAxis = xAxis / length;
+    yAxis = yAxis / length;
+    this.position.x += xAxis * this.speed;
+    this.position.y += yAxis * this.speed;
+  }
 }
 
 /**
@@ -27,13 +44,14 @@ class BulletMovement extends BulletAnimationHelper {
 */
 class Bullet extends BulletMovement {
   /** */
-  constructor(sprite = null, startposition = null, pattern = BulletPattern.DEFAULT, speed = 10, damage = 1) {
+  constructor(sprite = null, startposition = null, pattern = BulletPattern.FOLLOW, speed = 10, damage = 1) {
     super();
     this.sprite = sprite;
     this.position = startposition;
     this.pattern = pattern;
     this.speed = speed;
     this.damage = damage;
+    this.playerPositionSnap = null;
   }
 
   /**
@@ -63,6 +81,14 @@ class Bullet extends BulletMovement {
   setBulletPostition(position) {
     this.position = position;
     return this.position;
+  }
+
+  /**
+   * player Position at the time of generating bullet.
+   * @param {Position} position
+   */
+  setPlayerPositionSnap(position) {
+    this.playerPositionSnap = position;
   }
 
   /**
