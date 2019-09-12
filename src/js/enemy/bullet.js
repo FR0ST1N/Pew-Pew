@@ -138,7 +138,13 @@ class Bullet extends BulletMovement {
    * remove bullet
    */
   despawn() {
-    this.position = new Position(-100, -100);
+    this.position = null;
+    this.sprite = null;
+    this.position = null;
+    this.pattern = null;
+    this.speed = null;
+    this.damage = null;
+    this.playerPositionSnap = null;
   }
 
   /**
