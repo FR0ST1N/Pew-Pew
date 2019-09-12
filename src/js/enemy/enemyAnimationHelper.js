@@ -4,11 +4,10 @@
  */
 class EnemyAnimationHelper extends animationHelper {
   /**
-   * @param {number} totalFrames Value for timer
-   * @param {number} framesForNextAnimation
+   * constructor
    */
-  constructor(totalFrames) {
-    super(totalFrames);
+  constructor() {
+    super(120, 28);
     this.fireState = false;
     this._subAnimationState =false;
     this._workingState = null;

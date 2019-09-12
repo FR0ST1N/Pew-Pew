@@ -20,6 +20,14 @@ class BulletMovement extends BulletAnimationHelper {
   }
 
   /**
+   * based on the defined pattern, that specific function is called.
+   * @override
+   */
+  _Movement() {
+    eval('this.'+this.pattern+'()');
+  }
+
+  /**
    * follows enemie's position at the time of firing the bullet.
    * @return {void}
    */
@@ -47,13 +55,13 @@ class Bullet extends BulletMovement {
    * @param {Sprite} sprite
    * @param {Position|null} startposition - where the bullet originates
    * @param {BulletPattern|string} pattern
-   * @param {number} speed
+   * @param {number} speed - 1 is the slowest bullet possible
    * @param {number} damage
    */
   constructor(sprite = null,
       startposition = null,
       pattern = BulletPattern.FOLLOW,
-      speed = 10,
+      speed = 1,
       damage = 1) {
     super();
     this.sprite = sprite;

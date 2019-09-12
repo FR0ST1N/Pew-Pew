@@ -6,11 +6,11 @@
  */
 class animationHelper extends Timer {
   /**
-   * @param {number} totalFrames
-   * @param {number} fpsOfEnemy
+   * @param {number} animationTime
+   * @param {number} MovementTime
    */
-  constructor(totalFrames) {
-    super(totalFrames);
+  constructor(animationTime, MovementTime) {
+    super(animationTime, MovementTime);
   }
 
   /**
@@ -63,6 +63,6 @@ class animationHelper extends Timer {
   objectAnimation() {
     setTimeout(() => {
       this.postObjectUpdate();
-    }, 100);
+    }, 1);
   }
 }

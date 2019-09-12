@@ -9,7 +9,7 @@ class EnemyMovement extends EnemyAnimationHelper {
    * @param {Position} position
    */
   constructor(sprite, spriteConfig, position) {
-    super(4); /** defines fps per 100ms, available also for bullet*/
+    super();
     this.sprite = sprite;
     this.spriteConfig = spriteConfig;
     this.position = position;
@@ -49,7 +49,7 @@ class EnemyMovement extends EnemyAnimationHelper {
     const width = 700;
     const height = 500;
     const middleBoundaryx = 300;
-    const differenceStep = 10;
+    const differenceStep = 4;
     const decision = (Number.parseFloat(Math.random().toPrecision(2)));
     const boundaryCheck = function(position) {
       if (width < position.x ) {
@@ -120,6 +120,9 @@ class Enemy extends EnemyMovement {
   shoot() {
     /* if enemy is already in fire animation, just return */
     if (this.getFireState()) {
+      if (this.autoshoot) {
+        this._autoshoot();
+      }
       return;
     }
 
@@ -128,7 +131,7 @@ class Enemy extends EnemyMovement {
         5, 5, new Position(0, 0), 10, 10);
     /* bullet creation */
     const bullet = new Bullet(bulletSprite, new Position(this.position.x-30,
-        this.position.y+20), this.bulletpattern, 30, 1);
+        this.position.y+20), this.bulletpattern, 5, 1);
     /* bullet set context from enemy context to draw */
     bullet.setContext(this.context);
     /**

@@ -8,24 +8,16 @@ class BulletAnimationHelper extends animationHelper {
    * the same method at core.
    */
   constructor() {
-    super(5); /* bullet movement timer per 100ms */
-    this.explodeState = false;
+    super(0, 4); /* since bullet has no animation logic
+                  animation timer is not necessary */
   }
 
-
   /**
+   * @override
    * specific to bullet animation.
    * if bullet had fancy animaton and stuff, it goes inside here.
-   * @override
-   */
-  _Movement() {
-  }
-
-  /**
-   * @override
-   * based on the defined pattern, that specific function is called.
    */
   objectUpdate() {
-    eval('this.'+this.pattern+'()');
+
   }
 }

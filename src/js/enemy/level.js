@@ -22,7 +22,7 @@ class EnemySpawner {
 
     /* enemy creation */
     const enemy1 = new Enemy(spriteEnemy1, spriteConfigEnemy1,
-        positionEnemy1, 5);
+        positionEnemy1, 3);
 
     /* start enemy process, all bullet related is handled inside. */
     enemy1.startAnimation(context);

@@ -6,35 +6,52 @@
  * */
 class Timer {
   /**
-   * @param {number} totalTime
+   * @param {number} animationTime -if 0 timer wont run.
+   * @param {number} MovementTime - if 0 timer wont run.
    */
-  constructor(totalTime) {
-    this.timeToChangeAnimation = totalTime;
-    this.motionTime = Number.parseInt(this.timeToChangeAnimation/2);
-    this.timer = 0;
+  constructor(animationTime, MovementTime) {
+    this.timeToChangeAnimation = animationTime;
+    this.timeToChangeMotion = MovementTime;
+    this.animationTimer = 0;
+    this.motionTimer = 0;
   }
 
   /**
-   * reset the timer,
+   * reset the animation timer,
    * @return {void}
    */
-  _resetTimer() {
-    this.timer = 0;
+  _resetAnimationTimer() {
+    this.animationTimer = 0;
+  }
+
+
+  /**
+   * reset the animation timer,
+   * @return {void}
+   */
+  _resetMotionTimer() {
+    this.motionTimer = 0;
   }
 
   /**
    * @return {void}
    */
   stepTimer() {
-    this.timer += 1;
+    if (this.timeToChangeAnimation != 0) {
+      this.animationTimer += 1;
+    } if (this.timeToChangeMotion != 0) {
+      this.motionTimer += 1;
+    }
   }
 
   /**
    * @return {boolean}
    */
   isTimeToAnimate() {
-    if (this.timer == this.timeToChangeAnimation) {
-      this._resetTimer();
+    if (this.timeToChangeAnimation == 0) {
+      return true;
+    } if (this.animationTimer == this.timeToChangeAnimation) {
+      this._resetAnimationTimer();
       return true;
     }
     return false;
@@ -44,8 +61,10 @@ class Timer {
    * @return {boolean}
    */
   isTimeToMove() {
-    const fallBelow = Number.parseInt(this.timer/this.motionTime);
-    if (this.motionTime == fallBelow || fallBelow == 1 ) {
+    if (this.timeToChangeMotion == 0) {
+      return true;
+    } if (this.motionTimer == this.timeToChangeMotion) {
+      this._resetMotionTimer();
       return true;
     } else {
       return false;
