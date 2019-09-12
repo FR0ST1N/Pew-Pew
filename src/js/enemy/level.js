@@ -1,5 +1,5 @@
 /**
- * @file enemy creator
+ * @file handles level creation and enemy spawner.
  * @author bluepie <gopinath2nr@gmail.com>
  */
 class EnemySpawner {
@@ -63,7 +63,8 @@ class EnemySpawner {
     if (Enemybullet != null || Enemybullet != undefined) {
       if (!this.isBulletInsideCanvas(Enemybullet)) {
         return false;
-      }Enemybullet.wDraw();
+      } /* collision detection with player before draw */
+      this._checkCollisionWithPlayer(Enemybullet);
       return true;
     }
   }
@@ -74,9 +75,24 @@ class EnemySpawner {
      * @return {boolean}
      */
   isBulletInsideCanvas(bullet) {
-    if (bullet.getBulletPosition().x > 0
+    if (bullet.getBulletPosition().x > 0 /* check only left side*/
        && bullet.getBulletPosition().y > 0) {
       return true;
     } return false;
   }
+
+  /**
+   * @param {Bullet} bullet
+   */
+  _checkCollisionWithPlayer(bullet) {
+    const collideWithPlayerStatus = bullet
+        .collideDetect(new Position(this.player.position.x,
+            this.player.position.y));
+    if (!collideWithPlayerStatus) { /* if collides with player, dont draw */
+      bullet.wDraw();
+    } else {
+      /* player health decrease */
+    }
+  }
+
 }

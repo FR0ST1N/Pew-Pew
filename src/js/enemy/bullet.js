@@ -113,6 +113,27 @@ class Bullet extends BulletMovement {
     AudioEffects.playEnemyPewSound();
     this.objectAnimation(this.context);
   }
+
+ /**
+  * 
+  * @param {Position} playerPosition
+  * @return {boolean}
+  */
+  collideDetect(playerPosition) {
+    const bulletObject={'x': this.position.x,
+      'y': this.position.y,
+      'width': this.sprite.individualSpriteSize*this.sprite.scaleFactorX,
+      'height': this.sprite.individualSpriteSize*this.sprite.scaleFactorY,
+    };
+    const playerObject={
+      'x': playerPosition.x,
+      'y': playerPosition.y,
+      'width': 32*3,
+      'height': 32*3,
+    };
+    return CollisionDetection.detect(bulletObject, playerObject);
+  }
+
 }
 
 
