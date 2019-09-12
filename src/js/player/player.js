@@ -318,7 +318,7 @@ class Player {
       }
       this.frameCounter = 0;
       this.pressed.pew = true;
-      AudioEffects.playPewSound();
+      AudioEffects.playPlayerPewSound();
     }
   }
 

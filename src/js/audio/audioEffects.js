@@ -5,11 +5,19 @@
 
 /** Play game audio effects. */
 class AudioEffects {
-  /** Play fire sound effect */
-  static playPewSound() {
+  /** Play player fire sound effect */
+  static playPlayerPewSound() {
     this._playSound(
         [0, , 0.16, 0.18, 0.18, 0.47, 0.0084, -0.26, , , , , , 0.74, -1, ,
           -0.76, , 1, , , , , 0.15]
+    );
+  }
+
+  /** Play enemy fire sound effect */
+  static playEnemyPewSound() {
+    this._playSound(
+        [2, , 0.2, , 0.1753, 0.64, , -0.5261, , , , , , 0.5522, -0.564, , , ,
+          1, , , , , 0.25]
     );
   }
 
