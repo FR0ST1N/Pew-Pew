@@ -12,8 +12,8 @@ class UserInterface {
         'images/ui_heart.png',
         5
     );
-    this.stackSpriteSheet = new SpriteSheet(
-        'images/ui_stack.png',
+    this.countSpriteSheet = new SpriteSheet(
+        'images/ui_bullet_holder.png',
         7
     );
     this.names = ['a', 'b', 'c', 'd', 'e', 'f'];
@@ -26,7 +26,7 @@ class UserInterface {
         1,
         4
     );
-    this.stackSpriteSheet.addSpriteBulk(
+    this.countSpriteSheet.addSpriteBulk(
         this.names,
         1,
         6
@@ -36,14 +36,14 @@ class UserInterface {
   /**
    * Draw UI.
    * @param {number} currHealth Player's current health/lives.
-   * @param {number} stackLen Bullet stack length.
+   * @param {number} count Bullet count.
    * @param {number} score Current score.
    */
-  draw(currHealth, stackLen, score) {
+  draw(currHealth, count, score) {
     this.ctx.save();
     this.ctx.globalAlpha = 0.5;
     this._drawHealth(currHealth);
-    this._drawBulletStack(stackLen);
+    this._drawBulletCount(count);
     this._drawScore(score.toString(), 5);
     this.ctx.restore();
   }
@@ -65,15 +65,15 @@ class UserInterface {
   }
 
   /**
-   * Draw layer's bullet stack.
-   * @param {number} value Bullet Stack length.
+   * Draw player's bullet count.
+   * @param {number} value Bullet count.
    */
-  _drawBulletStack(value) {
+  _drawBulletCount(value) {
     PlayerUtil.imgDrawCall(
         this.ctx,
-        this.stackSpriteSheet,
+        this.countSpriteSheet,
         this.names[value],
-        this.stackSpriteSheet.spriteSize,
+        this.countSpriteSheet.spriteSize,
         50,
         540,
         7
