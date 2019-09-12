@@ -74,7 +74,7 @@ class EnemyMovement extends EnemyAnimationHelper {
 
   /**
    * enenmy changing position.
-   * @param {*} position
+   * @param {Position} position
    */
   _enemyPositionUpdate(position) {
     this.position.x = position.x;
@@ -161,7 +161,7 @@ class Enemy extends EnemyMovement {
   setPlayerPosition(x, y) {
     this.playerPosition = new Position(x, y);
   }
-  
+
   /**
    * @param {BulletPattern} bulletPattern
    */

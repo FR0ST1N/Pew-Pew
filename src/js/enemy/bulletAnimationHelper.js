@@ -2,10 +2,10 @@
  * @file handles bullet animation update, controls bullet's fps.
  * @author bluepie <gopinath2nr@gmail.com>
  */
-class BulletAnimationHelper extends animationHelper   { 
-
+class BulletAnimationHelper extends animationHelper {
   /**
-   * 
+   * both bullet animation and enemy animation use
+   * the same method at core.
    */
   constructor() {
     super(5); /* bullet movement timer per 100ms */

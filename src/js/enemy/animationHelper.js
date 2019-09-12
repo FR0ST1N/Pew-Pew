@@ -1,5 +1,7 @@
 /**
- * @file basic animation wrapper for making life simpler
+ * @file basic animation wrapper for making life simpler,
+ * both bullet and enemy extends this class and uses this class
+ * as thier core functionality.
  * @author bluepie <gopinath2nr@gmail.com>
  */
 class animationHelper extends Timer {
@@ -44,8 +46,7 @@ class animationHelper extends Timer {
       this._Movement();
     } if (this.isTimeToAnimate()) {
       this.objectUpdate();
-    } 
-    this.objectAnimation();
+    } this.objectAnimation();
   }
 
   /**
@@ -57,8 +58,7 @@ class animationHelper extends Timer {
   }
 
   /**
-   * object movement loop,
-   * increased settimeout loop & decreased timer counter
+   * object movement loop
    */
   objectAnimation() {
     setTimeout(() => {

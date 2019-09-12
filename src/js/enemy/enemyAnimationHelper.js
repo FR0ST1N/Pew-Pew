@@ -1,13 +1,11 @@
 /**
- * @file base on the stare of the enemy object,
- * performs the correct animation.
+ * @file all enemy animation related logic & methods
  * @author bluepie <gopinath2nr@gmail.com>
  */
 class EnemyAnimationHelper extends animationHelper {
   /**
-   * 
-   * @param {*} totalFrames
-   * @param {*} framesForNextAnimation
+   * @param {number} totalFrames Value for timer
+   * @param {number} framesForNextAnimation
    */
   constructor(totalFrames) {
     super(totalFrames);
@@ -29,7 +27,7 @@ class EnemyAnimationHelper extends animationHelper {
     }
   }
 
-  /**  
+  /**
    *  if fire state is toggled, automatically performs
    *  configured animation through sprite config then
    *  toggles firemode back off.
@@ -56,7 +54,8 @@ class EnemyAnimationHelper extends animationHelper {
     if (Array.isArray(this._workingState) && this._workingState.length) {
       this.sprite.position = this.spriteConfig
           .spriteSheet.getSpritePosition(this._workingState.shift());
-      this._subAnimationState = (Array.isArray(this._workingState) && this._workingState.length);
+      this._subAnimationState = (Array.isArray(this._workingState)
+       && this._workingState.length);
     }
   }
 

@@ -89,12 +89,11 @@ class EnemySpawner {
     const collideWithPlayerStatus = bullet
         .collideDetect(new Position(this.player.position.x,
             this.player.position.y));
-    if (!collideWithPlayerStatus) { /* if collides with player, dont draw */
+    if (!collideWithPlayerStatus) {/* if collides with player, dont draw */
       bullet.wDraw();
     } else {
       bullet.despawn();
       /* player health decrease */
     }
   }
-
 }

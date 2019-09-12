@@ -51,7 +51,7 @@ class Bullet extends BulletMovement {
    * @param {number} damage
    */
   constructor(sprite = null,
-      startposition = null, 
+      startposition = null,
       pattern = BulletPattern.FOLLOW,
       speed = 10,
       damage = 1) {
@@ -65,8 +65,8 @@ class Bullet extends BulletMovement {
   }
 
   /**
-     * @return {Bullet}
-     */
+   * returns default bullet, which is straight
+   */
   static get DEFAULT() {
     return new Bullet();
   }
@@ -143,7 +143,4 @@ class Bullet extends BulletMovement {
     };
     return CollisionDetection.detect(bulletObject, playerObject);
   }
-
 }
-
-

@@ -1,18 +1,18 @@
-/** 
+/**
  * @file enemySprite Properties
  * @author bluepie <gopinath2nr@gmail.com>
  * */
 class Sprite {
 /**
- * 
- * @param {*} imagename
- * @param {*} rows
- * @param {*} columns
- * @param {*} totalSpriteSize
- * @param {*} individualSpriteSize
- * @param {Position} position - position of one image inside sprite. start is 0,0
- * @param {*} scaleFactorX
- * @param {*} scaleFactorY
+ * Properties of each image sprite
+ * @param {string} imagename
+ * @param {number} rows
+ * @param {number} columns
+ * @param {number} totalSpriteSize
+ * @param {number} individualSpriteSize
+ * @param {Position} position - position of one image inside sprite.start-(0,0)
+ * @param {number} scaleFactorX
+ * @param {number} scaleFactorY
  */
   constructor(imagename, rows, columns,
       totalSpriteSize = 96,
@@ -37,7 +37,7 @@ class Sprite {
  */
 class SpriteConfig {
   /**
-   * 
+   * sprite config, for animations.
    * @param {*} motion1
    * @param {*} motion2
    * @param {*} sprite
@@ -56,9 +56,9 @@ class SpriteConfig {
   _extractSprites() {
     let spriteNames = this.MOTION_1.slice(0);
     spriteNames = spriteNames.concat(this.MOTION_2);
-    this.spriteSheet =  new SpriteSheet(this.sprite.image, this.sprite.individualSpriteSize);
-    this.spriteSheet.addSpriteBulk(spriteNames, this.sprite.rows, this.sprite.columns);
-
+    this.spriteSheet = new SpriteSheet(this.sprite.image,
+        this.sprite.individualSpriteSize);
+    this.spriteSheet.addSpriteBulk(spriteNames,
+        this.sprite.rows, this.sprite.columns);
   }
-
 }

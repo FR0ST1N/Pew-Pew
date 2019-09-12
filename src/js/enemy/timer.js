@@ -1,4 +1,4 @@
-/** 
+/**
  * @file Animation properties that all object in canvas should have,
  * ex |------------------------| represent total time
  *    |-----x------x------x-----| represent time to next frame.
