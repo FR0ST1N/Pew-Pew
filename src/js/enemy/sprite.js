@@ -1,4 +1,7 @@
-/** enemySprite Properties */
+/** 
+ * @file enemySprite Properties
+ * @author bluepie <gopinath2nr@gmail.com>
+ * */
 class Sprite {
 /**
  * 

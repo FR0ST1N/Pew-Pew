@@ -1,6 +1,6 @@
-
 /**
- * all the enemy movement logic goes here
+ * @file all the enemy movement logic goes here
+ * @author bluepie <gopinath2nr@gmail.com>
  */
 class EnemyMovement extends EnemyAnimationHelper {
   /**

@@ -1,6 +1,7 @@
 
-/** since enums are not available at disposable, enum alternative
- *  var/const pattern = {}; Object.freeze(pattern); could also work.
+/**
+ * @file since enums are not available at disposable, enum alternative
+ * @author bluepie <gopinath2nr@gmail.com>
  * @readonly
  * @enum {string}
  */

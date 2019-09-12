@@ -1,5 +1,8 @@
 
-/** helper for moving the bullets. */
+/**
+ * @file helper for moving the bullets.
+ * @author bluepie <gopinath2nr@gmail.com>
+ */
 class BulletMovement extends BulletAnimationHelper {
   /** constructor*/
   constructor() {

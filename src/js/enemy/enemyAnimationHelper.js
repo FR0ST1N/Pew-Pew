@@ -1,6 +1,7 @@
 /**
- * base on the stare of the enemy object,
+ * @file base on the stare of the enemy object,
  * performs the correct animation.
+ * @author bluepie <gopinath2nr@gmail.com>
  */
 class EnemyAnimationHelper extends animationHelper {
   /**

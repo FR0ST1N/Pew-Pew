@@ -1,4 +1,7 @@
-/** basic animation wrapper for making life simpler */
+/**
+ * @file basic animation wrapper for making life simpler
+ * @author bluepie <gopinath2nr@gmail.com>
+ */
 class animationHelper extends Timer {
   /**
    * @param {number} totalFrames

@@ -1,5 +1,6 @@
 /**
- * enemy creator
+ * @file enemy creator
+ * @author bluepie <gopinath2nr@gmail.com>
  */
 class EnemySpawner {
   /**

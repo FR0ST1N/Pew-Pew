@@ -1,5 +1,6 @@
 /**
- * handles bullet animation update, controls bullet's fps.
+ * @file handles bullet animation update, controls bullet's fps.
+ * @author bluepie <gopinath2nr@gmail.com>
  */
 class BulletAnimationHelper extends animationHelper   { 
 
