@@ -29,6 +29,8 @@ class BulletMovement extends BulletAnimationHelper {
 
   /**
    * follows enemie's position at the time of firing the bullet.
+   * & despawns on reaching position if it didnt encounter player
+   * till that time.
    * @return {void}
    */
   follow() {
@@ -38,6 +40,12 @@ class BulletMovement extends BulletAnimationHelper {
     let xAxis = this.playerPositionSnap.x - this.position.x;
     let yAxis = this.playerPositionSnap.y - this.position.y;
     const length = Math.sqrt((yAxis*yAxis) + (xAxis*xAxis));
+    /* despawn bullet after reaching its follow position */
+    if (xAxis > -10 && yAxis > -10) {/* right to left, so sub works
+                                      need to change this if more complex
+                                      gameplay */
+      this.despawn();
+    }
     xAxis = xAxis / length;
     yAxis = yAxis / length;
     this.position.x += xAxis * this.speed;
