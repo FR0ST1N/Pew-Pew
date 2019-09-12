@@ -50,7 +50,7 @@ class animationHelper extends Timer {
   }
 
   /**
-   * set context before using drawImage
+   * set context before using wDraw
    * @param {context} context
    */
   setContext(context) {

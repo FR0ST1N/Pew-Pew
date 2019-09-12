@@ -1,5 +1,5 @@
 /**
- * @file enemySprite Properties
+ * @file enemySprite & bulletSprite Properties
  * @author bluepie <gopinath2nr@gmail.com>
  * */
 class Sprite {
@@ -34,13 +34,15 @@ class Sprite {
 }
 
 /**
+ * Multiple images inside sprite are are
+ * animated with the help of this SpriteConfig
  */
 class SpriteConfig {
   /**
    * sprite config, for animations.
-   * @param {*} motion1
-   * @param {*} motion2
-   * @param {*} sprite
+   * @param {Array} motion1
+   * @param {Array} motion2
+   * @param {Sprite} sprite
    */
   constructor(motion1 = [], motion2 = [], sprite) {
     this.MOTION_1 = motion1;

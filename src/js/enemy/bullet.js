@@ -1,6 +1,6 @@
 
 /**
- * @file helper for moving the bullets.
+ * @file helper for moving the bullets & bullet logic
  * @author bluepie <gopinath2nr@gmail.com>
  */
 class BulletMovement extends BulletAnimationHelper {
@@ -54,8 +54,7 @@ class BulletMovement extends BulletAnimationHelper {
 }
 
 /**
- *  Each bullet has its own behaviour,
- *  @todo after bulletCreation, bullet should move towards its targetPosition,
+ *  Each bullet has its own behaviour and properties
  *
 */
 class Bullet extends BulletMovement {
