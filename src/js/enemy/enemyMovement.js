@@ -30,12 +30,13 @@ class EnemyMovement extends EnemyAnimationHelper {
         yaxisDiff = yaxisDiff*-1;
       } return yaxisDiff;
     };
-    /** move more toward player. */
-    while (1) {
-      position = this._directionDecision();
+    
+    let frames = 0; /* frames to stop infinite loop*/
+    while (frames < 100) {
+      position = this._directionDecision();/** move more toward player. */
       if (getyAxisDiff(position.y) <= getyAxisDiff(this.position.y)) {
         break;
-      }
+      } frames++;
     }
     this._enemyPositionUpdate(position);
   }
@@ -50,7 +51,8 @@ class EnemyMovement extends EnemyAnimationHelper {
     const height = 500;
     const middleBoundaryx = 300;
     const differenceStep = 4;
-    const decision = (Number.parseFloat(Math.random().toPrecision(2)));
+    const decisionX = parseFloat((Math.random()* differenceStep -2));
+    const decisionY = parseFloat((Math.random()* differenceStep -2));
     const boundaryCheck = function(position) {
       if (width < position.x ) {
         position.x = position.x-10; /* middle boundary line for enemy */
@@ -60,19 +62,8 @@ class EnemyMovement extends EnemyAnimationHelper {
         position.x = position.x+10;
       } return position;
     };
-    if (decision <= 0.25) {
-      return boundaryCheck(new Position(this.position.x-differenceStep,
-          this.position.y));
-    } else if (decision <= 0.25*2) {
-      return boundaryCheck(new Position( this.position.x,
-          this.position.y-differenceStep));
-    } else if (decision <= 0.25*3) {
-      return boundaryCheck(new Position( this.position.x+differenceStep,
-          this.position.y));
-    } else {
-      return boundaryCheck(new Position( this.position.x,
-          this.position.y+differenceStep));
-    }
+    return boundaryCheck(new Position(this.position.x+decisionX,
+        this.position.y+decisionY));
   }
 
   /**
