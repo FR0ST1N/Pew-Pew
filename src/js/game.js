@@ -55,7 +55,7 @@ class Game {
     /* Draw UI */
     this.globalObject.ui.draw(
         PLAYER.lives,
-        PLAYER.bulletStack.length,
+        PLAYER.bulletCount,
         this.globalObject.score
     );
     /* Refresh frame */

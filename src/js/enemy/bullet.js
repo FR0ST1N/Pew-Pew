@@ -110,7 +110,7 @@ class Bullet extends BulletMovement {
    * @override
    */
   fire() {
-    AudioEffects.playPewSound();
+    AudioEffects.playEnemyPewSound();
     this.objectAnimation(this.context);
   }
 }

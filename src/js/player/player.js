@@ -3,7 +3,7 @@
  * @author Frostin<iamfrostin@gmail.com>
  */
 
-/** Contains basic controls and other player functions(life, bullet stack). */
+/** Contains basic controls and other player functions. */
 class Player {
   /**
    * @typedef {Object} spriteSheet
@@ -36,7 +36,7 @@ class Player {
    * @param {canvasSize} canvasSize Canvas width and height.
    * @param {playerKeys} keys Keys for player control and action.
    * @param {number} [lives=3] Player's life count.
-   * @param {number} [maxStackSize=5] Max bullets stack can hold.
+   * @param {number} [maxBulletSize=5] Max bullets player can hold.
    */
   constructor(
       spriteSheet,
@@ -45,7 +45,7 @@ class Player {
       canvasSize,
       keys,
       lives = 3,
-      maxStackSize = 5
+      maxBulletSize = 5
   ) {
     this.spriteSheet = spriteSheet;
     this.spriteNames = spriteNames;
@@ -53,8 +53,8 @@ class Player {
     this.canvasSize = canvasSize;
     this.keys = keys;
     this.lives = lives;
-    this.maxStackSize = maxStackSize;
-    this.bulletStack = [];
+    this.maxBulletSize = maxBulletSize;
+    this.bulletCount = 0;
     this.pressed = {
       left: false,
       up: false,
@@ -318,7 +318,7 @@ class Player {
       }
       this.frameCounter = 0;
       this.pressed.pew = true;
-      AudioEffects.playPewSound();
+      AudioEffects.playPlayerPewSound();
     }
   }
 
@@ -354,41 +354,17 @@ class Player {
     return this.lives;
   }
 
-  /**
-   * @typedef {Object} bulletStackResult
-   * @property {number|undefined} value Bullet ID.
-   * @property {boolean} success Operation result.
-   */
-
-  /**
-   * Checks size and adds bullet to the stack.
-   * @param {number|undefined} bulletId Bullet type.
-   * @return {bulletStackResult}
-   */
-  pushBullet(bulletId) {
-    let pushed = false;
-    if (this.bulletStack.length < this.maxStackSize) {
-      /*
-       * Need condidion here to not push when no bullet contact.
-       * Just perform action(animation).
-       */
-      this.bulletStack.push(bulletId);
-      pushed = true;
+  /** Increments bullet count if it can hold */
+  incrementBulletCount() {
+    if (this.bulletCount < this.maxBulletSize) {
+      this.bulletCount++;
     }
-    return {value: bulletId, success: pushed};
   }
 
-  /**
-   * Removes the last added bullet from stack and returns it.
-   * @return {bulletStackResult}
-   */
-  popBullet() {
-    let popped = false;
-    let bulletId;
-    if (this.bulletStack.length > 0) {
-      bulletId = this.bulletStack.pop();
-      popped = true;
+  /** Decrements bullet count if > 0 */
+  decrementBulletCount() {
+    if (this.bulletCount > 0) {
+      this.bulletCount++;
     }
-    return {value: bulletId, success: popped};
   }
 }
