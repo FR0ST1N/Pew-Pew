@@ -48,13 +48,16 @@ class EnemyMovement extends EnemyAnimationHelper {
   _directionDecision() {
     const width = 700;
     const height = 500;
+    const middleBoundaryx = 300;
     const differenceStep = 10;
     const decision = (Number.parseFloat(Math.random().toPrecision(2)));
     const boundaryCheck = function(position) {
-      if (width < position.x) {
-        position.x = position.x-10;
+      if (width < position.x ) {
+        position.x = position.x-10; /* middle boundary line for enemy */
       } else if (height < position.y) {
         position.y = position.y-10;
+      } if (middleBoundaryx > position.x) {
+        position.x = position.x+10;
       } return position;
     };
     if (decision <= 0.25) {
