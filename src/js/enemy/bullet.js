@@ -44,14 +44,17 @@ class BulletMovement extends BulletAnimationHelper {
 */
 class Bullet extends BulletMovement {
   /**
-   * 
    * @param {Sprite} sprite
    * @param {Position|null} startposition - where the bullet originates
    * @param {BulletPattern|string} pattern
    * @param {number} speed
    * @param {number} damage
    */
-  constructor(sprite = null, startposition = null, pattern = BulletPattern.FOLLOW, speed = 10, damage = 1) {
+  constructor(sprite = null,
+      startposition = null, 
+      pattern = BulletPattern.FOLLOW,
+      speed = 10,
+      damage = 1) {
     super();
     this.sprite = sprite;
     this.position = startposition;
@@ -114,8 +117,15 @@ class Bullet extends BulletMovement {
     this.objectAnimation(this.context);
   }
 
- /**
-  * 
+  /**
+   * remove bullet
+   */
+  despawn() {
+    this.position = new Position(-100, -100);
+  }
+
+  /**
+   * detects collision with the given player coordinates
   * @param {Position} playerPosition
   * @return {boolean}
   */

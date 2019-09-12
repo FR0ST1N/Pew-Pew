@@ -62,6 +62,7 @@ class EnemySpawner {
   _bulletsDraw(Enemybullet) {
     if (Enemybullet != null || Enemybullet != undefined) {
       if (!this.isBulletInsideCanvas(Enemybullet)) {
+        Enemybullet.despawn();
         return false;
       } /* collision detection with player before draw */
       this._checkCollisionWithPlayer(Enemybullet);
@@ -91,6 +92,7 @@ class EnemySpawner {
     if (!collideWithPlayerStatus) { /* if collides with player, dont draw */
       bullet.wDraw();
     } else {
+      bullet.despawn();
       /* player health decrease */
     }
   }
