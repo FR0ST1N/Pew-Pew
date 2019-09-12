@@ -24,7 +24,9 @@ class BulletMovement extends BulletAnimationHelper {
    * @override
    */
   _Movement() {
-    eval('this.'+this.pattern+'()');
+    if (this.position != null) {
+      eval('this.'+this.pattern+'()');
+    }
   }
 
   /**

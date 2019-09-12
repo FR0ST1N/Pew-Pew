@@ -76,6 +76,9 @@ class EnemySpawner {
      * @return {boolean}
      */
   isBulletInsideCanvas(bullet) {
+    if (bullet.position == null) {
+      return false;
+    }
     if (bullet.getBulletPosition().x > 0 /* check only left side*/
        && bullet.getBulletPosition().y > 0) {
       return true;

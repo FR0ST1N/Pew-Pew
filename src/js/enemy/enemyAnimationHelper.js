@@ -7,7 +7,7 @@ class EnemyAnimationHelper extends animationHelper {
    * constructor
    */
   constructor() {
-    super(120, 28);
+    super(120, 12);
     this.fireState = false;
     this._subAnimationState =false;
     this._workingState = null;
