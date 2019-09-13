@@ -161,8 +161,8 @@ class Bullet extends BulletMovement {
     const playerObject={
       'x': playerPosition.x,
       'y': playerPosition.y,
-      'width': 32*3,
-      'height': 32*3,
+      'width': 32*2,
+      'height': 32*2,
     };
     return CollisionDetection.detect(bulletObject, playerObject);
   }
