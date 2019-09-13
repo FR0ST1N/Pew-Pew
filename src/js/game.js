@@ -30,8 +30,12 @@ class Game {
     /* Create and init UI */
     this.globalObject.ui = new UserInterface(this.ctx);
     this.globalObject.ui.init();
-    /* Init enemy spawn */
-    this.enemySpawner = new EnemySpawner(this);
+    /* Init level */
+    this.level = new Level(this);
+    /* reset level to one if already, on another level
+     this.level.resetLevelToOne(); */
+    /* trigger that level */
+    this.level.levelTrigger();
     /* Render game */
     this._render();
   }
@@ -50,8 +54,8 @@ class Game {
     PLAYER.playerMovement();
     /* Draw player */
     PLAYER._drawFrame();
-    /* Draw enemy */
-    this.enemySpawner.draw();
+    /* Draw enemy and bullets Inside "EnemySpawner" class */
+    this.level.draw();
     /* Draw UI */
     this.globalObject.ui.draw(
         PLAYER.lives,

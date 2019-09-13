@@ -128,12 +128,80 @@ class EnemySpawner {
  *    bullet configuraions:currently only one sprite
  *      bullet-properties: speed, pattern(bulletPattern), damage,
  *                         bulletPattern -> straight (or) follow
- */ 
+ *
+ */
 class Level extends EnemySpawner {
   /**
    * constructor
+   * @param {Object} object
    */
-  constructor() {
-    super();
+  constructor(object) {
+    super(object);
+    this.levelEndStatus = false;
+    this.level = 1; /* number */
+    this.currentLevelEnemies = []; /* array */
+    this.gameEnd = false;
+  }
+
+  /**
+   * triggers next level
+   */
+  triggerNextLevel() {
+    this.level += 1;
+    this.levelTrigger();
+  }
+
+  /**
+   * resetLevel to one
+   */
+  resetLevelToOne() {
+    this.level = 3;
+  }
+
+  /**
+   * design
+   * level one:
+   *  one enemy, straight bullet, health = 1, rateOfFire = (1000-100/level=1)
+   * level two:
+   *  two enemy:
+   *    1st enemy: straight bullet, health = 2, rateOfFire = (1000-100/level=2)
+   *    last enemy: follow bullet, health,rateOfFire=same as 1st enemy
+   * ... progressive, all the last enemy has the follow bullet
+   */
+  levelTrigger() {
+    for (let enemyCounter=1; enemyCounter <= this.level;
+      enemyCounter++ ) {
+      const enemy = this.enenmyOneFactory(
+          new Position(400, enemyCounter*50+100),
+          this.level,
+          (1000-100)/this.level);
+      enemy.startAnimation(this.context);
+      enemy.autoshoot = true;
+      if (this.level != 1 && enemyCounter == this.level) {
+        enemy.setBulletPattern(BulletPattern.FOLLOW);
+      }
+      enemy.shoot();
+      console.log(enemy);
+      console.log('spawned enemy for level ' + this.level);
+      this.drawableObjects.push(enemy);
+    }
+  }
+
+  /**
+   * creates enemy bashed on sprite 'enemy1.png'
+   * @param {Position} position
+   * @param {number} health
+   * @param {number} rateOfFire
+   * @return {Enemy} enemyObject
+   */
+  enenmyOneFactory(position, health, rateOfFire) {
+    const spriteEnemyOne = new Sprite('enemy1.png', 2, 2, 128, 32,
+        new Position(0, 0), 3, 3);
+    const spriteConfigEnemyOne = new SpriteConfig(['idle1', 'idle2'],
+        ['fire1', 'fire2'], spriteEnemyOne);
+    const enemyPosition = position;
+    const enemy = new Enemy(spriteEnemyOne, spriteConfigEnemyOne,
+        enemyPosition, health, rateOfFire);
+    return enemy;
   }
 }
