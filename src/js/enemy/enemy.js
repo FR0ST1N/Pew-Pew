@@ -82,4 +82,16 @@ class Enemy extends EnemyMovement {
   setBulletPattern(bulletPattern) {
     this.bulletpattern = bulletPattern;
   }
+
+  /**
+   * pass the bullet, detected during collision
+   * @param {Bullet} bullet
+   */
+  takeDamage(bullet) {
+    if (this.health > 0 && this.health-bullet.damage > 0) {
+      this.health -= this.bullet.damage; /* reduce life based on bullet */
+    } else if (this.health > this.health-bullet.damage < 0) {
+      this.health = 0;
+    }
+  }
 }
