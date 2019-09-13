@@ -33,6 +33,10 @@ class Enemy extends EnemyMovement {
       }
       return;
     }
+    if (this.position == null) {
+      this.autoshoot = false; /* async call, thus checking for null */
+      return;
+    }
 
     /* bullet sprite */
     const bulletSprite = new Sprite('enemy_bullet.png', 1, 5,

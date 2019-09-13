@@ -186,6 +186,7 @@ class Level extends EnemySpawner {
       }
       enemy.shoot();
       console.log('spawned enemy for level ' + this.level);
+      this.currentLevelEnemies.push(enemy);
       this.drawableObjects.push(enemy);
     }
   }

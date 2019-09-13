@@ -1,3 +1,4 @@
+
 /** Game class where everything comes together. */
 class Game {
   /**
@@ -62,6 +63,15 @@ class Game {
     /* Draw player */
     PLAYER._drawFrame();
     /* Draw enemy and bullets Inside "EnemySpawner" class */
+    let state = null;
+    this.level.currentLevelEnemies.forEach((enemy) => {
+      if (enemy.position!=null) {
+        state = true;
+      }
+    });
+    if (state == null) {
+      this.level.triggerNextLevel();
+    }
     this.level.draw();
     /* Draw UI */
     this.globalObject.ui.draw(
