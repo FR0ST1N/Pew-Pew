@@ -45,7 +45,7 @@ class Player {
       canvasSize,
       keys,
       lives = 3,
-      maxBulletSize = 5
+      maxBulletSize = 5,
   ) {
     this.spriteSheet = spriteSheet;
     this.spriteNames = spriteNames;
@@ -55,6 +55,8 @@ class Player {
     this.lives = lives;
     this.maxBulletSize = maxBulletSize;
     this.bulletCount = 0;
+    this.firedBulletStack = [];
+    this.level = null;
     this.pressed = {
       left: false,
       up: false,
@@ -161,6 +163,8 @@ class Player {
     } else if (PlayerUtil.isIdleAnim(this.animState)) {
       this._idleAnimation();
     }
+    /* Draw bullet */
+    this._bulletDraw();
     /* Draw player in canvas */
     PlayerUtil.imgDrawCall(
         this.ctx,
@@ -302,6 +306,13 @@ class Player {
   }
 
   /**
+   * @param {Level} level
+   */
+  setLevel(level) {
+    this.level = level;
+  }
+
+  /**
    * Fire on key down.
    * @param {KeyboardEvent} event
    */
@@ -311,6 +322,7 @@ class Player {
       return;
     }
     if (event.keyCode === this.keys.pew) {
+      this._fireBullet();
       if (this.animState === 0) {
         this.animState = 2;
       } else if (this.animState === 1) {
@@ -320,6 +332,77 @@ class Player {
       this.pressed.pew = true;
       AudioEffects.playPlayerPewSound();
     }
+  }
+
+  /**
+   * fire player bullet
+   */
+  _fireBullet() {
+    const bulletSprite = new Sprite('player_bullet.png', 1, 5,
+        5, 5, new Position(0, 0), 10, 10);
+    const bullet = new Bullet(bulletSprite, new Position(this.position.x+35,
+        this.position.y+45), this.bulletpattern, 5, 1);
+    bullet.setContext(this.ctx);
+    bullet.setPlayerMode();
+    bullet.fire();
+    this.firedBulletStack.push(bullet);
+  }
+
+  /**
+   * draws bullets.
+   */
+  _bulletDraw() {
+    this.firedBulletStack = this.firedBulletStack
+        .filter(this._bulletsDraw.bind(this));
+  }
+
+  /**
+   * @param {Bullet} Playerbullet
+   * @return {boolean}
+   */
+  _bulletsDraw(Playerbullet) {
+    if (Playerbullet != null || Playerbullet != undefined) {
+      if (!this.isBulletInsideCanvas(Playerbullet)) {
+        Playerbullet.despawn();
+        return false;
+      } /* collision detection with player before draw */
+      this._checkCollisionWithEnemy(Playerbullet);
+      return true;
+    }
+  }
+
+  /**
+     * check bullets postion in-relattion to canvas.
+     * @param {Bullet} bullet
+     * @return {boolean}
+     */
+  isBulletInsideCanvas(bullet) {
+    if (bullet.position == null) {
+      return false;
+    }
+    if (bullet.getBulletPosition().x < 800 /* check only right side*/
+       && bullet.getBulletPosition().y < 800) {
+      return true;
+    } return false;
+  }
+
+  /**
+   * @param {Bullet} bullet
+   */
+  _checkCollisionWithEnemy(bullet) {
+    this._playerBulletCollisionWithEnemy(bullet);
+  }
+
+  /**
+   * @param {Bullet} bullet
+   */
+  _playerBulletCollisionWithEnemy(bullet) {
+    this.level.drawableObjects.forEach((enemy) => {
+      if (enemy.collideDetect(bullet)) {
+        enemy.takeDamage(bullet.damage);
+        bullet.despawn();
+      } bullet.wDraw();
+    });
   }
 
   /**

@@ -181,7 +181,6 @@ class Level extends EnemySpawner {
         enemy.setBulletPattern(BulletPattern.FOLLOW);
       }
       enemy.shoot();
-      console.log(enemy);
       console.log('spawned enemy for level ' + this.level);
       this.drawableObjects.push(enemy);
     }

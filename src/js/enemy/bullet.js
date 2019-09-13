@@ -7,6 +7,7 @@ class BulletMovement extends BulletAnimationHelper {
   /** constructor*/
   constructor() {
     super();
+    this.playerMode = false;
   }
 
   /** override this method in inherited class */
@@ -25,6 +26,10 @@ class BulletMovement extends BulletAnimationHelper {
    */
   _Movement() {
     if (this.position != null) {
+      if (this.playerMode) {/* Hack, no time :() */
+        this._playerBulletMotion();
+        return;
+      }
       eval('this.'+this.pattern+'()');
     }
   }
@@ -43,7 +48,7 @@ class BulletMovement extends BulletAnimationHelper {
     let yAxis = this.playerPositionSnap.y - this.position.y;
     const length = Math.sqrt((yAxis*yAxis) + (xAxis*xAxis));
     /* despawn bullet after reaching its follow position */
-    if (xAxis > -10 && yAxis > -10) {/* right to left, so sub works
+    if (xAxis > -10 && yAxis > -10 && !this.playerMode) {/* right to left, so sub works
                                       need to change this if more complex
                                       gameplay */
       this.despawn();
@@ -52,6 +57,28 @@ class BulletMovement extends BulletAnimationHelper {
     yAxis = yAxis / length;
     this.position.x += xAxis * this.speed;
     this.position.y += yAxis * this.speed;
+  }
+
+  /**
+   * player bullet movement
+   * set the bullet mode to belong to player.
+   */
+  setPlayerMode() {
+    this.playerMode = true;
+  }
+
+  /**
+   * @return {boolean} - true if player mode
+   */
+  isPlayerMode() {
+    return this.playerMode;
+  }
+
+  /**
+   * player bullet moves from left to right
+   */
+  _playerBulletMotion() {
+    this.position.x = this.position.x + this.speed;
   }
 }
 

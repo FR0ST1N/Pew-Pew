@@ -32,6 +32,7 @@ class Game {
     this.globalObject.ui.init();
     /* Init level */
     this.level = new Level(this);
+    this.globalObject.player.setLevel(this.level);
     /* reset level to one if already, on another level
      this.level.resetLevelToOne(); */
     /* trigger that level */

@@ -85,14 +85,32 @@ class Enemy extends EnemyMovement {
 
   /**
    * pass the bullet, detected during collision
-   * @param {Bullet} bullet
+   * @param {number} damage
    */
-  takeDamage(bullet) {
-    if (this.health > 0 && this.health-bullet.damage > 0) {
-      this.health -= this.bullet.damage; /* reduce life based on bullet */
-    } else if (this.health > this.health-bullet.damage < 0) {
-      this.health = 0;
+  takeDamage(damage) {
+    if (this.health > 0) {
+      this.health = this.health - damage;
     }
+  }
+
+  /**
+   * collideDetect of enemyObject with given bullet
+   * @param {Bullet} bullet
+   * @return {boolean}
+   */
+  collideDetect(bullet) {
+    const bulletObject={'x': bullet.position.x,
+      'y': bullet.position.y,
+      'width': bullet.sprite.individualSpriteSize*this.sprite.scaleFactorX,
+      'height': bullet.sprite.individualSpriteSize*this.sprite.scaleFactorY,
+    };
+    const EnemyObject={
+      'x': this.position.x,
+      'y': this.position.y,
+      'width': this.sprite.individualSpriteSize*this.sprite.scaleFactorX,
+      'height': this.sprite.individualSpriteSize*this.sprite.scaleFactorY,
+    };
+    return CollisionDetection.detect(bulletObject, EnemyObject);
   }
 
   /** checks health and despawns enenmy, if enemy health
@@ -100,7 +118,7 @@ class Enemy extends EnemyMovement {
    * @return {boolean} - true for despawned enemy
    */
   checkHealthAndDespawn() {
-    if (this.health == null) {
+    if (this.health == null && this.sprite == null) {
       return true;
     }
     if (this.health < 1) {
@@ -109,8 +127,6 @@ class Enemy extends EnemyMovement {
       this.bullet = [];
       this.bulletpattern = null;
       this.autoshoot = false;
-      this.sprite = null;
-      this.spriteConfig = null;
       this.position = null;
       return true;
     } return false;
