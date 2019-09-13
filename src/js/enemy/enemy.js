@@ -13,7 +13,7 @@ class Enemy extends EnemyMovement {
  *            multiplier by 500ms
  */
   constructor(sprite, spriteConfig, position = null,
-      health = 1, rateOfFire = 2 ) {
+      health = 1, rateOfFire = 500 ) {
     super(sprite, spriteConfig, position);
     this.health = health;
     this.rateOfFire = rateOfFire;
@@ -64,7 +64,7 @@ class Enemy extends EnemyMovement {
   _autoshoot() {
     setTimeout( () => {
       this.shoot();
-    }, this.rateOfFire * 500);
+    }, this.rateOfFire);
   }
 
   /**
