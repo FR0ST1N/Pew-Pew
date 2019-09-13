@@ -57,6 +57,7 @@ class Player {
     this.bulletCount = 0;
     this.firedBulletStack = [];
     this.level = null;
+    this.absorbState =false;
     this.pressed = {
       left: false,
       up: false,
@@ -321,7 +322,8 @@ class Player {
     if (event.repeat) {
       return;
     }
-    if (event.keyCode === this.keys.pew) {
+    if (event.keyCode === this.keys.pew && this.bulletCount > 0) {
+      this.decrementBulletCount();
       this._fireBullet();
       if (this.animState === 0) {
         this.animState = 2;
@@ -447,7 +449,7 @@ class Player {
   /** Decrements bullet count if > 0 */
   decrementBulletCount() {
     if (this.bulletCount > 0) {
-      this.bulletCount++;
+      this.bulletCount--;
     }
   }
 }

@@ -82,7 +82,11 @@ class EnemySpawner {
       bullet.wDraw();
     } else {
       bullet.despawn();
-      /* player health decrease */
+      if (this.player.pressed.absorb) {
+        this.player.incrementBulletCount();
+        return;
+      }
+      this.player.decrementLife();
     }
   }
 }
@@ -155,7 +159,7 @@ class Level extends EnemySpawner {
    * resetLevel to one
    */
   resetLevelToOne() {
-    this.level = 3;
+    this.level = 1;
   }
 
   /**

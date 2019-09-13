@@ -180,6 +180,9 @@ class Bullet extends BulletMovement {
   * @return {boolean}
   */
   collideDetect(playerPosition) {
+    if (playerPosition.x == null || this.position.x == null) {
+      return false; /* dont proceed, if despawned */
+    }
     const bulletObject={'x': this.position.x,
       'y': this.position.y,
       'width': this.sprite.individualSpriteSize*this.sprite.scaleFactorX,

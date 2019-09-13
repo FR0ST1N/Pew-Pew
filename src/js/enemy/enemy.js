@@ -99,6 +99,9 @@ class Enemy extends EnemyMovement {
    * @return {boolean}
    */
   collideDetect(bullet) {
+    if (bullet.position.x == null || this.position == null) {
+      return false;
+    }
     const bulletObject={'x': bullet.position.x,
       'y': bullet.position.y,
       'width': bullet.sprite.individualSpriteSize*this.sprite.scaleFactorX,
