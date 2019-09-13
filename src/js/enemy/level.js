@@ -48,6 +48,7 @@ class EnemySpawner {
     */
   draw() {
     this.drawableObjects.forEach((enemy) => {
+      /* omites enemies having health < 1 */
       this._enemiesDraw(enemy);
       /* filter omits bullet if bullet is outside canvas */
       enemy.bullet = enemy.bullet.filter(this._bulletsDraw.bind(this));
@@ -113,5 +114,24 @@ class EnemySpawner {
       bullet.despawn();
       /* player health decrease */
     }
+  }
+}
+
+/**
+ * level design
+ * available configurations:
+ * enemies: enemy1, enemy2
+ *  enemy-property-variations: health, rateOfFire, autofire
+ *                             bullet
+ *    bullet configuraions:currently only one sprite
+ *      bullet-properties: speed, pattern(bulletPattern), damage,
+ *                         bulletPattern -> straight (or) follow
+ */ 
+class Level extends EnemySpawner {
+  /**
+   * constructor
+   */
+  constructor() {
+    super();
   }
 }
