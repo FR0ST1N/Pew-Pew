@@ -18,6 +18,9 @@ class EnemyAnimationHelper extends animationHelper {
    * @override
    */
   objectUpdate() {
+    if (this.checkHealthAndDespawn()) {
+      return;/* do not trigger animations if enemy is despawned */
+    }
     this._Movement();
     if (this.fireState) {
       this._fireAnimation();

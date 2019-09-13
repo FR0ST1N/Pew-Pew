@@ -94,4 +94,25 @@ class Enemy extends EnemyMovement {
       this.health = 0;
     }
   }
+
+  /** checks health and despawns enenmy, if enemy health
+   * not greater than 0
+   * @return {boolean} - true for despawned enemy
+   */
+  checkHealthAndDespawn() {
+    if (this.health == null) {
+      return true;
+    }
+    if (this.health < 1) {
+      this.health = null;
+      this.rateOfFire = null;
+      this.bullet = [];
+      this.bulletpattern = null;
+      this.autoshoot = false;
+      this.sprite = null;
+      this.spriteConfig = null;
+      this.position = null;
+      return true;
+    } return false;
+  }
 }

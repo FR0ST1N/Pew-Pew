@@ -48,10 +48,25 @@ class EnemySpawner {
     */
   draw() {
     this.drawableObjects.forEach((enemy) => {
-      enemy.setPlayerPosition(this.player.position.x, this.player.position.y);
-      enemy.wDraw();/* filter omits bullet if bullet is outside canvas */
+      this._enemiesDraw(enemy);
+      /* filter omits bullet if bullet is outside canvas */
       enemy.bullet = enemy.bullet.filter(this._bulletsDraw.bind(this));
     });
+  }
+
+
+  /**
+   * only draw enemies if they have health
+   * @param {Enemy} enemy
+   * @return {boolean} - enemy is drawable and has health
+   */
+  _enemiesDraw(enemy) {
+    if (enemy.health < 1 || enemy.health == null) {
+      enemy.checkHealthAndDespawn();
+      return false;
+    } enemy.wDraw();
+    enemy.setPlayerPosition(this.player.position.x, this.player.position.y);
+    return true;
   }
 
   /**

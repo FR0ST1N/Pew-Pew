@@ -21,6 +21,10 @@ class EnemyMovement extends EnemyAnimationHelper {
    * @override
    */
   _Movement() {
+    if (this.checkHealthAndDespawn()) {
+      return; /* do not compute movement & trigger movement
+              if enemy is despawned */
+    }
     const self = this;
     let position = null;
     /* diff between player and given position */
