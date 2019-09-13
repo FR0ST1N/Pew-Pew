@@ -30,7 +30,7 @@ class EnemyMovement extends EnemyAnimationHelper {
         yaxisDiff = yaxisDiff*-1;
       } return yaxisDiff;
     };
-    
+
     let frames = 0; /* frames to stop infinite loop*/
     while (frames < 100) {
       position = this._directionDecision();/** move more toward player. */
