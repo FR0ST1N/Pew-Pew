@@ -16,6 +16,7 @@ class Game {
       ui: null,
       score: 0,
     };
+    this.requestAnimationFrameId = null;
   }
 
   /** Game initialization. */
@@ -51,6 +52,11 @@ class Game {
     /* Paint BG */
     this.ctx.fillStyle = '#260016';
     this.ctx.fillRect(0, 0, this.width, this.height);
+    if (PLAYER.lives < 1) {
+      window.cancelAnimationFrame(this._render.bind(this));
+      alert('gameover');
+      exit();
+    }
     /* Change player position */
     PLAYER.playerMovement();
     /* Draw player */
@@ -64,7 +70,7 @@ class Game {
         this.globalObject.score
     );
     /* Refresh frame */
-    window.requestAnimationFrame(this._render.bind(this));
+    this.requestAnimationFrameId = window.requestAnimationFrame(this._render.bind(this));
   }
 
   /**
