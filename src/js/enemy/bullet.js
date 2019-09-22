@@ -47,10 +47,11 @@ class BulletMovement extends BulletAnimationHelper {
     let xAxis = this.playerPositionSnap.x - this.position.x;
     let yAxis = this.playerPositionSnap.y - this.position.y;
     const length = Math.sqrt((yAxis*yAxis) + (xAxis*xAxis));
-    /* despawn bullet after reaching its follow position */
-    if (xAxis > -10 && yAxis > -10 && !this.playerMode) {/* right to left, so sub works
-                                      need to change this if more complex
-                                      gameplay */
+    /*
+     * despawn bullet after reaching its follow position
+     * right to left, so sub works need to change this if more complex gameplay
+     */
+    if (xAxis > -10 && yAxis > -10 && !this.playerMode) {
       this.despawn();
     }
     xAxis = xAxis / length;

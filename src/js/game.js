@@ -1,4 +1,3 @@
-
 /** Game class where everything comes together. */
 class Game {
   /**
@@ -53,19 +52,20 @@ class Game {
     /* Paint BG */
     this.ctx.fillStyle = '#260016';
     this.ctx.fillRect(0, 0, this.width, this.height);
-    if (PLAYER.lives < 1) {
+    /* Player life check */
+    if (PLAYER.lives <= 0) {
       window.cancelAnimationFrame(this._render.bind(this));
       alert('gameover');
-      exit();
     }
     /* Change player position */
     PLAYER.playerMovement();
     /* Draw player */
     PLAYER._drawFrame();
     /* Draw enemy and bullets Inside "EnemySpawner" class */
+    /* What is happening here?! monkaS */
     let state = null;
     this.level.currentLevelEnemies.forEach((enemy) => {
-      if (enemy.position!=null) {
+      if (enemy.position != null) {
         state = true;
       }
     });
@@ -80,7 +80,8 @@ class Game {
         this.globalObject.score
     );
     /* Refresh frame */
-    this.requestAnimationFrameId = window.requestAnimationFrame(this._render.bind(this));
+    this.requestAnimationFrameId =
+        window.requestAnimationFrame(this._render.bind(this));
   }
 
   /**

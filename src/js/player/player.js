@@ -45,7 +45,7 @@ class Player {
       canvasSize,
       keys,
       lives = 3,
-      maxBulletSize = 5,
+      maxBulletSize = 5
   ) {
     this.spriteSheet = spriteSheet;
     this.spriteNames = spriteNames;
@@ -342,8 +342,8 @@ class Player {
   _fireBullet() {
     const bulletSprite = new Sprite('player_bullet.png', 1, 5,
         5, 5, new Position(0, 0), 10, 10);
-    const bullet = new Bullet(bulletSprite, new Position(this.position.x+35,
-        this.position.y+45), this.bulletpattern, 5, 1);
+    const bullet = new Bullet(bulletSprite, new Position(this.position.x + 35,
+        this.position.y + 45), this.bulletpattern, 5, 1);
     bullet.setContext(this.ctx);
     bullet.setPlayerMode();
     bullet.fire();
