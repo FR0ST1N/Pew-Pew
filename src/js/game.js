@@ -109,12 +109,12 @@ class Game {
       height: this.height,
     };
     const KEYS = {
-      left: 37,
-      up: 38,
-      right: 39,
-      down: 40,
-      pew: 88,
-      absorb: 90,
+      left: 'ArrowLeft',
+      up: 'ArrowUp',
+      right: 'ArrowRight',
+      down: 'ArrowDown',
+      pew: 'KeyX',
+      absorb: 'KeyZ',
     };
     const PLAYER = new Player(P_SS, SPRITE_NAMES, this.ctx, CANVAS_SIZE, KEYS);
     return PLAYER;

@@ -269,7 +269,7 @@ class Player {
    * @param {KeyboardEvent} event
    */
   _moveKeyDown(event) {
-    switch (event.keyCode) {
+    switch (event.code) {
       case this.keys.left:
         this.pressed.left = true;
         break;
@@ -290,7 +290,7 @@ class Player {
    * @param {KeyboardEvent} event
    */
   _moveKeyUp(event) {
-    switch (event.keyCode) {
+    switch (event.code) {
       case this.keys.left:
         this.pressed.left = false;
         break;
@@ -322,7 +322,7 @@ class Player {
     if (event.repeat) {
       return;
     }
-    if (event.keyCode === this.keys.pew && this.bulletCount > 0) {
+    if (event.code === this.keys.pew && this.bulletCount > 0) {
       this.decrementBulletCount();
       this._fireBullet();
       if (this.animState === 0) {
@@ -412,7 +412,7 @@ class Player {
    * @param {KeyboardEvent} event
    */
   _absorbKeyDown(event) {
-    if (event.keyCode === this.keys.absorb) {
+    if (event.code === this.keys.absorb) {
       this.pressed.absorb = true;
     }
   }
@@ -422,7 +422,7 @@ class Player {
    * @param {KeyboardEvent} event
    */
   _absorbKeyUp(event) {
-    if (event.keyCode === this.keys.absorb) {
+    if (event.code === this.keys.absorb) {
       this.pressed.absorb = false;
       this._returnToIdle(4, 5);
     }
