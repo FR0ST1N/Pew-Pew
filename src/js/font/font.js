@@ -303,6 +303,13 @@ class Font {
         [0],
         [0],
       ],
+      '.': [
+        [0],
+        [0],
+        [0],
+        [0],
+        [1],
+      ],
     };
     const CHAR_ARR = [];
     string = string.toUpperCase();
