@@ -17,6 +17,7 @@ class Game {
       score: 0,
     };
     this.requestAnimationFrameId = null;
+    this.version = 1.1;
   }
 
   /** Game initialization. */
@@ -29,15 +30,15 @@ class Game {
     this.globalObject.player = this._createPlayer();
     this.globalObject.player.init();
     /* Create and init UI */
-    this.globalObject.ui = new UserInterface(this.ctx);
+    this.globalObject.ui = new UserInterface(this.ctx, this.version);
     this.globalObject.ui.init();
     /* Init level */
-    this.level = new Level(this);
-    this.globalObject.player.setLevel(this.level);
+    // this.level = new Level(this);
+    // this.globalObject.player.setLevel(this.level);
     /* reset level to one if already, on another level
      this.level.resetLevelToOne(); */
     /* trigger that level */
-    this.level.levelTrigger();
+    // this.level.levelTrigger();
     /* Render game */
     this._render();
   }
@@ -46,24 +47,45 @@ class Game {
   _render() {
     /* Clear canvas */
     this.ctx.clearRect(0, 0, this.width, this.height);
-    /* Assign player obj to a temp const and increment player frame. */
-    const PLAYER = this.globalObject.player;
-    PLAYER.frameCounter++;
     /* Paint BG */
     this.ctx.fillStyle = '#260016';
     this.ctx.fillRect(0, 0, this.width, this.height);
-    /* Player life check */
-    if (PLAYER.lives <= 0) {
-      window.cancelAnimationFrame(this._render.bind(this));
-      alert('gameover');
+    /* Assign UI instance to a const */
+    const UI = this.globalObject.ui;
+    /* GameOver screen when player dies and reset game */
+    if (this.globalObject.player.lives <= 0) {
+      UI.currentState = UI.states.GAMEOVER;
+      this._resetGame();
     }
+    /* Draw actual game only if the current UI state says so */
+    if (UI.currentState === UI.states.GAME) {
+      this._drawGame(this.globalObject.player);
+    }
+    /* Draw UI */
+    UI.draw(
+        this.globalObject.player.lives,
+        this.globalObject.player.bulletCount,
+        this.globalObject.score
+    );
+    /* Refresh frame */
+    this.requestAnimationFrameId =
+        window.requestAnimationFrame(this._render.bind(this));
+  }
+
+  /**
+   * Draw Gameplay
+   * @param {Player} player A Player instance.
+   */
+  _drawGame(player) {
+    /* increment player frame */
+    player.frameCounter++;
     /* Change player position */
-    PLAYER.playerMovement();
+    player.playerMovement();
     /* Draw player */
-    PLAYER._drawFrame();
+    player._drawFrame();
     /* Draw enemy and bullets Inside "EnemySpawner" class */
     /* What is happening here?! monkaS */
-    let state = null;
+    /* let state = null;
     this.level.currentLevelEnemies.forEach((enemy) => {
       if (enemy.position != null) {
         state = true;
@@ -72,16 +94,7 @@ class Game {
     if (state == null) {
       this.level.triggerNextLevel();
     }
-    this.level.draw();
-    /* Draw UI */
-    this.globalObject.ui.draw(
-        PLAYER.lives,
-        PLAYER.bulletCount,
-        this.globalObject.score
-    );
-    /* Refresh frame */
-    this.requestAnimationFrameId =
-        window.requestAnimationFrame(this._render.bind(this));
+    this.level.draw(); */
   }
 
   /**
@@ -119,5 +132,11 @@ class Game {
     };
     const PLAYER = new Player(P_SS, SPRITE_NAMES, this.ctx, CANVAS_SIZE, KEYS);
     return PLAYER;
+  }
+
+  /** Reset game. */
+  _resetGame() {
+    this.globalObject.player = this._createPlayer();
+    this.globalObject.player.init();
   }
 }

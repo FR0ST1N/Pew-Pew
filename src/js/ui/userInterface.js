@@ -5,9 +5,13 @@
 
 /** Handles the UI stuff. */
 class UserInterface {
-  /** @param {CanvasRenderingContext2D} ctx */
-  constructor(ctx) {
+  /**
+   * @param {CanvasRenderingContext2D} ctx
+   * @param {number} version
+   */
+  constructor(ctx, version) {
     this.ctx = ctx;
+    this.version = version;
     this.healthSpriteSheet = new SpriteSheet(
         'images/ui_heart.png',
         5
@@ -16,7 +20,17 @@ class UserInterface {
         'images/ui_bullet_holder.png',
         7
     );
+    this.logoSpriteSheet = new SpriteSheet(
+        'images/logo.png',
+        15
+    );
     this.names = ['a', 'b', 'c', 'd', 'e', 'f'];
+    this.states = {
+      'START': 0,
+      'GAME': 1,
+      'GAMEOVER': 2,
+    };
+    this.currentState = this.states.START;
   }
 
   /** Initialize UI. */
@@ -31,21 +45,81 @@ class UserInterface {
         1,
         6
     );
+    this.logoSpriteSheet.addSprite({
+      name: 'logo',
+      x: 0,
+      y: 0,
+    });
+    this._uiInputListener();
   }
 
   /**
-   * Draw UI.
+   * Draw UI based on the state.
    * @param {number} currHealth Player's current health/lives.
    * @param {number} count Bullet count.
    * @param {number} score Current score.
    */
   draw(currHealth, count, score) {
     this.ctx.save();
-    this.ctx.globalAlpha = 0.5;
-    this._drawHealth(currHealth);
-    this._drawBulletCount(count);
-    this._drawScore(score.toString(), 5);
+    switch (this.currentState) {
+      case this.states.START:
+        this._drawLogo();
+        this.ctx.fillStyle = '#daf3ec';
+        Font.draw('v' + this.version, 2, this.ctx, 10, 10);
+        // Font.draw('Press space to start', 5, this.ctx, 218, 450);
+        Font.draw('Press space to start', 4.11, this.ctx, 250, 430);
+        break;
+      case this.states.GAME:
+        this.ctx.globalAlpha = 0.5;
+        this._drawHealth(currHealth);
+        this._drawBulletCount(count);
+        this._drawScore(score.toString(), 5);
+        break;
+      case this.states.GAMEOVER:
+        this.ctx.fillStyle = '#daf3ec';
+        Font.draw('Your score is ' + score, 5, this.ctx, 50, 300);
+        Font.draw('Press space to play again', 5, this.ctx, 50, 350);
+        break;
+    }
     this.ctx.restore();
+  }
+
+  /** Listener for start and restart game. */
+  _uiInputListener() {
+    document.addEventListener('keydown', this._uiInput.bind(this), false);
+  }
+
+  /**
+   * UI Input Listener
+   * @param {KeyboardEvent} event
+   */
+  _uiInput(event) {
+    if (event.repeat) {
+      return;
+    }
+    if (event.code === 'Space') {
+      if (
+        this.currentState === this.states.START ||
+        this.currentState === this.states.GAMEOVER
+      ) {
+        this.currentState = this.states.GAME;
+      }
+    }
+  }
+
+  /** Draw Logo on start screen. */
+  _drawLogo() {
+    const SCALE = 20;
+    const SIZE = this.logoSpriteSheet.spriteSize * SCALE;
+    PlayerUtil.imgDrawCall(
+        this.ctx,
+        this.logoSpriteSheet,
+        'logo',
+        this.logoSpriteSheet.spriteSize,
+        (800 - SIZE) / 2,
+        (600 - SIZE) / 2,
+        SCALE
+    );
   }
 
   /**

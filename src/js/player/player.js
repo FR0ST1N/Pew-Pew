@@ -322,6 +322,10 @@ class Player {
     if (event.repeat) {
       return;
     }
+    /* Just for testing */
+    /* if (event.code === this.keys.pew) {
+      this.decrementLife();
+    } */
     if (event.code === this.keys.pew && this.bulletCount > 0) {
       this.decrementBulletCount();
       this._fireBullet();
