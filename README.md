@@ -8,6 +8,7 @@ Meet Koko! Your average girl with the power to make a barrier around her and abs
 
 | Button  | Description |
 | ------------- | ------------- |
+| Space  | Start / Play Again  |
 | Arrow Keys | Movement  |
 | z | Barrier  |
 | x  | Pew  |
