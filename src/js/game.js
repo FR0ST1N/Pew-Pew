@@ -33,12 +33,9 @@ class Game {
     this.globalObject.ui = new UserInterface(this.ctx, this.version);
     this.globalObject.ui.init();
     /* Init level */
-    // this.level = new Level(this);
-    // this.globalObject.player.setLevel(this.level);
-    /* reset level to one if already, on another level
-     this.level.resetLevelToOne(); */
-    /* trigger that level */
-    // this.level.levelTrigger();
+    this.level = new Level(this);
+    /* setplayer Object's level */
+    this.globalObject.player.setLevel(this.level);
     /* Render game */
     this._render();
   }
@@ -60,6 +57,11 @@ class Game {
     /* Draw actual game only if the current UI state says so */
     if (UI.currentState === UI.states.GAME) {
       this._drawGame(this.globalObject.player);
+      /* check level start status and start level trigger */
+      if (!this.level.gameEnd) {
+        this.level.levelTrigger();
+        this.level.gameEnd = true;
+      }
     }
     /* Draw UI */
     UI.draw(
@@ -84,17 +86,7 @@ class Game {
     /* Draw player */
     player._drawFrame();
     /* Draw enemy and bullets Inside "EnemySpawner" class */
-    /* What is happening here?! monkaS */
-    /* let state = null;
-    this.level.currentLevelEnemies.forEach((enemy) => {
-      if (enemy.position != null) {
-        state = true;
-      }
-    });
-    if (state == null) {
-      this.level.triggerNextLevel();
-    }
-    this.level.draw(); */
+    this.level.draw();
   }
 
   /**
@@ -138,5 +130,7 @@ class Game {
   _resetGame() {
     this.globalObject.player = this._createPlayer();
     this.globalObject.player.init();
+    this.level.resetLevelToOne();
+    this.level.gameEnd = false;
   }
 }
