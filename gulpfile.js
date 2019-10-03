@@ -11,6 +11,7 @@ const zip = require('gulp-zip');
 const rimraf = require('gulp-rimraf');
 const checkSize = require('gulp-check-filesize');
 const imageMin = require('gulp-imagemin');
+const jsdoc = require('gulp-jsdoc3');
 
 const jsConcat = [
   'src/js/audio/audioEffects.js',
@@ -59,6 +60,12 @@ gulp.task('jsLintNoConcat', function() {
   return gulp.src('src/js/**/*.js')
       .pipe(jsLint())
       .pipe(jsLint.format());
+});
+
+gulp.task('genDocs', function() {
+  var config = require('./jsdoc.json');
+  return gulp.src('src/js/**/*.js', {read: false})
+      .pipe(jsdoc(config));
 });
 
 gulp.task('htmlBuild', function() {
@@ -139,5 +146,6 @@ gulp.task('build', gulp.series(
     'jsBuild',
     'jsfxr',
     'imageMin',
-    'zip'
+    'zip',
+    'genDocs'
 ));

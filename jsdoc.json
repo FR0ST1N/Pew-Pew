@@ -1,0 +1,53 @@
+{
+    "tags": {
+        "allowUnknownTags": false
+    },
+    "source": {
+        "includePattern": ".js$",
+        "excludePattern": "(node_modules/|docs)"
+    },
+    "plugins": [
+        "plugins/markdown"
+    ],
+    "opts": {
+        "template": "node_modules/docdash/",
+        "encoding": "utf8",
+        "destination": "build/docs/",
+        "recurse": true,
+        "verbose": true
+    },
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": false,
+        "default": {
+            "includeDate": false
+        }
+    },
+    "docdash": {
+        "openGraph": {
+            "title": "Pew Pew - Docs",
+            "type": "website",
+            "site_name": "Pew Pew - Docs",
+            "url": "https://fr0st1n.github.io/Pew-Pew/docs/"
+        },
+        "meta": {
+            "title": "Pew Pew - Docs",
+            "description": "Docementation for Pew Pew (JavaScript Game)",
+            "keyword": "javascript game, pew pew, game, html5"
+        },
+        "menu": {
+            "GitHub Repository": {
+                "href":"https://github.com/FR0ST1N/Pew-Pew",
+                "target":"_blank",
+                "class":"menu-item",
+                "id":"website_link"
+            },
+            "Play Game": {
+                "href":"https://fr0st1n.github.io/Pew-Pew/",
+                "target":"_blank",
+                "class":"menu-item",
+                "id":"game_link"
+            }
+        }
+    }
+}
