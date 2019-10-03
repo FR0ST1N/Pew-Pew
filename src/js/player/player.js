@@ -1,6 +1,6 @@
 /**
  * @file Main player file. Contains player animations and other stuffs.
- * @author Frostin<iamfrostin@gmail.com>
+ * @author Frostin <iamfrostin@gmail.com>
  */
 
 /** Contains basic controls and other player functions. */

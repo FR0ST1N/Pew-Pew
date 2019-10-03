@@ -1,6 +1,6 @@
 /**
  * @file Helper to the Player class.
- * @author Frostin<iamfrostin@gmail.com>
+ * @author Frostin <iamfrostin@gmail.com>
  */
 
 /** Utility methods for player. */

@@ -13,9 +13,9 @@ class BulletAnimationHelper extends animationHelper {
   }
 
   /**
-   * @override
    * specific to bullet animation.
    * if bullet had fancy animaton and stuff, it goes inside here.
+   * @override
    */
   objectUpdate() {
 

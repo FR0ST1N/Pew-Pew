@@ -1,6 +1,6 @@
 /**
  * @file All UI stuff is here.
- * @author Frostin<iamfrostin@gmail.com>
+ * @author Frostin <iamfrostin@gmail.com>
  */
 
 /** Handles the UI stuff. */

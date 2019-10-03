@@ -1,6 +1,6 @@
 /**
  * @file Contains method for collision detection.
- * @author Frostin<iamfrostin@gmail.com>
+ * @author Frostin <iamfrostin@gmail.com>
  */
 
 /** Collision detection class. */

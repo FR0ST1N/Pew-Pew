@@ -1,6 +1,6 @@
 /**
  * @file Contains all methods for sound effects.
- * @author Frostin<iamfrostin@gmail.com>
+ * @author Frostin <iamfrostin@gmail.com>
  */
 
 /** Play game audio effects. */

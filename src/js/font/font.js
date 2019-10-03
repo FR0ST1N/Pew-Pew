@@ -1,6 +1,6 @@
 /**
  * @file Contains method to draw strings in canvas.
- * @author Frostin<iamfrostin@gmail.com>
+ * @author Frostin <iamfrostin@gmail.com>
  */
 
 /**

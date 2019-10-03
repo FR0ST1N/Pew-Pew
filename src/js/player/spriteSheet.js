@@ -1,6 +1,6 @@
 /**
  * @file Sprite sheet helper.
- * @author Frostin<iamfrostin@gmail.com>
+ * @author Frostin <iamfrostin@gmail.com>
  */
 
 /** Class to handle sprite sheets. */

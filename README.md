@@ -1,4 +1,4 @@
-![Shrine](https://github.com/FR0ST1N/Pew-Pew/blob/master/banner.png "Pew-Pew")
+![Pew-Pew](https://github.com/FR0ST1N/Pew-Pew/blob/master/banner.png "Pew-Pew")
 
 # Description
 
