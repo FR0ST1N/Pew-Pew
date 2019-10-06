@@ -112,7 +112,7 @@ gulp.task('zip', function() {
   const maxSize = 1024 * 13;
 
   return gulp.src('build/**')
-      .pipe(zip('PewPew.zip'))
+      .pipe(zip('Pew-Pew.zip'))
       .pipe(gulp.dest('zip'))
       .pipe(checkSize({fileSizeLimit: maxSize}));
 });
