@@ -5,6 +5,7 @@
 class Enemy extends EnemyMovement {
 /**
  *
+ * @param {ui} Object
  * @param {Sprite} sprite
  * @param {SpriteConfig} spriteConfig
  * @param {Position} position
@@ -12,14 +13,16 @@ class Enemy extends EnemyMovement {
  * @param {number} rateOfFire - intervel between each bullet fire,
  *            multiplier by 500ms
  */
-  constructor(sprite, spriteConfig, position = null,
+  constructor(ui, sprite, spriteConfig, position = null,
       health = 1, rateOfFire = 500 ) {
     super(sprite, spriteConfig, position);
+    this.UI = ui;
     this.health = health;
     this.rateOfFire = rateOfFire;
     this.bullet = [];
     this.bulletpattern = BulletPattern.DEFAULT;
     this.autoshoot = false; /* enable this to auto fire based on rateOfFire */
+    this.autoShootTimeOutId = null; /* store timeoutid to later remove on despawn */
   }
 
   /**
@@ -36,6 +39,11 @@ class Enemy extends EnemyMovement {
     if (this.position == null) {
       this.autoshoot = false; /* async call, thus checking for null */
       return;
+    }
+    /* if ui state gameover despawn */
+    if(this.UI.currentState == this.UI.states.GAMEOVER){
+      this.health = null;
+      this.checkHealthAndDespawn();
     }
 
     /* bullet sprite */
@@ -57,6 +65,7 @@ class Enemy extends EnemyMovement {
     bullet.fire();
     /* push bullet to enemy's stack, used while EnemySpawner::draw */
     this.bullet.push(bullet);
+    /* autoshoot */
     if (this.autoshoot) {
       this._autoshoot();
     }
@@ -66,7 +75,7 @@ class Enemy extends EnemyMovement {
    * automatic enemy shooting.
    */
   _autoshoot() {
-    setTimeout( () => {
+    this.autoShootTimeOutId = setTimeout( () => {
       this.shoot();
     }, this.rateOfFire);
   }
@@ -135,6 +144,10 @@ class Enemy extends EnemyMovement {
       this.bulletpattern = null;
       this.autoshoot = false;
       this.position = null;
+      /* clear autoshoot */
+      clearTimeout(this.autoShootTimeOutpId); 
+      /* clear postion update and animation */
+      clearTimeout(this.animationTimerId);
       return true;
     } return false;
   }

@@ -11,6 +11,7 @@ class EnemySpawner {
     this.context = obj.ctx;
     this.player = obj.globalObject.player;
     this.drawableObjects = [];
+    this.UI = obj.globalObject.ui;
   }
 
   /** responsible for drawing
@@ -204,7 +205,7 @@ class Level extends EnemySpawner {
     const spriteConfigEnemyOne = new SpriteConfig(['idle1', 'idle2'],
         ['fire1', 'fire2'], spriteEnemyOne);
     const enemyPosition = position;
-    const enemy = new Enemy(spriteEnemyOne, spriteConfigEnemyOne,
+    const enemy = new Enemy(this.UI, spriteEnemyOne, spriteConfigEnemyOne,
         enemyPosition, health, rateOfFire);
     return enemy;
   }

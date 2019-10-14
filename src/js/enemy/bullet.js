@@ -173,6 +173,8 @@ class Bullet extends BulletMovement {
     this.speed = null;
     this.damage = null;
     this.playerPositionSnap = null;
+    /* clear motion animation for bullet */
+    clearTimeout(this.animationTimerId);
   }
 
   /**

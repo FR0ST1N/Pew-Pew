@@ -11,6 +11,7 @@ class animationHelper extends Timer {
    */
   constructor(animationTime, MovementTime) {
     super(animationTime, MovementTime);
+    this.animationTimerId = null;
   }
 
   /**
@@ -64,7 +65,7 @@ class animationHelper extends Timer {
    * object movement loop
    */
   objectAnimation() {
-    setTimeout(() => {
+    this.animationTimerId = setTimeout(() => {
       this.postObjectUpdate();
     }, 1);
   }
