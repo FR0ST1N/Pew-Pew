@@ -33,6 +33,8 @@ Meet Koko! Your average girl with the power to make a barrier around her and abs
 
 # Development
 
+## Follow the development [trello](https://trello.com/b/LoGXtFYM)
+
 ## [Docs](https://fr0st1n.github.io/Pew-Pew/docs/)
 
 ## Gulp Commands
