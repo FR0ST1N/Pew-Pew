@@ -59,7 +59,7 @@ class Game {
       this._drawGame(this.globalObject.player);
       /* check level start status and start level trigger */
       if (!this.level.gameEnd) {
-        this.level.levelTrigger();
+        this.level.triggerNextLevel();
         this.level.gameEnd = true;
       }
     }

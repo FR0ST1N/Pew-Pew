@@ -24,6 +24,7 @@ class EnemySpawner {
       /* filter omits bullet if bullet is outside canvas */
       enemy.bullet = enemy.bullet.filter(this._bulletsDraw.bind(this));
     });
+    this._levelCheck();
   }
 
 
@@ -143,7 +144,7 @@ class Level extends EnemySpawner {
   constructor(object) {
     super(object);
     this.levelEndStatus = false;
-    this.level = 1; /* number */
+    this.level = 0; /* number */
     this.currentLevelEnemies = []; /* array */
     this.gameEnd = false;
   }
@@ -152,6 +153,8 @@ class Level extends EnemySpawner {
    * triggers next level
    */
   triggerNextLevel() {
+    this.currentLevelEnemies = []; /* reset current level enemies */
+    this.drawableObjects = [];
     this.level += 1;
     this.levelTrigger();
   }
@@ -208,5 +211,21 @@ class Level extends EnemySpawner {
     const enemy = new Enemy(this.UI, spriteEnemyOne, spriteConfigEnemyOne,
         enemyPosition, health, rateOfFire);
     return enemy;
+  }
+
+  /**
+   *
+   */
+  _levelCheck() {
+    const eHolder = [];
+    this.currentLevelEnemies.forEach((enemy) => {
+      if (!enemy.checkHealthAndDespawn()) {
+        eHolder.push(enemy);
+      }
+    });
+    /* trigger next level */
+    if (eHolder.length==0) {
+      this.gameEnd = false;
+    }
   }
 }

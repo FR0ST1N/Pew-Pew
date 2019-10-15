@@ -112,7 +112,7 @@ class Enemy extends EnemyMovement {
    * @return {boolean}
    */
   collideDetect(bullet) {
-    if (bullet.position.x == null || this.position == null) {
+    if (this.position == null || bullet.position == null ) {
       return false;
     }
     const bulletObject={'x': bullet.position.x,
