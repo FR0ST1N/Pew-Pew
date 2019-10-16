@@ -53,7 +53,8 @@ gulp.task('jsLint', function() {
   return gulp.src('src/js/**/*.js')
       .pipe(concat('main.js'))
       .pipe(jsLint())
-      .pipe(jsLint.format());
+      .pipe(jsLint.format())
+      .pipe(jsLint.failAfterError());
 });
 
 gulp.task('jsLintNoConcat', function() {

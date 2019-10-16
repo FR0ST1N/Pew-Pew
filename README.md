@@ -48,6 +48,7 @@ Meet Koko! Your average girl with the power to make a barrier around her and abs
     * Shows JS lint errors without minifying and concatenating code
 * `gulp build`
     * Shows HTML, CSS and JS lint errors
+    * Build will fail if there are JS line errors
     * Minifies code and images in `src` directory
     * Concat files after minification
     * Puts the output files in `build` directory
