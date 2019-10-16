@@ -5,7 +5,7 @@
 class Enemy extends EnemyMovement {
 /**
  *
- * @param {ui} Object
+ * @param {ui} ui
  * @param {Sprite} sprite
  * @param {SpriteConfig} spriteConfig
  * @param {Position} position
@@ -21,8 +21,10 @@ class Enemy extends EnemyMovement {
     this.rateOfFire = rateOfFire;
     this.bullet = [];
     this.bulletpattern = BulletPattern.DEFAULT;
-    this.autoshoot = false; /* enable this to auto fire based on rateOfFire */
-    this.autoShootTimeOutId = null; /* store timeoutid to later remove on despawn */
+    /* enable this to auto fire based on rateOfFire */
+    this.autoshoot = false;
+    /* store timeoutid to later remove on despawn */
+    this.autoShootTimeOutId = null;
   }
 
   /**
@@ -41,7 +43,7 @@ class Enemy extends EnemyMovement {
       return;
     }
     /* if ui state gameover despawn */
-    if(this.UI.currentState == this.UI.states.GAMEOVER){
+    if (this.UI.currentState == this.UI.states.GAMEOVER) {
       this.health = null;
       this.checkHealthAndDespawn();
     }
@@ -145,7 +147,7 @@ class Enemy extends EnemyMovement {
       this.autoshoot = false;
       this.position = null;
       /* clear autoshoot */
-      clearTimeout(this.autoShootTimeOutpId); 
+      clearTimeout(this.autoShootTimeOutpId);
       /* clear postion update and animation */
       clearTimeout(this.animationTimerId);
       return true;
