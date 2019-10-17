@@ -4,8 +4,8 @@
  */
 class Enemy extends EnemyMovement {
 /**
- *
  * @param {ui} ui
+ * @param {Score} score instance of score
  * @param {Sprite} sprite
  * @param {SpriteConfig} spriteConfig
  * @param {Position} position
@@ -13,13 +13,15 @@ class Enemy extends EnemyMovement {
  * @param {number} rateOfFire - intervel between each bullet fire,
  *            multiplier by 500ms
  */
-  constructor(ui, sprite, spriteConfig, position = null,
+  constructor(ui, score, sprite, spriteConfig, position = null,
       health = 1, rateOfFire = 500 ) {
     super(sprite, spriteConfig, position);
     this.UI = ui;
     this.health = health;
+    this.level = health;
     this.rateOfFire = rateOfFire;
     this.bullet = [];
+    this.score = score;
     this.bulletpattern = BulletPattern.DEFAULT;
     /* enable this to auto fire based on rateOfFire */
     this.autoshoot = false;
@@ -146,6 +148,9 @@ class Enemy extends EnemyMovement {
       this.bulletpattern = null;
       this.autoshoot = false;
       this.position = null;
+      /* NOTE: Pass level as param. level(number) must start at 1. */
+      /* Set score */
+      this.score.setScore(this.level); /* Gets called multiple times */
       /* clear autoshoot */
       clearTimeout(this.autoShootTimeOutpId);
       /* clear postion update and animation */

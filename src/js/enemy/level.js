@@ -147,6 +147,7 @@ class Level extends EnemySpawner {
     this.level = 0; /* number */
     this.currentLevelEnemies = []; /* array */
     this.gameEnd = false;
+    this.score = object.globalObject.score;
   }
 
   /**
@@ -208,8 +209,8 @@ class Level extends EnemySpawner {
     const spriteConfigEnemyOne = new SpriteConfig(['idle1', 'idle2'],
         ['fire1', 'fire2'], spriteEnemyOne);
     const enemyPosition = position;
-    const enemy = new Enemy(this.UI, spriteEnemyOne, spriteConfigEnemyOne,
-        enemyPosition, health, rateOfFire);
+    const enemy = new Enemy(this.UI, this.score, spriteEnemyOne,
+        spriteConfigEnemyOne, enemyPosition, health, rateOfFire);
     return enemy;
   }
 

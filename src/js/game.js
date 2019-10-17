@@ -14,7 +14,7 @@ class Game {
     this.globalObject = {
       player: null,
       ui: null,
-      score: 0,
+      score: null,
     };
     this.requestAnimationFrameId = null;
     this.version = '1.1.0';
@@ -32,6 +32,8 @@ class Game {
     /* Create and init UI */
     this.globalObject.ui = new UserInterface(this.ctx, this.version);
     this.globalObject.ui.init();
+    /** Create score instance and set it */
+    this.globalObject.score = new Score();
     /* Init level */
     this.level = new Level(this);
     /* setplayer Object's level */
@@ -67,7 +69,7 @@ class Game {
     UI.draw(
         this.globalObject.player.lives,
         this.globalObject.player.bulletCount,
-        this.globalObject.score
+        this.globalObject.score.getScore()
     );
     /* Refresh frame */
     this.requestAnimationFrameId =

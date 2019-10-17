@@ -15,6 +15,7 @@ const jsdoc = require('gulp-jsdoc3');
 
 const jsConcat = [
   'src/js/audio/audioEffects.js',
+  'src/js/score/score.js',
   'src/js/player/spriteSheet.js',
   'src/js/enemy/common/sprite.js',
   'src/js/enemy/common/position.js',
