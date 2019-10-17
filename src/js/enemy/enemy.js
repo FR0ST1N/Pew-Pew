@@ -121,8 +121,8 @@ class Enemy extends EnemyMovement {
     }
     const bulletObject={'x': bullet.position.x,
       'y': bullet.position.y,
-      'width': bullet.sprite.individualSpriteSize*this.sprite.scaleFactorX,
-      'height': bullet.sprite.individualSpriteSize*this.sprite.scaleFactorY,
+      'width': bullet.sprite.individualSpriteSize*bullet.sprite.scaleFactorX,
+      'height': bullet.sprite.individualSpriteSize*bullet.sprite.scaleFactorY,
     };
     const EnemyObject={
       'x': this.position.x,
