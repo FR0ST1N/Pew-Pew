@@ -56,8 +56,10 @@ class BulletMovement extends BulletAnimationHelper {
     }
     xAxis = xAxis / length;
     yAxis = yAxis / length;
-    this.position.x += xAxis * this.speed;
-    this.position.y += yAxis * this.speed;
+    if (this.position != null) {
+      this.position.x += xAxis * this.speed;
+      this.position.y += yAxis * this.speed;
+    }
   }
 
   /**

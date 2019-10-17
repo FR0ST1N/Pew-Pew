@@ -133,13 +133,15 @@ class Enemy extends EnemyMovement {
     return CollisionDetection.detect(bulletObject, EnemyObject);
   }
 
-  /** 
+  /**
    * checks health and despawns enenmy, if enemy health
    * not greater than 0
    * @return {boolean} - true for despawned enemy
    */
   checkHealthAndDespawn() {
-    if (this.health == null || this.sprite == null) {
+    /* enemy instance needs player position at all times*/
+    if (this.health == null || this.sprite == null
+      || this.playerPosition == null) {
       return true;
     }
     if (this.health < 1) {
@@ -149,6 +151,7 @@ class Enemy extends EnemyMovement {
       this.bulletpattern = null;
       this.autoshoot = false;
       this.position = null;
+      this.playerPosition = null;
       /* NOTE: Pass level as param. level(number) must start at 1. */
       /* Set score */
       this.score.setScore(this.level);
