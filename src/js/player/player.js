@@ -264,6 +264,21 @@ class Player {
     document.addEventListener('keyup', this._absorbKeyUp.bind(this), false);
   }
 
+  /** Stop listening for inputs from player. */
+  _stopInputListeners() {
+    /* Movement */
+    document.removeEventListener('keydown', this._moveKeyDown.bind(this),
+        false);
+    document.removeEventListener('keyup', this._moveKeyUp.bind(this), false);
+    /* Fire */
+    document.removeEventListener('keydown', this._fireKeyDown.bind(this),
+        false);
+    /* Absorb */
+    document.removeEventListener('keydown', this._absorbKeyDown.bind(this),
+        false);
+    document.removeEventListener('keyup', this._absorbKeyUp.bind(this), false);
+  }
+
   /**
    * Player movement on key down.
    * @param {KeyboardEvent} event
@@ -431,6 +446,14 @@ class Player {
       this.pressed.absorb = false;
       this._returnToIdle(4, 5);
     }
+  }
+
+  /** Called when player is dead. */
+  destroy() {
+    this.level = null;
+    this.position = null;
+    this.bulletCount = 0;
+    this._stopInputListeners();
   }
 
   /**

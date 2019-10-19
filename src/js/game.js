@@ -52,12 +52,14 @@ class Game {
     /* Assign UI instance to a const */
     const UI = this.globalObject.ui;
     /* GameOver screen when player dies and reset game */
-    if (this.globalObject.player.lives <= 0) {
+    if (this.globalObject.player.lives <= 0 &&
+        UI.currentState === UI.states.GAME) {
       UI.currentState = UI.states.GAMEOVER;
       this._resetGame();
     }
     /* Draw actual game only if the current UI state says so */
-    if (UI.currentState === UI.states.GAME) {
+    if (UI.currentState === UI.states.GAME &&
+        this.globalObject.player !== null) {
       this._drawGame(this.globalObject.player);
       /* check level start status and start level trigger */
       if (!this.level.gameEnd) {
@@ -130,9 +132,11 @@ class Game {
 
   /** Reset game. */
   _resetGame() {
+    this.globalObject.player.destroy();
+    this.globalObject.player = null;
     this.globalObject.player = this._createPlayer();
     this.globalObject.player.init();
-    this.level.resetLevelToOne();
-    this.level.gameEnd = false;
+    this.level.reset(this.globalObject.player);
+    this.globalObject.player.setLevel(this.level);
   }
 }

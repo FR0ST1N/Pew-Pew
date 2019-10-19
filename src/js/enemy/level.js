@@ -34,6 +34,9 @@ class EnemySpawner {
    * @return {boolean} - enemy is drawable and has health
    */
   _enemiesDraw(enemy) {
+    if (this.player == null) {
+      return false;
+    }
     if (enemy.health < 1 || enemy.health == null) {
       enemy.checkHealthAndDespawn();
       return false;
@@ -48,6 +51,9 @@ class EnemySpawner {
      * @return {boolean}
      */
   _bulletsDraw(Enemybullet) {
+    if (this.player == null) {
+      return false;
+    }
     if (Enemybullet != null || Enemybullet != undefined) {
       if (!this.isBulletInsideCanvas(Enemybullet)) {
         Enemybullet.despawn();
@@ -161,10 +167,20 @@ class Level extends EnemySpawner {
   }
 
   /**
-   * resetLevel to one
+   * resets the level
+   * @param {Player} player
    */
-  resetLevelToOne() {
-    this.level = 1;
+  reset(player) {
+    this.level = 0;
+    this.player = player;
+  }
+
+  /**
+   * Sets the instance of the new player (used on level reset)
+   * @param {Player} player A player instance.
+   */
+  setNewPlayer(player) {
+    this.player = player;
   }
 
   /**
@@ -190,7 +206,6 @@ class Level extends EnemySpawner {
         enemy.setBulletPattern(BulletPattern.FOLLOW);
       }
       enemy.shoot();
-      console.log('spawned enemy for level ' + this.level);
       this.currentLevelEnemies.push(enemy);
       this.drawableObjects.push(enemy);
     }
@@ -215,7 +230,7 @@ class Level extends EnemySpawner {
   }
 
   /**
-   *
+   * please add doc *praying emoji*
    */
   _levelCheck() {
     const eHolder = [];

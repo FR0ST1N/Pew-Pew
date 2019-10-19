@@ -60,6 +60,11 @@ class UserInterface {
    * @param {number} score Current score.
    */
   draw(currHealth, count, score) {
+    if (currHealth === null) {
+      currHealth = 0;
+      count = 0;
+      score = 0;
+    }
     this.ctx.save();
     switch (this.currentState) {
       case this.states.START:
