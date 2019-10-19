@@ -172,14 +172,14 @@ class Level extends EnemySpawner {
    */
   reset(player) {
     this.level = 0;
-    this.player = player;
+    this._setNewPlayer(player);
   }
 
   /**
    * Sets the instance of the new player (used on level reset)
    * @param {Player} player A player instance.
    */
-  setNewPlayer(player) {
+  _setNewPlayer(player) {
     this.player = player;
   }
 
