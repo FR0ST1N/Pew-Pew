@@ -57,7 +57,7 @@ class Player {
     this.bulletCount = 0;
     this.firedBulletStack = [];
     this.level = null;
-    this.absorbState =false;
+    this.absorbState = false;
     this.pressed = {
       left: false,
       up: false,
@@ -416,7 +416,8 @@ class Player {
    * @param {KeyboardEvent} event
    */
   _absorbKeyDown(event) {
-    if (event.code === this.keys.absorb) {
+    if (event.code === this.keys.absorb &&
+        this.bulletCount < this.maxBulletSize) {
       this.pressed.absorb = true;
     }
   }
@@ -426,7 +427,7 @@ class Player {
    * @param {KeyboardEvent} event
    */
   _absorbKeyUp(event) {
-    if (event.code === this.keys.absorb) {
+    if (event.code === this.keys.absorb && this.pressed.absorb) {
       this.pressed.absorb = false;
       this._returnToIdle(4, 5);
     }
@@ -447,6 +448,10 @@ class Player {
   incrementBulletCount() {
     if (this.bulletCount < this.maxBulletSize) {
       this.bulletCount++;
+    }
+    if (this.pressed.absorb === true &&
+        this.bulletCount >= this.maxBulletSize) {
+      this._absorbKeyUp(new KeyboardEvent('keyup', {'code': this.keys.absorb}));
     }
   }
 
