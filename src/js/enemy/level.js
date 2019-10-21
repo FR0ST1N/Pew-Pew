@@ -193,7 +193,7 @@ class Level extends EnemySpawner {
     for (let enemyCounter=1; enemyCounter <= this.level;
       enemyCounter++ ) {
       const enemy = this.enenmyOneFactory(
-          new Position(400, enemyCounter*50+100),
+          new Position(700, enemyCounter*50+100),
           this.level,
           (1000-100)/this.level);
       enemy.startAnimation(this.context);
@@ -216,7 +216,7 @@ class Level extends EnemySpawner {
    */
   enenmyOneFactory(position, health, rateOfFire) {
     const spriteEnemyOne = new Sprite('enemy1.png', 2, 2, 128, 32,
-        new Position(0, 0), 3, 3);
+        new Position(0, 0), 2, 2);
     const spriteConfigEnemyOne = new SpriteConfig(['idle1', 'idle2'],
         ['fire1', 'fire2'], spriteEnemyOne);
     const enemyPosition = position;

@@ -52,7 +52,7 @@ class Enemy extends EnemyMovement {
 
     /* bullet sprite */
     const bulletSprite = new Sprite('enemy_bullet.png', 1, 5,
-        5, 5, new Position(0, 0), 10, 10);
+        5, 5, new Position(0, 0), 5, 5);
     /* bullet creation */
     const bullet = new Bullet(bulletSprite, new Position(this.position.x-30,
         this.position.y+20), this.bulletpattern, 5, 1);
