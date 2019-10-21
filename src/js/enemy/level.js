@@ -34,9 +34,6 @@ class EnemySpawner {
    * @return {boolean} - enemy is drawable and has health
    */
   _enemiesDraw(enemy) {
-    if (this.player == null) {
-      return false;
-    }
     if (enemy.health < 1 || enemy.health == null) {
       enemy.checkHealthAndDespawn();
       return false;
@@ -51,9 +48,6 @@ class EnemySpawner {
      * @return {boolean}
      */
   _bulletsDraw(Enemybullet) {
-    if (this.player == null) {
-      return false;
-    }
     if (Enemybullet != null || Enemybullet != undefined) {
       if (!this.isBulletInsideCanvas(Enemybullet)) {
         Enemybullet.despawn();

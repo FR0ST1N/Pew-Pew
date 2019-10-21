@@ -59,8 +59,7 @@ class Game {
       this._resetGame();
     }
     /* Draw actual game only if the current UI state says so */
-    if (UI.currentState === UI.states.GAME &&
-        this.globalObject.player !== null) {
+    if (UI.currentState === UI.states.GAME) {
       /* Reset score when gameover -> game state */
       if (this.resetScore) {
         this.globalObject.score.resetScore();
@@ -139,10 +138,12 @@ class Game {
   /** Reset game. */
   _resetGame() {
     this.resetScore = true;
+    /* Destroy old player */
     this.globalObject.player.destroy();
-    this.globalObject.player = null;
+    /* Crerate new player */
     this.globalObject.player = this._createPlayer();
     this.globalObject.player.init();
+    /* Reset level */
     this.level.reset(this.globalObject.player);
     this.globalObject.player.setLevel(this.level);
   }
