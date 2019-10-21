@@ -193,7 +193,7 @@ class Level extends EnemySpawner {
     for (let enemyCounter=1; enemyCounter <= this.level;
       enemyCounter++ ) {
       const enemy = this.enenmyOneFactory(
-          new Position(700, enemyCounter*50+100),
+          new Position(800, enemyCounter*50+100),
           this.level,
           (1000-100)/this.level);
       enemy.startAnimation(this.context);
