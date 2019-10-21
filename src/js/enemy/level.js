@@ -15,16 +15,18 @@ class EnemySpawner {
   }
 
   /** responsible for drawing
-     *    enemies and bullets inside canvas from requestAnimationFrame.
+    * enemies and bullets inside canvas from requestAnimationFrame.
+    * eHolder = if the current level monsters are defeated, trigger next level
     */
   draw() {
+    let eHolder = []; /* check current level monsters to trigger next level */
     this.drawableObjects.forEach((enemy) => {
-      /* omites enemies having health < 1 */
-      this._enemiesDraw(enemy);
-      /* filter omits bullet if bullet is outside canvas */
+      if (this._enemiesDraw(enemy)) {/* omites enemies having health < 1 */
+        eHolder.push(enemy);
+      } /* filter omits bullet if bullet is outside canvas */
       enemy.bullet = enemy.bullet.filter(this._bulletsDraw.bind(this));
-    });
-    this._levelCheck();
+    }); /* trigger next level */
+    eHolder = (eHolder.length==0) ? this.gameEnd = false: [];
   }
 
 
@@ -221,21 +223,5 @@ class Level extends EnemySpawner {
     const enemy = new Enemy(this.UI, this.score, spriteEnemyOne,
         spriteConfigEnemyOne, enemyPosition, health, rateOfFire);
     return enemy;
-  }
-
-  /**
-   * please add doc *praying emoji*
-   */
-  _levelCheck() {
-    const eHolder = [];
-    this.currentLevelEnemies.forEach((enemy) => {
-      if (!enemy.checkHealthAndDespawn()) {
-        eHolder.push(enemy);
-      }
-    });
-    /* trigger next level */
-    if (eHolder.length==0) {
-      this.gameEnd = false;
-    }
   }
 }
