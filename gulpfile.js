@@ -29,6 +29,7 @@ const jsConcat = [
   'src/js/enemy/bulletSpeed.js',
   'src/js/enemy/bulletPattern.js',
   'src/js/enemy/bulletAnimationHelper.js',
+  'src/js/enemy/bulletMovement.js',
   'src/js/enemy/bullet.js',
   'src/js/enemy/enemyAnimationHelper.js',
   'src/js/enemy/enemyMovement.js',
