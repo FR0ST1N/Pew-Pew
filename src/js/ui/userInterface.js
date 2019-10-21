@@ -70,8 +70,7 @@ class UserInterface {
       case this.states.START:
         this._drawLogo();
         this.ctx.fillStyle = '#daf3ec';
-        Font.draw('v' + this.version, 2, this.ctx, 10, 10);
-        // Font.draw('Press space to start', 5, this.ctx, 218, 450);
+        Font.draw(this.version, 2, this.ctx, 10, 10);
         Font.draw('Press space to start', 4.11, this.ctx, 250, 430);
         break;
       case this.states.GAME:

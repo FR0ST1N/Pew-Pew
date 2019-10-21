@@ -17,7 +17,8 @@ class Game {
       score: null,
     };
     this.requestAnimationFrameId = null;
-    this.version = '1.1.0';
+    this.version = 'v1.0.0';
+    this.resetScore = false;
   }
 
   /** Game initialization. */
@@ -60,6 +61,11 @@ class Game {
     /* Draw actual game only if the current UI state says so */
     if (UI.currentState === UI.states.GAME &&
         this.globalObject.player !== null) {
+      /* Reset score when gameover -> game state */
+      if (this.resetScore) {
+        this.globalObject.score.resetScore();
+        this.resetScore = false;
+      }
       this._drawGame(this.globalObject.player);
       /* check level start status and start level trigger */
       if (!this.level.gameEnd) {
@@ -132,6 +138,7 @@ class Game {
 
   /** Reset game. */
   _resetGame() {
+    this.resetScore = true;
     this.globalObject.player.destroy();
     this.globalObject.player = null;
     this.globalObject.player = this._createPlayer();
