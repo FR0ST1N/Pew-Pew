@@ -106,6 +106,7 @@ class UserInterface {
         this.currentState === this.states.START ||
         this.currentState === this.states.GAMEOVER
       ) {
+        AudioEffects.playUiSound();
         this.currentState = this.states.GAME;
       }
     }

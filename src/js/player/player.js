@@ -463,6 +463,7 @@ class Player {
   decrementLife() {
     if (this.lives > 0) {
       this.lives--;
+      AudioEffects.playPlayerDamageSound();
     }
     return this.lives;
   }
@@ -471,6 +472,7 @@ class Player {
   incrementBulletCount() {
     if (this.bulletCount < this.maxBulletSize) {
       this.bulletCount++;
+      AudioEffects.playBarrierSound();
     }
     if (this.pressed.absorb === true &&
         this.bulletCount >= this.maxBulletSize) {

@@ -107,6 +107,7 @@ class Enemy extends EnemyMovement {
   takeDamage(damage) {
     if (this.health > 0) {
       this.health = this.health - damage;
+      AudioEffects.playEnemyDamageSound();
     }
   }
 
