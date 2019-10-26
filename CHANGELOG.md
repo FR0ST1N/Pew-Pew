@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Font for `.` character.
+- Font for `.` and `-` characters.
 - Game start and game over screens.
 - Doc generation with `genDocs` command and included it in `build`.
 - Game score.
