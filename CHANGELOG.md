@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Doc generation with `genDocs` command and included it in `build`.
 - Game score.
 - New sound effect for UI.
+- Changelog.
 
 ### Changed
 
@@ -26,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enemy size reduced from `3` to `2`.
 - New player fire sound effect.
 - Changed master volume of all sound effects to `0.5`.
+- Readme updates.
 
 ### Fixed
 
