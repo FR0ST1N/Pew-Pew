@@ -1,6 +1,6 @@
 {
   "name": "pew-pew",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.1",
   "description": "Pew Pew! Is a Game Made For Js13kGames.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

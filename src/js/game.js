@@ -17,7 +17,7 @@ class Game {
       score: null,
     };
     this.requestAnimationFrameId = null;
-    this.version = 'v1.0.0';
+    this.version = 'v1.0.0-alpha.1';
     this.resetScore = false;
   }
 
