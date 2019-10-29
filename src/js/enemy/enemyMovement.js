@@ -31,7 +31,7 @@ class EnemyMovement extends EnemyAnimationHelper {
     const getyAxisDiff = function(y) {
       let yaxisDiff = self.playerPosition.y - y;
       if (yaxisDiff < 0) {
-        yaxisDiff = yaxisDiff*-1;
+        yaxisDiff = yaxisDiff * -1;
       } return yaxisDiff;
     };
 
@@ -55,19 +55,19 @@ class EnemyMovement extends EnemyAnimationHelper {
     const height = 500;
     const middleBoundaryx = 300;
     const differenceStep = 4;
-    const decisionX = parseFloat((Math.random()* differenceStep -2));
-    const decisionY = parseFloat((Math.random()* differenceStep -2));
+    const decisionX = parseFloat((Math.random() * differenceStep - 2));
+    const decisionY = parseFloat((Math.random() * differenceStep - 2));
     const boundaryCheck = function(position) {
       if (width < position.x ) {
-        position.x = position.x-10; /* middle boundary line for enemy */
+        position.x = position.x - 10; /* middle boundary line for enemy */
       } else if (height < position.y) {
-        position.y = position.y-10;
+        position.y = position.y - 10;
       } if (middleBoundaryx > position.x) {
-        position.x = position.x+10;
+        position.x = position.x + 10;
       } return position;
     };
-    return boundaryCheck(new Position(this.position.x+decisionX,
-        this.position.y+decisionY));
+    return boundaryCheck(new Position(this.position.x + decisionX,
+        this.position.y + decisionY));
   }
 
   /**

@@ -54,8 +54,8 @@ class Enemy extends EnemyMovement {
     const bulletSprite = new Sprite('enemy_bullet.png', 1, 5,
         5, 5, new Position(0, 0), 5, 5);
     /* bullet creation */
-    const bullet = new Bullet(bulletSprite, new Position(this.position.x-30,
-        this.position.y+20), this.bulletpattern, 5, 1);
+    const bullet = new Bullet(bulletSprite, new Position(this.position.x - 30,
+        this.position.y + 20), this.bulletpattern, 5, 1);
     /* bullet set context from enemy context to draw */
     bullet.setContext(this.context);
     /**
@@ -120,16 +120,16 @@ class Enemy extends EnemyMovement {
     if (this.position == null || bullet.position == null ) {
       return false;
     }
-    const bulletObject={'x': bullet.position.x,
+    const bulletObject = {'x': bullet.position.x,
       'y': bullet.position.y,
-      'width': bullet.sprite.individualSpriteSize*bullet.sprite.scaleFactorX,
-      'height': bullet.sprite.individualSpriteSize*bullet.sprite.scaleFactorY,
+      'width': bullet.sprite.individualSpriteSize * bullet.sprite.scaleFactorX,
+      'height': bullet.sprite.individualSpriteSize * bullet.sprite.scaleFactorY,
     };
-    const EnemyObject={
+    const EnemyObject = {
       'x': this.position.x,
       'y': this.position.y,
-      'width': this.sprite.individualSpriteSize*this.sprite.scaleFactorX,
-      'height': this.sprite.individualSpriteSize*this.sprite.scaleFactorY,
+      'width': this.sprite.individualSpriteSize * this.sprite.scaleFactorX,
+      'height': this.sprite.individualSpriteSize * this.sprite.scaleFactorY,
     };
     return CollisionDetection.detect(bulletObject, EnemyObject);
   }
@@ -141,8 +141,8 @@ class Enemy extends EnemyMovement {
    */
   checkHealthAndDespawn() {
     /* enemy instance needs player position at all times*/
-    if (this.health == null || this.sprite == null
-      || this.playerPosition == null) {
+    if (this.health == null || this.sprite == null ||
+      this.playerPosition == null) {
       return true;
     }
     if (this.health < 1) {

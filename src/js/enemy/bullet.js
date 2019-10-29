@@ -103,16 +103,16 @@ class Bullet extends BulletMovement {
     if (playerPosition.x == null || this.position.x == null) {
       return false; /* dont proceed, if despawned */
     }
-    const bulletObject={'x': this.position.x,
+    const bulletObject = {'x': this.position.x,
       'y': this.position.y,
-      'width': this.sprite.individualSpriteSize*this.sprite.scaleFactorX,
-      'height': this.sprite.individualSpriteSize*this.sprite.scaleFactorY,
+      'width': this.sprite.individualSpriteSize * this.sprite.scaleFactorX,
+      'height': this.sprite.individualSpriteSize * this.sprite.scaleFactorY,
     };
-    const playerObject={
+    const playerObject = {
       'x': playerPosition.x,
       'y': playerPosition.y,
-      'width': 32*2,
-      'height': 32*2,
+      'width': 32 * 2,
+      'height': 32 * 2,
     };
     return CollisionDetection.detect(bulletObject, playerObject);
   }

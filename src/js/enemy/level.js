@@ -26,7 +26,7 @@ class EnemySpawner {
       } /* filter omits bullet if bullet is outside canvas */
       enemy.bullet = enemy.bullet.filter(this._bulletsDraw.bind(this));
     }); /* trigger next level */
-    eHolder = (eHolder.length==0) ? this.gameEnd = false: [];
+    eHolder = (eHolder.length == 0) ? this.gameEnd = false : [];
   }
 
 
@@ -69,8 +69,8 @@ class EnemySpawner {
     if (bullet.position == null) {
       return false;
     }
-    if (bullet.getBulletPosition().x > 0 /* check only left side*/
-       && bullet.getBulletPosition().y > 0) {
+    if (bullet.getBulletPosition().x > 0 && /* check only left side*/
+       bullet.getBulletPosition().y > 0) {
       return true;
     } return false;
   }
@@ -190,12 +190,12 @@ class Level extends EnemySpawner {
    * ... progressive, all the last enemy has the follow bullet
    */
   levelTrigger() {
-    for (let enemyCounter=1; enemyCounter <= this.level;
+    for (let enemyCounter = 1; enemyCounter <= this.level;
       enemyCounter++ ) {
       const enemy = this.enenmyOneFactory(
-          new Position(800, enemyCounter*50+100),
+          new Position(800, enemyCounter * 50 + 100),
           this.level,
-          (1000-100)/this.level);
+          (1000 - 100) / this.level);
       enemy.startAnimation(this.context);
       enemy.autoshoot = true;
       if (this.level != 1 && enemyCounter == this.level) {

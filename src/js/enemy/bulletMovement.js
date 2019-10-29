@@ -30,7 +30,7 @@ class BulletMovement extends BulletAnimationHelper {
         this._playerBulletMotion();
         return;
       }
-      eval('this.'+this.pattern+'()');
+      eval('this.' + this.pattern + '()');
     }
   }
 
@@ -46,7 +46,7 @@ class BulletMovement extends BulletAnimationHelper {
     }
     let xAxis = this.playerPositionSnap.x - this.position.x;
     let yAxis = this.playerPositionSnap.y - this.position.y;
-    const length = Math.sqrt((yAxis*yAxis) + (xAxis*xAxis));
+    const length = Math.sqrt((yAxis * yAxis) + (xAxis * xAxis));
     /*
      * despawn bullet after reaching its follow position
      * right to left, so sub works need to change this if more complex gameplay

@@ -401,8 +401,8 @@ class Player {
     if (bullet.position == null) {
       return false;
     }
-    if (bullet.getBulletPosition().x < 800 /* check only right side*/
-       && bullet.getBulletPosition().y < 800) {
+    if (bullet.getBulletPosition().x < 800 && /* check only right side*/
+       bullet.getBulletPosition().y < 800) {
       return true;
     } return false;
   }

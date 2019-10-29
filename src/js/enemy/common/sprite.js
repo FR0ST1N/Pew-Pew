@@ -21,7 +21,7 @@ class Sprite {
       scaleFactorX = 3,
       scaleFactorY = 3) {
     const image = new Image();
-    image.src = 'images/'+imagename;
+    image.src = 'images/' + imagename;
     this.image = image;
     this.rows = rows;
     this.columns = columns;

@@ -9,7 +9,7 @@ class EnemyAnimationHelper extends animationHelper {
   constructor() {
     super(120, 12);
     this.fireState = false;
-    this._subAnimationState =false;
+    this._subAnimationState = false;
     this._workingState = null;
   }
 
@@ -56,8 +56,8 @@ class EnemyAnimationHelper extends animationHelper {
     if (Array.isArray(this._workingState) && this._workingState.length) {
       this.sprite.position = this.spriteConfig
           .spriteSheet.getSpritePosition(this._workingState.shift());
-      this._subAnimationState = (Array.isArray(this._workingState)
-       && this._workingState.length);
+      this._subAnimationState = (Array.isArray(this._workingState) &&
+       this._workingState.length);
     }
   }
 
