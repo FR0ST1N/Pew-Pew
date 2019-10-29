@@ -1,0 +1,13 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "extends": "google",
+  "rules": {
+    "space-infix-ops": 2,
+    "operator-linebreak": 2,
+    "new-parens": 2
+  }
+}

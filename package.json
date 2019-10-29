@@ -42,14 +42,6 @@
     "stylelint": "^10.1.0",
     "stylelint-config-standard": "^18.3.0"
   },
-  "eslintConfig": {
-    "env": {
-      "browser": true,
-      "node": true,
-      "es6": true
-    },
-    "extends": "google"
-  },
   "stylelint": {
     "extends": "stylelint-config-standard"
   }
