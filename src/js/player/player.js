@@ -378,25 +378,25 @@ class Player {
   }
 
   /**
-   * @param {Bullet} Playerbullet
+   * @param {Bullet} playerBullet
    * @return {boolean}
    */
-  _bulletsDraw(Playerbullet) {
-    if (Playerbullet != null || Playerbullet != undefined) {
-      if (!this.isBulletInsideCanvas(Playerbullet)) {
-        Playerbullet.despawn();
+  _bulletsDraw(playerBullet) {
+    if (playerBullet != null || playerBullet != undefined) {
+      if (!this.isBulletInsideCanvas(playerBullet)) {
+        playerBullet.despawn();
         return false;
       } /* collision detection with player before draw */
-      this._checkCollisionWithEnemy(Playerbullet);
+      this._checkCollisionWithEnemy(playerBullet);
       return true;
     }
   }
 
   /**
-     * check bullets postion in-relattion to canvas.
-     * @param {Bullet} bullet
-     * @return {boolean}
-     */
+   * check bullets postion in-relattion to canvas.
+   * @param {Bullet} bullet
+   * @return {boolean}
+   */
   isBulletInsideCanvas(bullet) {
     if (bullet.position == null) {
       return false;
