@@ -74,7 +74,6 @@ class UserInterface {
         Font.draw('Press space to start', 4.11, this.ctx, 250, 430);
         break;
       case this.states.GAME:
-        this.ctx.globalAlpha = 0.5;
         this._drawHealth(currHealth);
         this._drawBulletCount(count);
         this._drawScore(score.toString(), 5);
