@@ -82,10 +82,9 @@ class UserInterface {
       case this.states.GAMEOVER:
         this.ctx.fillStyle = '#daf3ec';
         Font.draw('Your score is', 5, this.ctx, 50, 300);
+        Font.draw('Press space to play again', 5, this.ctx, 50, 350);
         this.ctx.fillStyle = '#00bff3';
         Font.draw(score.toString(), 5, this.ctx, 300, 300);
-        this.ctx.fillStyle = '#daf3ec';
-        Font.draw('Press space to play again', 5, this.ctx, 50, 350);
         break;
     }
     this.ctx.restore();
