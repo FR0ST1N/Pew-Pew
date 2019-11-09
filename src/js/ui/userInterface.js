@@ -70,6 +70,7 @@ class UserInterface {
       case this.states.START:
         this._drawLogo();
         this.ctx.fillStyle = '#daf3ec';
+        this._drawControls(565, 485);
         Font.draw(this.version, 2, this.ctx, 10, 10);
         Font.draw('Press space to start', 4.11, this.ctx, 250, 430);
         break;
@@ -167,5 +168,20 @@ class UserInterface {
     this.ctx.fillStyle = '#00bff3';
     const CORRECTION = (value.length - 1) * 20;
     Font.draw(value, size, this.ctx, 775 - CORRECTION, 10);
+  }
+
+  /**
+   * Draw controls in UI
+   * @param {number} x
+   * @param {number} y
+   */
+  _drawControls(x, y) {
+    this.ctx.strokeStyle = '#daf3ec';
+    this.ctx.lineWidth = 2;
+    this.ctx.strokeRect(x, y, 210, 90);
+    Font.draw('Controls', 2.5, this.ctx, x + 10, y + 10);
+    Font.draw('Arrow Keys - Movement', 2.2, this.ctx, x + 10, y + 30);
+    Font.draw('z - Barrier', 2.2, this.ctx, x + 10, y + 50);
+    Font.draw('x - pew', 2.2, this.ctx, x + 10, y + 70);
   }
 }
