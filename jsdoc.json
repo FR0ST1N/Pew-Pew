@@ -14,7 +14,7 @@
         "encoding": "utf8",
         "destination": "build/docs/",
         "recurse": true,
-        "verbose": true
+        "verbose": false
     },
     "templates": {
         "cleverLinks": false,
