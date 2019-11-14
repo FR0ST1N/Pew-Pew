@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>enemy/enemy.js - Pew Pew - Docs</title>
+    
+    <meta name="description" content="Docementation for Pew Pew (JavaScript Game)" />
+    
+        <meta name="keywords" content="javascript game, pew pew, game, html5" />
+        <meta name="keyword" content="javascript game, pew pew, game, html5" />
+    
+    
+    
+    <meta property="og:title" content="Pew Pew - Docs"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content=""/>
+    <meta property="og:site_name" content="Pew Pew - Docs"/>
+    <meta property="og:url" content="https://fr0st1n.github.io/Pew-Pew/docs/"/>
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/FR0ST1N/Pew-Pew" target="_blank" class="menu-item" id="website_link" >GitHub Repository</a></h2><h2><a href="https://fr0st1n.github.io/Pew-Pew/" target="_blank" class="menu-item" id="game_link" >Play Game</a></h2><h3>Classes</h3><ul><li><a href="animationHelper.html">animationHelper</a><ul class='methods'><li data-type='method'><a href="animationHelper.html#objectAnimation">objectAnimation</a></li><li data-type='method'><a href="animationHelper.html#objectUpdate">objectUpdate</a></li><li data-type='method'><a href="animationHelper.html#postObjectUpdate">postObjectUpdate</a></li><li data-type='method'><a href="animationHelper.html#setContext">setContext</a></li><li data-type='method'><a href="animationHelper.html#wDraw">wDraw</a></li></ul></li><li><a href="AudioEffects.html">AudioEffects</a><ul class='methods'><li data-type='method'><a href="AudioEffects.html#._playSound">_playSound</a></li><li data-type='method'><a href="AudioEffects.html#.playBarrierSound">playBarrierSound</a></li><li data-type='method'><a href="AudioEffects.html#.playEnemyDamageSound">playEnemyDamageSound</a></li><li data-type='method'><a href="AudioEffects.html#.playEnemyPewSound">playEnemyPewSound</a></li><li data-type='method'><a href="AudioEffects.html#.playPlayerDamageSound">playPlayerDamageSound</a></li><li data-type='method'><a href="AudioEffects.html#.playPlayerPewSound">playPlayerPewSound</a></li><li data-type='method'><a href="AudioEffects.html#.playUiSound">playUiSound</a></li></ul></li><li><a href="Bullet.html">Bullet</a><ul class='methods'><li data-type='method'><a href="Bullet.html#collideDetect">collideDetect</a></li><li data-type='method'><a href="Bullet.html#despawn">despawn</a></li><li data-type='method'><a href="Bullet.html#fire">fire</a></li><li data-type='method'><a href="Bullet.html#getBulletPosition">getBulletPosition</a></li><li data-type='method'><a href="Bullet.html#setBulletPostition">setBulletPostition</a></li><li data-type='method'><a href="Bullet.html#setBulletTarget">setBulletTarget</a></li><li data-type='method'><a href="Bullet.html#setPlayerPositionSnap">setPlayerPositionSnap</a></li></ul></li><li><a href="BulletAnimationHelper.html">BulletAnimationHelper</a><ul class='methods'><li data-type='method'><a href="BulletAnimationHelper.html#objectUpdate">objectUpdate</a></li></ul></li><li><a href="BulletMovement.html">BulletMovement</a><ul class='methods'><li data-type='method'><a href="BulletMovement.html#_Movement">_Movement</a></li><li data-type='method'><a href="BulletMovement.html#_playerBulletMotion">_playerBulletMotion</a></li><li data-type='method'><a href="BulletMovement.html#fire">fire</a></li><li data-type='method'><a href="BulletMovement.html#follow">follow</a></li><li data-type='method'><a href="BulletMovement.html#isPlayerMode">isPlayerMode</a></li><li data-type='method'><a href="BulletMovement.html#setPlayerMode">setPlayerMode</a></li><li data-type='method'><a href="BulletMovement.html#straight">straight</a></li></ul></li><li><a href="CollisionDetection.html">CollisionDetection</a><ul class='methods'><li data-type='method'><a href="CollisionDetection.html#.detect">detect</a></li></ul></li><li><a href="Enemy.html">Enemy</a><ul class='methods'><li data-type='method'><a href="Enemy.html#_autoshoot">_autoshoot</a></li><li data-type='method'><a href="Enemy.html#checkHealthAndDespawn">checkHealthAndDespawn</a></li><li data-type='method'><a href="Enemy.html#collideDetect">collideDetect</a></li><li data-type='method'><a href="Enemy.html#setBulletPattern">setBulletPattern</a></li><li data-type='method'><a href="Enemy.html#setPlayerPosition">setPlayerPosition</a></li><li data-type='method'><a href="Enemy.html#shoot">shoot</a></li><li data-type='method'><a href="Enemy.html#takeDamage">takeDamage</a></li></ul></li><li><a href="EnemyAnimationHelper.html">EnemyAnimationHelper</a><ul class='methods'><li data-type='method'><a href="EnemyAnimationHelper.html#_fireAnimation">_fireAnimation</a></li><li data-type='method'><a href="EnemyAnimationHelper.html#_idleAnimation">_idleAnimation</a></li><li data-type='method'><a href="EnemyAnimationHelper.html#getFireState">getFireState</a></li><li data-type='method'><a href="EnemyAnimationHelper.html#objectUpdate">objectUpdate</a></li><li data-type='method'><a href="EnemyAnimationHelper.html#triggerFireState">triggerFireState</a></li></ul></li><li><a href="EnemyMovement.html">EnemyMovement</a><ul class='methods'><li data-type='method'><a href="EnemyMovement.html#_directionDecision">_directionDecision</a></li><li data-type='method'><a href="EnemyMovement.html#_enemyPositionUpdate">_enemyPositionUpdate</a></li><li data-type='method'><a href="EnemyMovement.html#_Movement">_Movement</a></li><li data-type='method'><a href="EnemyMovement.html#startAnimation">startAnimation</a></li></ul></li><li><a href="EnemySpawner.html">EnemySpawner</a><ul class='methods'><li data-type='method'><a href="EnemySpawner.html#_bulletsDraw">_bulletsDraw</a></li><li data-type='method'><a href="EnemySpawner.html#_checkCollisionWithPlayer">_checkCollisionWithPlayer</a></li><li data-type='method'><a href="EnemySpawner.html#_enemiesDraw">_enemiesDraw</a></li><li data-type='method'><a href="EnemySpawner.html#draw">draw</a></li><li data-type='method'><a href="EnemySpawner.html#isBulletInsideCanvas">isBulletInsideCanvas</a></li></ul></li><li><a href="Font.html">Font</a><ul class='methods'><li data-type='method'><a href="Font.html#._getChars">_getChars</a></li><li data-type='method'><a href="Font.html#.draw">draw</a></li></ul></li><li><a href="Game.html">Game</a><ul class='methods'><li data-type='method'><a href="Game.html#_createPlayer">_createPlayer</a></li><li data-type='method'><a href="Game.html#_drawGame">_drawGame</a></li><li data-type='method'><a href="Game.html#_render">_render</a></li><li data-type='method'><a href="Game.html#_resetGame">_resetGame</a></li><li data-type='method'><a href="Game.html#init">init</a></li></ul></li><li><a href="Level.html">Level</a><ul class='methods'><li data-type='method'><a href="Level.html#_setNewPlayer">_setNewPlayer</a></li><li data-type='method'><a href="Level.html#enenmyOneFactory">enenmyOneFactory</a></li><li data-type='method'><a href="Level.html#levelTrigger">levelTrigger</a></li><li data-type='method'><a href="Level.html#reset">reset</a></li><li data-type='method'><a href="Level.html#triggerNextLevel">triggerNextLevel</a></li></ul></li><li><a href="Player.html">Player</a><ul class='methods'><li data-type='method'><a href="Player.html#_absorbAnimation">_absorbAnimation</a></li><li data-type='method'><a href="Player.html#_absorbKeyDown">_absorbKeyDown</a></li><li data-type='method'><a href="Player.html#_absorbKeyUp">_absorbKeyUp</a></li><li data-type='method'><a href="Player.html#_bulletDraw">_bulletDraw</a></li><li data-type='method'><a href="Player.html#_bulletsDraw">_bulletsDraw</a></li><li data-type='method'><a href="Player.html#_checkCollisionWithEnemy">_checkCollisionWithEnemy</a></li><li data-type='method'><a href="Player.html#_drawFrame">_drawFrame</a></li><li data-type='method'><a href="Player.html#_fireAnimation">_fireAnimation</a></li><li data-type='method'><a href="Player.html#_fireBullet">_fireBullet</a></li><li data-type='method'><a href="Player.html#_fireKeyDown">_fireKeyDown</a></li><li data-type='method'><a href="Player.html#_idleAnimation">_idleAnimation</a></li><li data-type='method'><a href="Player.html#_moveKeyDown">_moveKeyDown</a></li><li data-type='method'><a href="Player.html#_moveKeyUp">_moveKeyUp</a></li><li data-type='method'><a href="Player.html#_playerBulletCollisionWithEnemy">_playerBulletCollisionWithEnemy</a></li><li data-type='method'><a href="Player.html#_returnToIdle">_returnToIdle</a></li><li data-type='method'><a href="Player.html#_startInputListeners">_startInputListeners</a></li><li data-type='method'><a href="Player.html#_stopInputListeners">_stopInputListeners</a></li><li data-type='method'><a href="Player.html#decrementBulletCount">decrementBulletCount</a></li><li data-type='method'><a href="Player.html#decrementLife">decrementLife</a></li><li data-type='method'><a href="Player.html#destroy">destroy</a></li><li data-type='method'><a href="Player.html#incrementBulletCount">incrementBulletCount</a></li><li data-type='method'><a href="Player.html#init">init</a></li><li data-type='method'><a href="Player.html#isBulletInsideCanvas">isBulletInsideCanvas</a></li><li data-type='method'><a href="Player.html#playerMovement">playerMovement</a></li><li data-type='method'><a href="Player.html#setLevel">setLevel</a></li></ul></li><li><a href="PlayerUtil.html">PlayerUtil</a><ul class='methods'><li data-type='method'><a href="PlayerUtil.html#.bound">bound</a></li><li data-type='method'><a href="PlayerUtil.html#.getBarrierPosition">getBarrierPosition</a></li><li data-type='method'><a href="PlayerUtil.html#.imgDrawCall">imgDrawCall</a></li><li data-type='method'><a href="PlayerUtil.html#.isIdleAnim">isIdleAnim</a></li></ul></li><li><a href="Position.html">Position</a></li><li><a href="Score.html">Score</a><ul class='methods'><li data-type='method'><a href="Score.html#getScore">getScore</a></li><li data-type='method'><a href="Score.html#resetScore">resetScore</a></li><li data-type='method'><a href="Score.html#setScore">setScore</a></li></ul></li><li><a href="Sprite.html">Sprite</a></li><li><a href="SpriteConfig.html">SpriteConfig</a><ul class='methods'><li data-type='method'><a href="SpriteConfig.html#_extractSprites">_extractSprites</a></li></ul></li><li><a href="SpriteSheet.html">SpriteSheet</a><ul class='methods'><li data-type='method'><a href="SpriteSheet.html#addSprite">addSprite</a></li><li data-type='method'><a href="SpriteSheet.html#addSpriteBulk">addSpriteBulk</a></li><li data-type='method'><a href="SpriteSheet.html#getSprite">getSprite</a></li><li data-type='method'><a href="SpriteSheet.html#getSpritePosition">getSpritePosition</a></li></ul></li><li><a href="Timer.html">Timer</a><ul class='methods'><li data-type='method'><a href="Timer.html#_resetAnimationTimer">_resetAnimationTimer</a></li><li data-type='method'><a href="Timer.html#_resetMotionTimer">_resetMotionTimer</a></li><li data-type='method'><a href="Timer.html#isTimeToAnimate">isTimeToAnimate</a></li><li data-type='method'><a href="Timer.html#isTimeToMove">isTimeToMove</a></li><li data-type='method'><a href="Timer.html#stepTimer">stepTimer</a></li></ul></li><li><a href="UserInterface.html">UserInterface</a><ul class='methods'><li data-type='method'><a href="UserInterface.html#_drawBulletCount">_drawBulletCount</a></li><li data-type='method'><a href="UserInterface.html#_drawControls">_drawControls</a></li><li data-type='method'><a href="UserInterface.html#_drawHealth">_drawHealth</a></li><li data-type='method'><a href="UserInterface.html#_drawLogo">_drawLogo</a></li><li data-type='method'><a href="UserInterface.html#_drawScore">_drawScore</a></li><li data-type='method'><a href="UserInterface.html#_uiInput">_uiInput</a></li><li data-type='method'><a href="UserInterface.html#_uiInputListener">_uiInputListener</a></li><li data-type='method'><a href="UserInterface.html#draw">draw</a></li><li data-type='method'><a href="UserInterface.html#init">init</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#main">main</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">enemy/enemy.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @file enemy logic goes here.
+ * @author bluepie &lt;gopinath2nr@gmail.com>
+ */
+class Enemy extends EnemyMovement {
+/**
+ * @param {ui} ui
+ * @param {Score} score instance of score
+ * @param {Sprite} sprite
+ * @param {SpriteConfig} spriteConfig
+ * @param {Position} position
+ * @param {number} health
+ * @param {number} rateOfFire - intervel between each bullet fire,
+ *            multiplier by 500ms
+ */
+  constructor(ui, score, sprite, spriteConfig, position = null,
+      health = 1, rateOfFire = 500 ) {
+    super(sprite, spriteConfig, position);
+    this.UI = ui;
+    this.health = health;
+    this.level = health;
+    this.rateOfFire = rateOfFire;
+    this.bullet = [];
+    this.score = score;
+    this.bulletpattern = BulletPattern.DEFAULT;
+    /* enable this to auto fire based on rateOfFire */
+    this.autoshoot = false;
+    /* store timeoutid to later remove on despawn */
+    this.autoShootTimeOutId = null;
+  }
+
+  /**
+   * enemy shoots new bullet.
+   */
+  shoot() {
+    /* if enemy is already in fire animation, just return */
+    if (this.getFireState()) {
+      if (this.autoshoot) {
+        this._autoshoot();
+      }
+      return;
+    }
+    if (this.position == null) {
+      this.autoshoot = false; /* async call, thus checking for null */
+      return;
+    }
+    /* if ui state gameover despawn */
+    if (this.UI.currentState == this.UI.states.GAMEOVER) {
+      this.health = null;
+      this.checkHealthAndDespawn();
+    }
+
+    /* bullet sprite */
+    const bulletSprite = new Sprite('enemy_bullet.png', 1, 5,
+        5, 5, new Position(0, 0), 5, 5);
+    /* bullet creation */
+    const bullet = new Bullet(bulletSprite, new Position(this.position.x - 30,
+        this.position.y + 20), this.bulletpattern, 5, 1);
+    /* bullet set context from enemy context to draw */
+    bullet.setContext(this.context);
+    /**
+     * set players position at the point of relasing the bullet, this
+     * is only required if bulletPattern is set to follow.
+     */
+    bullet.setPlayerPositionSnap(this.playerPosition);
+    /* set fire animation state for enemyObject, */
+    this.triggerFireState();
+    /* bullet object movement trigger, leaving enemy. */
+    bullet.fire();
+    /* push bullet to enemy's stack, used while EnemySpawner::draw */
+    this.bullet.push(bullet);
+    /* autoshoot */
+    if (this.autoshoot) {
+      this._autoshoot();
+    }
+  }
+
+  /**
+   * automatic enemy shooting.
+   */
+  _autoshoot() {
+    this.autoShootTimeOutId = setTimeout( () => {
+      this.shoot();
+    }, this.rateOfFire);
+  }
+
+  /**
+   *
+   * @param {number} x
+   * @param {number} y
+   */
+  setPlayerPosition(x, y) {
+    this.playerPosition = new Position(x, y);
+  }
+
+  /**
+   * @param {BulletPattern} bulletPattern
+   */
+  setBulletPattern(bulletPattern) {
+    this.bulletpattern = bulletPattern;
+  }
+
+  /**
+   * pass the bullet, detected during collision
+   * @param {number} damage
+   */
+  takeDamage(damage) {
+    if (this.health > 0) {
+      this.health = this.health - damage;
+      AudioEffects.playEnemyDamageSound();
+    }
+  }
+
+  /**
+   * collideDetect of enemyObject with given bullet
+   * @param {Bullet} bullet
+   * @return {boolean}
+   */
+  collideDetect(bullet) {
+    if (this.position == null || bullet.position == null ) {
+      return false;
+    }
+    const bulletObject = {'x': bullet.position.x,
+      'y': bullet.position.y,
+      'width': bullet.sprite.individualSpriteSize * bullet.sprite.scaleFactorX,
+      'height': bullet.sprite.individualSpriteSize * bullet.sprite.scaleFactorY,
+    };
+    const EnemyObject = {
+      'x': this.position.x,
+      'y': this.position.y,
+      'width': this.sprite.individualSpriteSize * this.sprite.scaleFactorX,
+      'height': this.sprite.individualSpriteSize * this.sprite.scaleFactorY,
+    };
+    return CollisionDetection.detect(bulletObject, EnemyObject);
+  }
+
+  /**
+   * checks health and despawns enenmy, if enemy health
+   * not greater than 0
+   * @return {boolean} - true for despawned enemy
+   */
+  checkHealthAndDespawn() {
+    /* enemy instance needs player position at all times*/
+    if (this.health == null || this.sprite == null ||
+      this.playerPosition == null) {
+      return true;
+    }
+    if (this.health &lt; 1) {
+      this.health = null;
+      this.rateOfFire = null;
+      this.bullet = [];
+      this.bulletpattern = null;
+      this.autoshoot = false;
+      this.position = null;
+      this.playerPosition = null;
+      /* NOTE: Pass level as param. level(number) must start at 1. */
+      /* Set score */
+      this.score.setScore(this.level);
+      /* clear autoshoot */
+      clearTimeout(this.autoShootTimeOutpId);
+      /* clear postion update and animation */
+      clearTimeout(this.animationTimerId);
+      return true;
+    } return false;
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>
