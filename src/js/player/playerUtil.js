@@ -35,24 +35,24 @@ class PlayerUtil {
     const MAX_BOUND = bound + (spriteSize * scale);
     switch (direction) {
       case 'left':
-        result = position.x - move > (0 + bound)
-          ? true
-          : false;
+        result = position.x - move > (0 + bound) ?
+          true :
+          false;
         break;
       case 'right':
-        result = position.x + move < (canvasSize.width - MAX_BOUND)
-          ? true
-          : false;
+        result = position.x + move < (canvasSize.width - MAX_BOUND) ?
+          true :
+          false;
         break;
       case 'up':
-        result = position.y - move > (0 + bound)
-          ? true
-          : false;
+        result = position.y - move > (0 + bound) ?
+          true :
+          false;
         break;
       case 'down':
-        result = position.y + move < (canvasSize.height - MAX_BOUND)
-          ? true
-          : false;
+        result = position.y + move < (canvasSize.height - MAX_BOUND) ?
+          true :
+          false;
         break;
     }
     return result;
