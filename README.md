@@ -2,7 +2,7 @@
 
 ![Pew-Pew](banner.png "Pew-Pew")
 
-[![GitHub release][release badge]][release link] [![GitHub license][license badge]][license link]
+[![GitHub release][release badge]][release link]
 
 ## Table of Contents
 
@@ -114,7 +114,5 @@ See [CHANGELOG.md](CHANGELOG.md).
 
 [**GPL-3.0-or-later**](https://github.com/FR0ST1N/Pew-Pew/blob/master/LICENSE)
 
-[license link]: https://github.com/FR0ST1N/Pew-Pew/blob/master/LICENSE
-[license badge]: https://img.shields.io/github/license/FR0ST1N/Pew-Pew?color=260016&style=for-the-badge
-[release badge]: https://img.shields.io/github/v/release/FR0ST1N/Pew-Pew?color=260016&include_prereleases&style=for-the-badge
+[release badge]: https://img.shields.io/github/v/release/FR0ST1N/Pew-Pew?color=260016&include_prereleases&label=%20&logo=github&style=for-the-badge
 [release link]: https://github.com/FR0ST1N/Pew-Pew/releases
