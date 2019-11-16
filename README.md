@@ -99,7 +99,7 @@ npx gulp build
 2. Create a branch.
 3. Make changes.
 4. Submit a pull request.
-  
+
 Open an issue if you want to discuss something and check for lint errors before making a pull request.
 
 ### Code Style (JavaScript)
@@ -112,7 +112,7 @@ See [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 
-[**GPL-3.0**](https://github.com/FR0ST1N/Pew-Pew/blob/master/LICENSE)
+[**GPL-3.0-or-later**](https://github.com/FR0ST1N/Pew-Pew/blob/master/LICENSE)
 
 [license link]: https://github.com/FR0ST1N/Pew-Pew/blob/master/LICENSE
 [license badge]: https://img.shields.io/github/license/FR0ST1N/Pew-Pew?color=260016&style=for-the-badge
