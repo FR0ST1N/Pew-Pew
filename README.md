@@ -112,7 +112,7 @@ See [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 
-[**GPL-3.0-or-later**](https://github.com/FR0ST1N/Pew-Pew/blob/master/LICENSE)
+[**GPL-3.0-or-later**](https://github.com/FR0ST1N/Pew-Pew/blob/master/LICENSE).
 
 [release badge]: https://img.shields.io/github/v/release/FR0ST1N/Pew-Pew?color=260016&include_prereleases&label=%20&logo=github&style=for-the-badge
 [release link]: https://github.com/FR0ST1N/Pew-Pew/releases
