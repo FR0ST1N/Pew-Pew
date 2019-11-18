@@ -96,7 +96,7 @@ npx gulp build
 ### Workflow
 
 1. Fork the repo.
-2. Create a branch.
+2. Create a branch (use `develop` as parent).
 3. Make changes.
 4. Submit a pull request.
 
