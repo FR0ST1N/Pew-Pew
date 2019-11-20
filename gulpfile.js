@@ -65,7 +65,7 @@ gulp.task('jsLintNoConcat', function() {
 });
 
 gulp.task('genDocs', function() {
-  var config = require('./jsdoc.json');
+  const config = require('./jsdoc.json');
   return gulp.src('src/js/**/*.js', {read: false})
       .pipe(jsdoc(config));
 });
