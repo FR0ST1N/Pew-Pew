@@ -18,10 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * @file all the enemy movement logic goes here
- * @author bluepie <gopinath2nr@gmail.com>
- */
+/** Movement for enemies */
 class EnemyMovement extends EnemyAnimationHelper {
   /**
    * @param {Sprite} sprite

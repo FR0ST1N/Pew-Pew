@@ -18,10 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * @file enemy logic goes here.
- * @author bluepie <gopinath2nr@gmail.com>
- */
+/** Main enemy class */
 class Enemy extends EnemyMovement {
 /**
  * @param {ui} ui

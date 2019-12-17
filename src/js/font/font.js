@@ -19,11 +19,6 @@
  */
 
 /**
- * @file Contains method to draw strings in canvas.
- * @author Frostin <iamfrostin@gmail.com>
- */
-
-/**
  * Pixel art font lib for canvas.
  * Modified ver. of PaulBGD's PixelFont repo.
  */

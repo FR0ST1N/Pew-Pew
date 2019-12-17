@@ -18,11 +18,6 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * @file Helper to the Player class.
- * @author Frostin <iamfrostin@gmail.com>
- */
-
 /** Utility methods for player. */
 class PlayerUtil {
   /**

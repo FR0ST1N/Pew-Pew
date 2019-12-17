@@ -18,11 +18,6 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * @file Sprite sheet helper.
- * @author Frostin <iamfrostin@gmail.com>
- */
-
 /** Class to handle sprite sheets. */
 class SpriteSheet {
   /**

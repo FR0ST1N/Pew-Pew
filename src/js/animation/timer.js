@@ -18,12 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * @file Animation properties that all object in canvas should have,
- * ex |------------------------| represent total time
- *    |-----x------x------x-----| represent time to next frame.
- * @author bluepie <gopinath2nr@gmail.com>
- * */
+/** Timer for animation */
 class Timer {
   /**
    * @param {number} animationTime -if 0 timer wont run.

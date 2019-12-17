@@ -18,11 +18,6 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * @file Main player file. Contains player animations and other stuffs.
- * @author Frostin <iamfrostin@gmail.com>
- */
-
 /** Contains basic controls and other player functions. */
 class Player {
   /**

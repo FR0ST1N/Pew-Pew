@@ -18,10 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * @file 2dimensional postion inrelation to canvas.
- * @author bluepie <gopinath2nr@gmail.com>
- */
+/** Holds X and Y */
 class Position {
   /**
    * @param {number} xcordinates

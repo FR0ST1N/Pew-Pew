@@ -18,11 +18,6 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * @file All UI stuff is here.
- * @author Frostin <iamfrostin@gmail.com>
- */
-
 /** Handles the UI stuff. */
 class UserInterface {
   /**

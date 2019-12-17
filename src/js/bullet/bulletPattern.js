@@ -18,13 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-/**
- * @file since enums are not available at disposable, enum alternative
- * @author bluepie <gopinath2nr@gmail.com>
- * @readonly
- * @enum {string}
- */
+/** Bullet Patterns */
 class BulletPattern {
   /**
    * bullet pattern default.

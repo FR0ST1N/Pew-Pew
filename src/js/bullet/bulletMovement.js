@@ -18,11 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-/**
- * @file helper for moving the bullets & bullet logic
- * @author bluepie <gopinath2nr@gmail.com>
- */
+/** All bullet movements are implemented here */
 class BulletMovement extends BulletAnimationHelper {
   /** constructor*/
   constructor() {

@@ -18,11 +18,6 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * @file Contains method for collision detection.
- * @author Frostin <iamfrostin@gmail.com>
- */
-
 /** Collision detection class. */
 class CollisionDetection {
   /**

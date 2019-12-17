@@ -18,12 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * @file basic animation wrapper for making life simpler,
- * both bullet and enemy extends this class and uses this class
- * as thier core functionality.
- * @author bluepie <gopinath2nr@gmail.com>
- */
+/** Enemy animation healper */
 class animationHelper extends Timer {
   /**
    * @param {number} animationTime

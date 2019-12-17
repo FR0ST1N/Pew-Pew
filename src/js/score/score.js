@@ -18,11 +18,6 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * @file Manage player score.
- * @author Frostin <iamfrostin@gmail.com>
- */
-
 /** Score class. */
 class Score {
   /** Creates _score variable and sets value to 0 */

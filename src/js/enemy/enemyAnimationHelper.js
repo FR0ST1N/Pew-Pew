@@ -18,10 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * @file all enemy animation related logic & methods
- * @author bluepie <gopinath2nr@gmail.com>
- */
+/** Enemy animation helper */
 class EnemyAnimationHelper extends animationHelper {
   /**
    * constructor

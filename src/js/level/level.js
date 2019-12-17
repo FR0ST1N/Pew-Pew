@@ -18,10 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * @file handles level creation and enemy spawner.
- * @author bluepie <gopinath2nr@gmail.com>
- */
+/** Enemy spawner */
 class EnemySpawner {
   /**
      * @param {Object} object

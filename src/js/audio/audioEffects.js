@@ -18,11 +18,6 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * @file Contains all methods for sound effects.
- * @author Frostin <iamfrostin@gmail.com>
- */
-
 /** Play game audio effects. */
 class AudioEffects {
   /** Play player fire sound effect */

@@ -18,10 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * @file handles bullet animation update, controls bullet's fps.
- * @author bluepie <gopinath2nr@gmail.com>
- */
+/** Bullet animation healper */
 class BulletAnimationHelper extends animationHelper {
   /**
    * both bullet animation and enemy animation use

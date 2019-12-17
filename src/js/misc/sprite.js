@@ -18,10 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * @file enemySprite & bulletSprite Properties
- * @author bluepie <gopinath2nr@gmail.com>
- * */
+/** Sprite class for enemies */
 class Sprite {
 /**
  * Properties of each image sprite

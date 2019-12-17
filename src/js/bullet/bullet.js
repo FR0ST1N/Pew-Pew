@@ -18,12 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-/**
- * @file bullet logic
- * Each bullet has its own behaviour and properties
- * @author bluepie <gopinath2nr@gmail.com>
- */
+/** Main bullet class */
 class Bullet extends BulletMovement {
   /**
    * @param {Sprite} sprite
