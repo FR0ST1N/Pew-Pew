@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/FR0ST1N/Pew-Pew#readme",
   "devDependencies": {
-    "docdash": "^1.1.1",
+    "docdash": "^1.2.0",
     "eslint-config-google": "^0.14.0",
     "gulp": "^4.0.2",
     "gulp-check-filesize": "^2.0.1",
