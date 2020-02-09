@@ -32,7 +32,7 @@ class Animator {
   }
 
   /** Idle animation logic */
-  _idleAnimation() {
+  idleAnimation() {
     if (this.frameCounter <= 15) {
       this.animState = 0;
     } else if (this.frameCounter >= 16 && this.frameCounter <= 30) {
@@ -44,7 +44,7 @@ class Animator {
   }
 
   /** Fire animation logic */
-  _fireAnimation() {
+  fireAnimation() {
     const ANIM_TIME = 7;
     if (this.frameCounter <= ANIM_TIME) {
       if (this.animState === 0) {

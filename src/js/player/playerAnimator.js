@@ -29,7 +29,7 @@ class PlayerAnimator extends Animator {
    * Absorb animation logic
    * States - 4 and 5
    */
-  _absorbAnimation() {
+  absorbAnimation() {
     if (this.frameCounter <= 15) {
       this.animState = 4;
     } else if (this.frameCounter >= 16 && this.frameCounter <= 30) {
