@@ -53,7 +53,7 @@ class Animator {
         this.animState = 3;
       }
     } else if (this.frameCounter > ANIM_TIME) {
-      this._returnToIdle(2, 3);
+      this.returnToIdle(2, 3);
       /* NOTE: set pressed flase from player */
       // this.pressed.pew = false;
     }
@@ -64,7 +64,7 @@ class Animator {
    * @param {number} a State 1.
    * @param {number} b State 2.
    */
-  _returnToIdle(a, b) {
+  returnToIdle(a, b) {
     if (this.animState === a) {
       this.animState = 1;
       /* For smooth transition to idle state */
@@ -75,8 +75,21 @@ class Animator {
     }
   }
 
+  /** Reset frame counter to 0. */
+  resetFrameCounter() {
+    this.frameCounter = 0;
+  }
+
   /** Returns the current animation state. */
   get state() {
-    return animState;
+    return this.animState;
+  }
+
+  /**
+   * Used to increment the frame counter.
+   * @param {number} v Frame increment value.
+   */
+  set incrementFrame(v) {
+    this.frameCounter = this.frameCounter + v;
   }
 }

@@ -14,6 +14,7 @@ const imageMin = require('gulp-imagemin');
 const jsdoc = require('gulp-jsdoc3');
 
 const jsConcat = [
+  'src/js/animator/animator.js',
   'src/js/audio/audioEffects.js',
   'src/js/score/score.js',
   'src/js/spritesheet/spriteSheet.js',
@@ -21,6 +22,7 @@ const jsConcat = [
   'src/js/misc/position.js',
   'src/js/animation/timer.js',
   'src/js/player/playerUtil.js',
+  'src/js/player/playerAnimator.js',
   'src/js/player/player.js',
   'src/js/font/font.js',
   'src/js/ui/userInterface.js',

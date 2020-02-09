@@ -94,8 +94,9 @@ class Player {
         spriteSheet.image,
         spriteSheet.spriteSize
     );
-    this.animState = 0;
-    this.frameCounter = 0;
+    // this.animState = 0;
+    // this.frameCounter = 0;
+    this.playerAnimator = new PlayerAnimator();
   }
 
   /** Player initialization. */
@@ -172,12 +173,16 @@ class Player {
 
   /** Draw a single player frame. */
   _drawFrame() {
+    const STATE = this.playerAnimator.state;
+    if (this.pressed.pew && PlayerUtil.isIdleAnim(STATE)) {
+      this.pressed.pew = false;
+    }
     if (this.pressed.absorb) {
-      this._absorbAnimation();
+      this.playerAnimator.absorbAnimation();
     } else if (this.pressed.pew) {
-      this._fireAnimation();
-    } else if (PlayerUtil.isIdleAnim(this.animState)) {
-      this._idleAnimation();
+      this.playerAnimator.fireAnimation();
+    } else if (PlayerUtil.isIdleAnim(STATE)) {
+      this.playerAnimator.idleAnimation();
     }
     /* Draw bullet */
     this._bulletDraw();
@@ -185,7 +190,7 @@ class Player {
     PlayerUtil.imgDrawCall(
         this.ctx,
         this.playerSpriteSheet,
-        this.spriteNames[this.animState],
+        this.spriteNames[STATE],
         this.spriteSheet.spriteSize,
         this.position.x,
         this.position.y,
@@ -210,6 +215,7 @@ class Player {
           this.scale.barrier
       );
     }
+    this.playerAnimator.incrementFrame = 1;
   }
 
   /** Idle animation logic */
@@ -359,12 +365,12 @@ class Player {
     if (event.code === this.keys.pew && this.bulletCount > 0) {
       this.decrementBulletCount();
       this._fireBullet();
-      if (this.animState === 0) {
+      /* if (this.animState === 0) {
         this.animState = 2;
       } else if (this.animState === 1) {
         this.animState = 3;
-      }
-      this.frameCounter = 0;
+      } */
+      this.playerAnimator.resetFrameCounter();
       this.pressed.pew = true;
       AudioEffects.playPlayerPewSound();
     }
@@ -459,7 +465,8 @@ class Player {
   _absorbKeyUp(event) {
     if (event.code === this.keys.absorb && this.pressed.absorb) {
       this.pressed.absorb = false;
-      this._returnToIdle(4, 5);
+      this.playerAnimator.resetFrameCounter();
+      this.playerAnimator.returnToIdle(4, 5);
     }
   }
 
