@@ -18,7 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Game class where everything comes together. */
+/** @file Game class where everything comes together. */
 class Game {
   /**
    * @param {HTMLCanvasElement} canvas Game canvas element.

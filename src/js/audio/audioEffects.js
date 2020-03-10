@@ -18,7 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Play game audio effects. */
+/** @file Play game audio effects. */
 class AudioEffects {
   /** Play player fire sound effect */
   static playPlayerPewSound() {

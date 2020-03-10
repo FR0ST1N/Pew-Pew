@@ -18,7 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Enemy spawner */
+/** @file Enemy spawner */
 class EnemySpawner {
   /**
      * @param {Object} object

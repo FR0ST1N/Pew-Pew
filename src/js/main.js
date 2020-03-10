@@ -18,7 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Main entry function. */
+/** @file Main entry function. */
 function main() {
   const CANVAS = document.getElementById('game');
   const GAME = new Game(CANVAS, 800, 600);

@@ -18,7 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Common animator class for both player and enemy. */
+/** @file Common animator class for both player and enemy. */
 class Animator {
   /** No params for constructor */
   constructor() {

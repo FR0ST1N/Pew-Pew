@@ -18,7 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Enemy animation helper */
+/** @file Enemy animation helper */
 class EnemyAnimationHelper extends animationHelper {
   /**
    * constructor

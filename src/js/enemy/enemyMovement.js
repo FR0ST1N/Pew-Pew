@@ -18,7 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Movement for enemies */
+/** @file Movement for enemies */
 class EnemyMovement extends EnemyAnimationHelper {
   /**
    * @param {Sprite} sprite

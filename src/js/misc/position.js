@@ -18,7 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Holds X and Y */
+/** @file Holds X and Y */
 class Position {
   /**
    * @param {number} xcordinates

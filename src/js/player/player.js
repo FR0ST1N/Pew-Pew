@@ -18,7 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Contains basic controls and other player functions. */
+/** @file Contains basic controls and other player functions. */
 class Player {
   /**
    * @typedef {Object} spriteSheet

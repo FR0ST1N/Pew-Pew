@@ -19,7 +19,7 @@
  */
 
 /**
- * Pixel art font lib for canvas.
+ * @file Pixel art font lib for canvas.
  * Modified ver. of PaulBGD's PixelFont repo.
  */
 class Font {

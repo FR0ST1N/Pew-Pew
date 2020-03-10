@@ -18,7 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Main bullet class */
+/** @file Main bullet class */
 class Bullet extends BulletMovement {
   /**
    * @param {Sprite} sprite

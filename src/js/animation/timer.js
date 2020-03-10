@@ -18,7 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Timer for animation */
+/** @file Timer for animation */
 class Timer {
   /**
    * @param {number} animationTime -if 0 timer wont run.

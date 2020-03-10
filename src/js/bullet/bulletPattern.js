@@ -18,7 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Bullet Patterns */
+/** @file Bullet Patterns */
 class BulletPattern {
   /**
    * bullet pattern default.

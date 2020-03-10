@@ -18,7 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Utility methods for player. */
+/** @file Utility methods for player. */
 class PlayerUtil {
   /**
    * @typedef {Object} position

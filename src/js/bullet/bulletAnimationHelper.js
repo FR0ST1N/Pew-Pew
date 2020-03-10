@@ -18,7 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Bullet animation healper */
+/** @file Bullet animation healper */
 class BulletAnimationHelper extends animationHelper {
   /**
    * both bullet animation and enemy animation use

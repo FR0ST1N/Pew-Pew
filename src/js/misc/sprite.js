@@ -18,7 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Sprite class for enemies */
+/** @file Sprite class for enemies */
 class Sprite {
 /**
  * Properties of each image sprite

@@ -18,7 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Absorb animation logic for player. */
+/** @file Absorb animation logic for player. */
 class PlayerAnimator extends Animator {
   /** Inherited values from Animator class */
   constructor() {

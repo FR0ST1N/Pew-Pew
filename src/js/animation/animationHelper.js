@@ -18,7 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Enemy animation healper */
+/** @file Enemy animation helper */
 class animationHelper extends Timer {
   /**
    * @param {number} animationTime

@@ -18,7 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Score class. */
+/** @file Score class. */
 class Score {
   /** Creates _score variable and sets value to 0 */
   constructor() {

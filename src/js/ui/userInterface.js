@@ -18,7 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Handles the UI stuff. */
+/** @file Handles the UI stuff. */
 class UserInterface {
   /**
    * @param {CanvasRenderingContext2D} ctx

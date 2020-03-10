@@ -18,7 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Class to handle sprite sheets. */
+/** @file Class to handle sprite sheets. */
 class SpriteSheet {
   /**
    * @param {string} image Sprite sheet location.

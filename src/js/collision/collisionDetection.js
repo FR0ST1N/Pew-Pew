@@ -18,7 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Collision detection class. */
+/** @file Collision detection class. */
 class CollisionDetection {
   /**
    * @typedef {Object} colliderObject

@@ -18,7 +18,7 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Main enemy class */
+/** @file Main enemy class */
 class Enemy extends EnemyMovement {
 /**
  * @param {ui} ui
