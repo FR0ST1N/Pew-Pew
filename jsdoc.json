@@ -25,14 +25,14 @@
     },
     "docdash": {
         "openGraph": {
-            "title": "Pew Pew - Docs",
+            "title": "Pew Pew Docs",
             "type": "website",
-            "site_name": "Pew Pew - Docs",
+            "site_name": "Pew Pew",
             "url": "https://fr0st1n.github.io/Pew-Pew/docs/"
         },
         "meta": {
-            "title": "Pew Pew - Docs",
-            "description": "Docementation for Pew Pew (JavaScript Game)",
+            "title": "Pew Pew Docs",
+            "description": "Docementation for Pew Pew (JavaScript Game).",
             "keyword": "javascript game, pew pew, game, html5"
         },
         "menu": {
