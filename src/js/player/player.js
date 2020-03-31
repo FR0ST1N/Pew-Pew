@@ -244,7 +244,7 @@ class Player {
   }
 
   /**
-   * Player movements ok key up and down.
+   * Player movements on key up and down.
    * @param {KeyboardEvent} event
    */
   _moveKey(event) {
