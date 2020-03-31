@@ -94,8 +94,6 @@ class Player {
         spriteSheet.image,
         spriteSheet.spriteSize
     );
-    // this.animState = 0;
-    // this.frameCounter = 0;
     this.playerAnimator = new PlayerAnimator();
   }
 
@@ -218,66 +216,11 @@ class Player {
     this.playerAnimator.incrementFrame = 1;
   }
 
-  /** Idle animation logic */
-  _idleAnimation() {
-    if (this.frameCounter <= 15) {
-      this.animState = 0;
-    } else if (this.frameCounter >= 16 && this.frameCounter <= 30) {
-      this.animState = 1;
-    }
-    if (this.frameCounter === 30) {
-      this.frameCounter = 0;
-    }
-  }
-
-  /** Fire animation logic */
-  _fireAnimation() {
-    const ANIM_TIME = 7;
-    if (this.frameCounter <= ANIM_TIME) {
-      if (this.animState === 0) {
-        this.animState = 2;
-      } else if (this.animState === 1) {
-        this.animState = 3;
-      }
-    } else if (this.frameCounter > ANIM_TIME) {
-      this._returnToIdle(2, 3);
-      this.pressed.pew = false;
-    }
-  }
-
-  /** Absorb animation */
-  _absorbAnimation() {
-    if (this.frameCounter <= 15) {
-      this.animState = 4;
-    } else if (this.frameCounter >= 16 && this.frameCounter <= 30) {
-      this.animState = 5;
-    }
-    if (this.frameCounter === 30) {
-      this.frameCounter = 0;
-    }
-  }
-
-  /**
-   * Returns back to idle animation.
-   * @param {number} a State 1.
-   * @param {number} b State 2.
-   */
-  _returnToIdle(a, b) {
-    if (this.animState === a) {
-      this.animState = 1;
-      /* For smooth transition to idle state */
-      this.frameCounter = 15;
-    } else if (this.animState === b) {
-      this.animState = 0;
-      this.frameCounter = 0;
-    }
-  }
-
   /** Listens for input from player. */
   _startInputListeners() {
     /* Movement */
-    document.addEventListener('keydown', this._moveKeyDown.bind(this), false);
-    document.addEventListener('keyup', this._moveKeyUp.bind(this), false);
+    document.addEventListener('keydown', this._moveKey.bind(this), false);
+    document.addEventListener('keyup', this._moveKey.bind(this), false);
     /* Fire */
     document.addEventListener('keydown', this._fireKeyDown.bind(this), false);
     /* Absorb */
@@ -288,9 +231,9 @@ class Player {
   /** Stop listening for inputs from player. */
   _stopInputListeners() {
     /* Movement */
-    document.removeEventListener('keydown', this._moveKeyDown.bind(this),
+    document.removeEventListener('keydown', this._moveKey.bind(this),
         false);
-    document.removeEventListener('keyup', this._moveKeyUp.bind(this), false);
+    document.removeEventListener('keyup', this._moveKey.bind(this), false);
     /* Fire */
     document.removeEventListener('keydown', this._fireKeyDown.bind(this),
         false);
@@ -301,43 +244,28 @@ class Player {
   }
 
   /**
-   * Player movement on key down.
+   * Player movements ok key up and down.
    * @param {KeyboardEvent} event
    */
-  _moveKeyDown(event) {
-    switch (event.code) {
-      case this.keys.left:
-        this.pressed.left = true;
-        break;
-      case this.keys.right:
-        this.pressed.right = true;
-        break;
-      case this.keys.up:
-        this.pressed.up = true;
-        break;
-      case this.keys.down:
-        this.pressed.down = true;
-        break;
+  _moveKey(event) {
+    let value;
+    if (event.type == 'keydown') {
+      value = true;
+    } else if (event.type == 'keyup') {
+      value = false;
     }
-  }
-
-  /**
-   * Player movement on key up.
-   * @param {KeyboardEvent} event
-   */
-  _moveKeyUp(event) {
     switch (event.code) {
       case this.keys.left:
-        this.pressed.left = false;
+        this.pressed.left = value;
         break;
       case this.keys.right:
-        this.pressed.right = false;
+        this.pressed.right = value;
         break;
       case this.keys.up:
-        this.pressed.up = false;
+        this.pressed.up = value;
         break;
       case this.keys.down:
-        this.pressed.down = false;
+        this.pressed.down = value;
         break;
     }
   }
@@ -365,11 +293,6 @@ class Player {
     if (event.code === this.keys.pew && this.bulletCount > 0) {
       this.decrementBulletCount();
       this._fireBullet();
-      /* if (this.animState === 0) {
-        this.animState = 2;
-      } else if (this.animState === 1) {
-        this.animState = 3;
-      } */
       this.playerAnimator.resetFrameCounter();
       this.pressed.pew = true;
       AudioEffects.playPlayerPewSound();
@@ -407,7 +330,8 @@ class Player {
       if (!this.isBulletInsideCanvas(playerBullet)) {
         playerBullet.despawn();
         return false;
-      } /* collision detection with player before draw */
+      }
+      /* collision detection with player before draw */
       this._checkCollisionWithEnemy(playerBullet);
       return true;
     }

@@ -54,8 +54,6 @@ class Animator {
       }
     } else if (this.frameCounter > ANIM_TIME) {
       this.returnToIdle(2, 3);
-      /* NOTE: set pressed flase from player */
-      // this.pressed.pew = false;
     }
   }
 
