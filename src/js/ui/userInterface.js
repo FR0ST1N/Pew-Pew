@@ -88,6 +88,8 @@ class UserInterface {
         this._drawControls(565, 485);
         Font.draw(this.version, 2, this.ctx, 10, 10);
         Font.draw('Press space to start', 4.11, this.ctx, 250, 430);
+        Font.draw('Source code and license', 2, this.ctx, 10, 545);
+        Font.draw('github.com/FR0ST1N/Pew-Pew', 2, this.ctx, 10, 565);
         break;
       case this.states.GAME:
         this._drawHealth(currHealth);
