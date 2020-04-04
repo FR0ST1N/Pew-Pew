@@ -18,11 +18,47 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** @file Main entry function. */
-function main() {
-  const CANVAS = document.getElementById('game');
-  const GAME = new Game(CANVAS, 800, 600);
-  GAME.init();
+/** @file Main entry file. */
+window.onload = function() {
+  const PATHS = [
+    'images/player.png',
+    'images/player_bullet.png',
+    'images/ui_bullet_holder.png',
+    'images/ui_heart.png',
+    'images/logo.png',
+    'images/enemy_bullet.png',
+    'images/enemy1.png',
+  ];
+  loadImages(PATHS, main);
+};
+
+/**
+ * Image loading function.
+ * @param {string[]} paths Image paths.
+ * @param {mainCallback} cb Callback after images have been loaded.
+ */
+function loadImages(paths, cb) {
+  /* NOTE: Not tested yet. */
+  const IMAGES = [];
+  let loaded = 0;
+  for (let i = 0; i < paths.length; i++) {
+    IMAGES[i] = new Image();
+    IMAGES[i].onload = function() {
+      if (++loaded >= paths.length) {
+        cb(IMAGES);
+      }
+    };
+    IMAGES[i].src = paths[i];
+  }
 }
 
-main();
+/**
+ * Main entry to game.
+ * @callback mainCallback
+ * @param {HTMLImageElement[]} images Array of loaded images.
+ */
+function main(images) {
+  const CANVAS = document.getElementById('game');
+  const GAME = new Game(CANVAS, 800, 600, images);
+  GAME.init();
+}
