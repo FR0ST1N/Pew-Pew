@@ -299,6 +299,7 @@ class Player {
       this._fireBullet();
       this.playerAnimator.resetFrameCounter();
       this.pressed.pew = true;
+      this.playerAnimator.fireAnimation();
       AudioEffects.playPlayerPewSound();
     }
   }
