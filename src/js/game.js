@@ -24,13 +24,15 @@ class Game {
    * @param {HTMLCanvasElement} canvas Game canvas element.
    * @param {number} width Canvas width.
    * @param {number} height Canvas height.
+   * @param {HTMLImageElement[]} images Game images.
    */
-  constructor(canvas, width, height) {
+  constructor(canvas, width, height, images) {
     canvas.width = width;
     canvas.height = height;
     this.width = width;
     this.height = height;
     this.ctx = canvas.getContext('2d');
+    this.images = images;
     this.globalObject = {
       player: null,
       ui: null,
@@ -51,7 +53,8 @@ class Game {
     this.globalObject.player = this._createPlayer();
     this.globalObject.player.init();
     /* Create and init UI */
-    this.globalObject.ui = new UserInterface(this.ctx, this.version);
+    const UI_IMAGES = this.images.slice(2, 5);
+    this.globalObject.ui = new UserInterface(this.ctx, this.version, UI_IMAGES);
     this.globalObject.ui.init();
     /** Create score instance and set it */
     this.globalObject.score = new Score();
@@ -124,7 +127,7 @@ class Game {
    */
   _createPlayer() {
     const P_SS = {
-      image: 'images/player.png',
+      image: null,
       spriteSize: 32,
       rows: 4,
       columns: 2,
@@ -151,7 +154,9 @@ class Game {
       pew: 'KeyX',
       absorb: 'KeyZ',
     };
-    const PLAYER = new Player(P_SS, SPRITE_NAMES, this.ctx, CANVAS_SIZE, KEYS);
+    const PLAYER_IMAGES = this.images.slice(0, 2);
+    const PLAYER = new Player(P_SS, SPRITE_NAMES, this.ctx, CANVAS_SIZE, KEYS,
+        PLAYER_IMAGES);
     return PLAYER;
   }
 

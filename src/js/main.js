@@ -23,8 +23,8 @@ window.onload = function() {
   const PATHS = [
     'images/player.png',
     'images/player_bullet.png',
-    'images/ui_bullet_holder.png',
     'images/ui_heart.png',
+    'images/ui_bullet_holder.png',
     'images/logo.png',
     'images/enemy_bullet.png',
     'images/enemy1.png',

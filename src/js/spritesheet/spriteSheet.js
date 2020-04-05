@@ -21,7 +21,7 @@
 /** @file Class to handle sprite sheets. */
 class SpriteSheet {
   /**
-   * @param {string} image Sprite sheet location.
+   * @param {HTMLImageElement} image Sprite sheet.
    * @param {number} spriteSize Source sprite size(x = y).
    */
   constructor(image, spriteSize) {

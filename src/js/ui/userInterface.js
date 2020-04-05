@@ -23,20 +23,21 @@ class UserInterface {
   /**
    * @param {CanvasRenderingContext2D} ctx
    * @param {number} version
+   * @param {HTMLImageElement[]} images
    */
-  constructor(ctx, version) {
+  constructor(ctx, version, images) {
     this.ctx = ctx;
     this.version = version;
     this.healthSpriteSheet = new SpriteSheet(
-        'images/ui_heart.png',
+        images[0],
         5
     );
     this.countSpriteSheet = new SpriteSheet(
-        'images/ui_bullet_holder.png',
+        images[1],
         7
     );
     this.logoSpriteSheet = new SpriteSheet(
-        'images/logo.png',
+        images[2],
         15
     );
     this.names = ['a', 'b', 'c', 'd', 'e', 'f'];

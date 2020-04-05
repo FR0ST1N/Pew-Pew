@@ -22,7 +22,7 @@
 class Player {
   /**
    * @typedef {Object} spriteSheet
-   * @property {string} image Sprite sheet path.
+   * @property {HTMLImageElement} image Sprite sheet.
    * @property {number} spriteSize Size of each sprite(x = y).
    * @property {number} rows No. of rows in sprite sheet.
    * @property {number} columns No. of columns in sprite sheet.
@@ -50,6 +50,7 @@ class Player {
    * @param {CanvasRenderingContext2D} ctx Canvas context.
    * @param {canvasSize} canvasSize Canvas width and height.
    * @param {playerKeys} keys Keys for player control and action.
+   * @param {HTMLImageElement[]} images Player images.
    * @param {number} [lives=3] Player's life count.
    * @param {number} [maxBulletSize=5] Max bullets player can hold.
    */
@@ -59,14 +60,17 @@ class Player {
       ctx,
       canvasSize,
       keys,
+      images,
       lives = 3,
       maxBulletSize = 5
   ) {
+    spriteSheet.image = images[0];
     this.spriteSheet = spriteSheet;
     this.spriteNames = spriteNames;
     this.ctx = ctx;
     this.canvasSize = canvasSize;
     this.keys = keys;
+    this.images = images;
     this.lives = lives;
     this.maxBulletSize = maxBulletSize;
     this.bulletCount = 0;

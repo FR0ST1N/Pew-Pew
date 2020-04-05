@@ -109,10 +109,8 @@ class PlayerUtil {
    */
   static imgDrawCall(ctx, spriteSheet, spriteName, size, x, y, scale) {
     const SPRITE = spriteSheet.getSprite(spriteName);
-    const SPRITE_IMG = new Image();
-    SPRITE_IMG.src = spriteSheet.image;
     ctx.drawImage(
-        SPRITE_IMG,
+        spriteSheet.image,
         SPRITE.x,
         SPRITE.y,
         size,
