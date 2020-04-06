@@ -34,7 +34,7 @@
     "gulp-htmllint": "0.0.16",
     "gulp-htmlmin": "^5.0.1",
     "gulp-imagemin": "^7.1.0",
-    "gulp-jsdoc3": "^2.0.0",
+    "gulp-jsdoc3": "^3.0.0",
     "gulp-minify": "^3.1.0",
     "gulp-rimraf": "^1.0.0",
     "gulp-stylelint": "^13.0.0",
