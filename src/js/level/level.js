@@ -131,8 +131,6 @@ class EnemySpawner {
 // /* start enemy process, all bullet related is handled inside. */
 // enemy1.startAnimation(this.context);
 
-// /* enabling autofire for the enemy */
-// enemy1.autoshoot = true;
 
 // /* overriding default bullet Pattern */
 // enemy1.setBulletPattern(BulletPattern.FOLLOW);
@@ -149,7 +147,7 @@ class EnemySpawner {
  * level design
  * available configurations:
  * enemies: enemy1, enemy2
- *  enemy-property-variations: health, rateOfFire, autofire
+ *  enemy-property-variations: health, rateOfFire,
  *                             bullet
  *    bullet configuraions:currently only one sprite
  *      bullet-properties: speed, pattern(bulletPattern), damage,
@@ -213,9 +211,8 @@ class Level extends EnemySpawner {
       const enemy = this.enenmyOneFactory(
           new Position(800, enemyCounter * 50 + 100),
           this.level,
-          (1000 - 100) / this.level);
+          this.level * 2);
       enemy.startAnimation(this.context);
-      enemy.autoshoot = true;
       if (this.level != 1 && enemyCounter == this.level) {
         enemy.setBulletPattern(BulletPattern.FOLLOW);
       }

@@ -22,10 +22,11 @@
 class animationHelper extends Timer {
   /**
    * @param {number} animationTime
-   * @param {number} MovementTime
+   * @param {Function} callback
    */
-  constructor(animationTime, MovementTime) {
-    super(animationTime, MovementTime);
+  constructor(animationTime, callback = null) {
+    super(animationTime);
+    this.callback = callback;
   }
 
   /**
@@ -33,27 +34,19 @@ class animationHelper extends Timer {
    * @return {Object} this
    */
   wDraw() {
-    if (this.sprite == null) {
-      return this;
+    if (this.sprite != null) {
+      this.context.drawImage(
+          this.sprite.image,
+          this.sprite.position.x,
+          this.sprite.position.y,
+          this.sprite.individualSpriteSize,
+          this.sprite.individualSpriteSize,
+          this.position.x, this.position.y,
+          this.sprite.individualSpriteSize * this.sprite.scaleFactorX,
+          this.sprite.individualSpriteSize * this.sprite.scaleFactorY
+      );
     }
-    this.context.drawImage(
-        this.sprite.image,
-        this.sprite.position.x,
-        this.sprite.position.y,
-        this.sprite.individualSpriteSize,
-        this.sprite.individualSpriteSize,
-        this.position.x, this.position.y,
-        this.sprite.individualSpriteSize * this.sprite.scaleFactorX,
-        this.sprite.individualSpriteSize * this.sprite.scaleFactorY
-    );
     return this;
-  }
-
-  /**
-   * override this method in child classe, for animation logic.
-   * when it is time for next frame, this method will be called.
-   */
-  objectUpdate() {
   }
 
   /**
@@ -63,10 +56,9 @@ class animationHelper extends Timer {
    */
   incrementFrame() {
     this.stepTimer();
-    if (this.isTimeToMove()) {
-      this._Movement();
-    } if (this.isTimeToAnimate()) {
-      this.objectUpdate();
+    this._Movement();
+    if (this.callback && this.isTimeToAnimate()) {
+      this.callback();
     }
     return this;
   }

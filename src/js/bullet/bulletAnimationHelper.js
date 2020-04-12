@@ -25,16 +25,7 @@ class BulletAnimationHelper extends animationHelper {
    * the same method at core.
    */
   constructor() {
-    super(0, 4); /* since bullet has no animation logic
+    super(0, null); /* since bullet has no animation logic
                   animation timer is not necessary */
-  }
-
-  /**
-   * specific to bullet animation.
-   * if bullet had fancy animaton and stuff, it goes inside here.
-   * @override
-   */
-  objectUpdate() {
-
   }
 }

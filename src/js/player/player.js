@@ -311,7 +311,7 @@ class Player {
     const bulletSprite = new Sprite('player_bullet.png', 1, 5,
         5, 5, new Position(0, 0), 10, 10);
     const bullet = new Bullet(bulletSprite, new Position(this.position.x + 35,
-        this.position.y + 45), this.bulletpattern, 5, 1);
+        this.position.y + 45), this.bulletpattern, this.level.level * 2, 1);
     bullet.setContext(this.ctx);
     bullet.setPlayerMode();
     bullet.fire();

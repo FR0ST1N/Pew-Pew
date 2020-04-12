@@ -22,13 +22,10 @@
 class Timer {
   /**
    * @param {number} animationTime -if 0 timer wont run.
-   * @param {number} MovementTime - if 0 timer wont run.
    */
-  constructor(animationTime, MovementTime) {
+  constructor(animationTime) {
     this.timeToChangeAnimation = animationTime;
-    this.timeToChangeMotion = MovementTime;
     this.animationTimer = 0;
-    this.motionTimer = 0;
   }
 
   /**
@@ -39,24 +36,12 @@ class Timer {
     this.animationTimer = 0;
   }
 
-
   /**
-   * reset the animation timer,
-   * @return {void}
-   */
-  _resetMotionTimer() {
-    this.motionTimer = 0;
-  }
-
-  /**
-   * @return {void}
+   * @return {Object} this
    */
   stepTimer() {
-    if (this.timeToChangeAnimation != 0) {
-      this.animationTimer += 1;
-    } if (this.timeToChangeMotion != 0) {
-      this.motionTimer += 1;
-    }
+    (this.timeToChangeAnimation != 0) && this.animationTimer++;
+    return this;
   }
 
   /**
@@ -70,19 +55,5 @@ class Timer {
       return true;
     }
     return false;
-  }
-
-  /**
-   * @return {boolean}
-   */
-  isTimeToMove() {
-    if (this.timeToChangeMotion == 0) {
-      return true;
-    } if (this.motionTimer == this.timeToChangeMotion) {
-      this._resetMotionTimer();
-      return true;
-    } else {
-      return false;
-    }
   }
 }

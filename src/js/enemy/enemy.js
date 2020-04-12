@@ -40,10 +40,6 @@ class Enemy extends EnemyMovement {
     this.bullet = [];
     this.score = score;
     this.bulletpattern = BulletPattern.DEFAULT;
-    /* enable this to auto fire based on rateOfFire */
-    this.autoshoot = false;
-    /* store timeoutid to later remove on despawn */
-    this.autoShootTimeOutId = null;
   }
 
   /**
@@ -52,13 +48,6 @@ class Enemy extends EnemyMovement {
   shoot() {
     /* if enemy is already in fire animation, just return */
     if (this.getFireState()) {
-      if (this.autoshoot) {
-        this._autoshoot();
-      }
-      return;
-    }
-    if (this.position == null) {
-      this.autoshoot = false; /* async call, thus checking for null */
       return;
     }
     /* if ui state gameover despawn */
@@ -72,7 +61,7 @@ class Enemy extends EnemyMovement {
         5, 5, new Position(0, 0), 5, 5);
     /* bullet creation */
     const bullet = new Bullet(bulletSprite, new Position(this.position.x - 30,
-        this.position.y + 20), this.bulletpattern, 5, 1);
+        this.position.y + 20), this.bulletpattern, this.rateOfFire, 1);
     /* bullet set context from enemy context to draw */
     bullet.setContext(this.context);
     /**
@@ -86,20 +75,8 @@ class Enemy extends EnemyMovement {
     bullet.fire();
     /* push bullet to enemy's stack, used while EnemySpawner::draw */
     this.bullet.push(bullet);
-    /* autoshoot */
-    if (this.autoshoot) {
-      this._autoshoot();
-    }
   }
 
-  /**
-   * automatic enemy shooting.
-   */
-  _autoshoot() {
-    this.autoShootTimeOutId = setTimeout( () => {
-      this.shoot();
-    }, this.rateOfFire);
-  }
 
   /**
    *
@@ -167,7 +144,6 @@ class Enemy extends EnemyMovement {
       this.rateOfFire = null;
       this.bullet = [];
       this.bulletpattern = null;
-      this.autoshoot = false;
       this.position = null;
       this.playerPosition = null;
       /* NOTE: Pass level as param. level(number) must start at 1. */

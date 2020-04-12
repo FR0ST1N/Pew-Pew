@@ -24,26 +24,13 @@ class EnemyAnimationHelper extends animationHelper {
    * constructor
    */
   constructor() {
-    super(120, 12);
+    super(16, () => {
+      /* play animation based on current state of enemy */
+      (this.fireState) ? this._fireAnimation() : this._idleAnimation();
+    });
     this.fireState = false;
     this._subAnimationState = false;
     this._workingState = null;
-  }
-
-  /**
-   * objectUpdate.
-   * @override
-   */
-  objectUpdate() {
-    if (this.checkHealthAndDespawn()) {
-      return;/* do not trigger animations if enemy is despawned */
-    }
-    this._Movement();
-    if (this.fireState) {
-      this._fireAnimation();
-    } else {
-      this._idleAnimation();
-    }
   }
 
   /**
