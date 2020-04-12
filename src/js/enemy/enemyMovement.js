@@ -101,6 +101,5 @@ class EnemyMovement extends EnemyAnimationHelper {
    */
   startAnimation(context) {
     this.setContext(context);
-    this.objectAnimation();
   }
 }

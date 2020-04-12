@@ -56,8 +56,9 @@ class EnemySpawner {
     if (enemy.health < 1 || enemy.health == null) {
       enemy.checkHealthAndDespawn();
       return false;
-    } enemy.wDraw();
-    enemy.setPlayerPosition(this.player.position.x, this.player.position.y);
+    } enemy.incrementFrame()
+        .wDraw()
+        .setPlayerPosition(this.player.position.x, this.player.position.y);
     return true;
   }
 
@@ -100,7 +101,7 @@ class EnemySpawner {
         .collideDetect(new Position(this.player.position.x,
             this.player.position.y));
     if (!collideWithPlayerStatus) {/* if collides with player, dont draw */
-      bullet.wDraw();
+      bullet.incrementFrame().wDraw();
     } else {
       bullet.despawn();
       if (this.player.pressed.absorb) {

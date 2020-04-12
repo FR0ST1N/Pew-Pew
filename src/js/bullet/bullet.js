@@ -91,7 +91,6 @@ class Bullet extends BulletMovement {
    */
   fire() {
     AudioEffects.playEnemyPewSound();
-    this.objectAnimation(this.context);
   }
 
   /**
@@ -105,8 +104,6 @@ class Bullet extends BulletMovement {
     this.speed = null;
     this.damage = null;
     this.playerPositionSnap = null;
-    /* clear motion animation for bullet */
-    clearTimeout(this.animationTimerId);
   }
 
   /**

@@ -26,15 +26,15 @@ class animationHelper extends Timer {
    */
   constructor(animationTime, MovementTime) {
     super(animationTime, MovementTime);
-    this.animationTimerId = null;
   }
 
   /**
    * wrapper Draw.
+   * @return {Object} this
    */
   wDraw() {
     if (this.sprite == null) {
-      return;
+      return this;
     }
     this.context.drawImage(
         this.sprite.image,
@@ -46,6 +46,7 @@ class animationHelper extends Timer {
         this.sprite.individualSpriteSize * this.sprite.scaleFactorX,
         this.sprite.individualSpriteSize * this.sprite.scaleFactorY
     );
+    return this;
   }
 
   /**
@@ -58,14 +59,16 @@ class animationHelper extends Timer {
   /**
    * makes decisions whether to redraw,
    * based on the fps defined.
+   * @return {Object} this
    */
-  postObjectUpdate() {
+  incrementFrame() {
     this.stepTimer();
     if (this.isTimeToMove()) {
       this._Movement();
     } if (this.isTimeToAnimate()) {
       this.objectUpdate();
-    } this.objectAnimation();
+    }
+    return this;
   }
 
   /**
@@ -74,14 +77,5 @@ class animationHelper extends Timer {
    */
   setContext(context) {
     this.context = context;
-  }
-
-  /**
-   * object movement loop
-   */
-  objectAnimation() {
-    this.animationTimerId = setTimeout(() => {
-      this.postObjectUpdate();
-    }, 1);
   }
 }

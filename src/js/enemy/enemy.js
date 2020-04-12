@@ -173,10 +173,6 @@ class Enemy extends EnemyMovement {
       /* NOTE: Pass level as param. level(number) must start at 1. */
       /* Set score */
       this.score.setScore(this.level);
-      /* clear autoshoot */
-      clearTimeout(this.autoShootTimeOutpId);
-      /* clear postion update and animation */
-      clearTimeout(this.animationTimerId);
       return true;
     } return false;
   }

@@ -372,7 +372,9 @@ class Player {
       if (enemy.collideDetect(bullet)) {
         enemy.takeDamage(bullet.damage);
         bullet.despawn();
-      } bullet.wDraw();
+      } bullet
+          .incrementFrame()
+          .wDraw();
     });
   }
 
