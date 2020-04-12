@@ -12,7 +12,9 @@ const rimraf = require('gulp-rimraf');
 const checkSize = require('gulp-check-filesize');
 const imageMin = require('gulp-imagemin');
 const jsdoc = require('gulp-jsdoc3');
+const log = require('fancy-log');
 
+let ignoreJsLintErrors = false;
 const jsConcat = [
   'src/js/animator/animator.js',
   'src/js/audio/audioEffects.js',
@@ -53,11 +55,21 @@ gulp.task('cssLint', function() {
 });
 
 gulp.task('jsLint', function() {
-  return gulp.src('src/js/**/*.js')
-      .pipe(concat('main.js'))
-      .pipe(jsLint())
-      .pipe(jsLint.format())
-      .pipe(jsLint.failAfterError());
+  if (process.argv.includes('--ignoreJsErrors')) {
+    log('WARNING: Ignoring JS Errors.');
+    ignoreJsLintErrors = true;
+  }
+
+  return ignoreJsLintErrors ?
+      (gulp.src('src/js/**/*.js')
+          .pipe(concat('main.js'))
+          .pipe(jsLint())
+          .pipe(jsLint.format())) :
+      (gulp.src('src/js/**/*.js')
+          .pipe(concat('main.js'))
+          .pipe(jsLint())
+          .pipe(jsLint.format())
+          .pipe(jsLint.failAfterError()));
 });
 
 gulp.task('jsLintNoConcat', function() {
@@ -122,14 +134,14 @@ gulp.task('zip', function() {
 });
 
 gulp.task('jsfxr', function() {
-  console.log('Added jsfxr to build!');
+  log('Added jsfxr to build!');
 
   return gulp.src('src/jsfxr/jsfxr.min.js', {allowEmpty: true})
       .pipe(gulp.dest('build/jsfxr/'));
 });
 
 gulp.task('watch', function() {
-  console.log('Now Watching!');
+  log('Now Watching!');
   gulp.watch('src/index.html', gulp.series('htmlLint', 'htmlBuild'));
   gulp.watch('src/css/*.css', gulp.series('cssLint', 'cssBuild'));
   gulp.watch('src/js/**/*.js', gulp.series('jsLint', 'jsBuild'));
