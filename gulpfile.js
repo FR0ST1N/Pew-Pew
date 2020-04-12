@@ -28,7 +28,6 @@ const jsConcat = [
   'src/js/ui/userInterface.js',
   'src/js/collision/collisionDetection.js',
   'src/js/animation/animationHelper.js',
-  'src/js/bullet/bulletPattern.js',
   'src/js/bullet/bulletAnimationHelper.js',
   'src/js/bullet/bulletMovement.js',
   'src/js/bullet/bullet.js',

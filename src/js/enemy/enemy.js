@@ -39,7 +39,7 @@ class Enemy extends EnemyMovement {
     this.rateOfFire = rateOfFire;
     this.bullet = [];
     this.score = score;
-    this.bulletpattern = BulletPattern.DEFAULT;
+    this.bulletpattern = 'straight';
   }
 
   /**
@@ -55,13 +55,13 @@ class Enemy extends EnemyMovement {
       this.health = null;
       this.checkHealthAndDespawn();
     }
-
-    /* bullet sprite */
-    const bulletSprite = new Sprite('enemy_bullet.png', 1, 5,
-        5, 5, new Position(0, 0), 5, 5);
     /* bullet creation */
-    const bullet = new Bullet(bulletSprite, new Position(this.position.x - 30,
-        this.position.y + 20), this.bulletpattern, this.rateOfFire, 1);
+    const bullet = new Bullet(
+        window.enemyBulletSprite,
+        new Position(this.position.x - 30, this.position.y + 20),
+        this.bulletpattern,
+        this.rateOfFire,
+        1);
     /* bullet set context from enemy context to draw */
     bullet.setContext(this.context);
     /**

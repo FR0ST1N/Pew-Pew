@@ -23,13 +23,13 @@ class Bullet extends BulletMovement {
   /**
    * @param {Sprite} sprite
    * @param {Position|null} startposition - where the bullet originates
-   * @param {BulletPattern|string} pattern
+   * @param {string} pattern
    * @param {number} speed - 1 is the slowest bullet possible
    * @param {number} damage
    */
   constructor(sprite = null,
       startposition = null,
-      pattern = BulletPattern.FOLLOW,
+      pattern = 'follow',
       speed = 1,
       damage = 1) {
     super();

@@ -39,6 +39,7 @@ class BulletMovement extends BulletAnimationHelper {
   /**
    * based on the defined pattern, that specific function is called.
    * @override
+   * @return {Object} this
    */
   _Movement() {
     if (this.position != null) {
@@ -48,6 +49,7 @@ class BulletMovement extends BulletAnimationHelper {
       }
       eval('this.' + this.pattern + '()');
     }
+    return this;
   }
 
   /**

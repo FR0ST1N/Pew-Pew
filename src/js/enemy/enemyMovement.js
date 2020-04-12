@@ -36,10 +36,11 @@ class EnemyMovement extends EnemyAnimationHelper {
   /**
    * enemy motion logic
    * @override
+   * @return {Object} this
    */
   _Movement() {
     if (this.checkHealthAndDespawn()) {
-      return; /* do not compute movement & trigger movement
+      return this; /* do not compute movement & trigger movement
               if enemy is despawned */
     }
     const self = this;
@@ -60,6 +61,7 @@ class EnemyMovement extends EnemyAnimationHelper {
       } frames++;
     }
     this._enemyPositionUpdate(position);
+    return this;
   }
 
 

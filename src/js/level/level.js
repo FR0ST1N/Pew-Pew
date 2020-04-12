@@ -116,8 +116,6 @@ class EnemySpawner {
 
 // examples:
 //  /* enemy sprite, look into sprite.js for more info */
-// const spriteEnemy1 = new Sprite('enemy1.png', 2, 2, 128, 32,
-//     new Position(0, 0), 3, 3);
 //   /* enemy sprite config, based on rows and columns */
 // const spriteConfigEnemy1 = new SpriteConfig(['idle1', 'idle2'],
 //     ['fire1', 'fire2'], spriteEnemy1);
@@ -214,7 +212,7 @@ class Level extends EnemySpawner {
           this.level * 2);
       enemy.startAnimation(this.context);
       if (this.level != 1 && enemyCounter == this.level) {
-        enemy.setBulletPattern(BulletPattern.FOLLOW);
+        enemy.setBulletPattern('follow');
       }
       enemy.shoot();
       this.currentLevelEnemies.push(enemy);
@@ -230,12 +228,10 @@ class Level extends EnemySpawner {
    * @return {Enemy} enemyObject
    */
   enenmyOneFactory(position, health, rateOfFire) {
-    const spriteEnemyOne = new Sprite('enemy1.png', 2, 2, 128, 32,
-        new Position(0, 0), 2, 2);
     const spriteConfigEnemyOne = new SpriteConfig(['idle1', 'idle2'],
-        ['fire1', 'fire2'], spriteEnemyOne);
+        ['fire1', 'fire2'], window.enemyOneSprite);
     const enemyPosition = position;
-    const enemy = new Enemy(this.UI, this.score, spriteEnemyOne,
+    const enemy = new Enemy(this.UI, this.score, window.enemyOneSprite,
         spriteConfigEnemyOne, enemyPosition, health, rateOfFire);
     return enemy;
   }

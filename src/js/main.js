@@ -30,7 +30,47 @@ window.onload = function() {
     'images/enemy1.png',
   ];
   loadImages(PATHS, main);
+
+  const crateImageElement = (path) => {
+    const image = new Image();
+    image.src = path;
+    return image;
+  };
+
+  window.enemyOneSprite = {
+    'image': crateImageElement('images/enemy1.png'),
+    'rows': '2',
+    'columns': '2',
+    'totalSpriteSize': '128',
+    'individualSpriteSize': '32',
+    'position': {'x': 0, 'y': 0},
+    'scaleFactorX': 2,
+    'scaleFactorY': 2,
+  };
+
+  window.enemyBulletSprite = {
+    'image': crateImageElement('images/enemy_bullet.png'),
+    'rows': '1',
+    'columns': '5',
+    'totalSpriteSize': '5',
+    'individualSpriteSize': '5',
+    'position': {'x': 0, 'y': 0},
+    'scaleFactorX': 5,
+    'scaleFactorY': 5,
+  };
+
+  window.playerBulletSprite = {
+    'image': crateImageElement('images/player_bullet.png'),
+    'rows': '1',
+    'columns': '5',
+    'totalSpriteSize': '5',
+    'individualSpriteSize': '5',
+    'position': {'x': 0, 'y': 0},
+    'scaleFactorX': 10,
+    'scaleFactorY': 10,
+  };
 };
+
 
 /**
  * Image loading function.

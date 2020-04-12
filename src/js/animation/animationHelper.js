@@ -55,11 +55,8 @@ class animationHelper extends Timer {
    * @return {Object} this
    */
   incrementFrame() {
-    this.stepTimer();
-    this._Movement();
-    if (this.callback && this.isTimeToAnimate()) {
-      this.callback();
-    }
+    this.stepTimer()._Movement();
+    (this.callback && this.isTimeToAnimate()) && this.callback();
     return this;
   }
 

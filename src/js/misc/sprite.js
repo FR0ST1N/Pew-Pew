@@ -18,40 +18,10 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** @file Sprite class for enemies */
-class Sprite {
-/**
- * Properties of each image sprite
- * @param {string} imagename
- * @param {number} rows
- * @param {number} columns
- * @param {number} totalSpriteSize
- * @param {number} individualSpriteSize
- * @param {Position} position - position of one image inside sprite.start-(0,0)
- * @param {number} scaleFactorX
- * @param {number} scaleFactorY
- */
-  constructor(imagename, rows, columns,
-      totalSpriteSize = 96,
-      individualSpriteSize = 32,
-      position,
-      scaleFactorX = 3,
-      scaleFactorY = 3) {
-    const image = new Image();
-    image.src = 'images/' + imagename;
-    this.image = image;
-    this.rows = rows;
-    this.columns = columns;
-    this.individualSpriteSize = individualSpriteSize;
-    this.totalSpriteSize = totalSpriteSize;
-    this.position = position;
-    this.scaleFactorX = scaleFactorX;
-    this.scaleFactorY = scaleFactorY;
-  }
-}
+/** @file SpriteCnfig for enemies */
 
 /**
- * Multiple images inside sprite are are
+ * Multiple images inside sprite are
  * animated with the help of this SpriteConfig
  */
 class SpriteConfig {
