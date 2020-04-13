@@ -19,101 +19,106 @@
  */
 
 /** @file Main bullet class */
-class Bullet extends BulletMovement {
+class Bullet {
   /**
-   * @param {Sprite} sprite
-   * @param {Position|null} startposition - where the bullet originates
-   * @param {BulletPattern|string} pattern
-   * @param {number} speed - 1 is the slowest bullet possible
-   * @param {number} damage
+   * @param {Object} position x and y.
+   * @param {HTMLImageElement} image Image for bullet.
+   * @param {number} speed Bullet speed.
+   * @param {CanvasRenderingContext2D} ctx Canvas context.
+   * @param {canvasSize} canvasSize Canvas width and height.
+   * @param {number} [damage=1] Bullet damage to collided object.
+   * @param {boolean} [isPlayer=false] Does the bullet belong to player?
    */
-  constructor(sprite = null,
-      startposition = null,
-      pattern = BulletPattern.FOLLOW,
-      speed = 1,
-      damage = 1) {
-    super();
-    this.sprite = sprite;
-    this.position = startposition;
-    this.pattern = pattern;
-    this.speed = speed;
-    this.damage = damage;
-    this.playerPositionSnap = null;
-  }
-
-  /**
-   * returns default bullet, which is straight
-   */
-  static get DEFAULT() {
-    return new Bullet();
-  }
-
-  /**
-     * the postion that the bullet should travel towards,
-     * bullet explodes at end?(inrelation with bulletPattern)
-     *  or just goes offscreen
-     * @param {Position} position
-     * @return {Position}
-     */
-  setBulletTarget(position) {
-    this.targetPosition = position;
-    return this.targetPosition;
-  }
-
-  /**
-     * if you are insane, and teleport a bullet for some reason.
-     * @param {Position} position,
-     * @return {Position}
-     */
-  setBulletPostition(position) {
+  constructor(
+      position,
+      image,
+      speed,
+      ctx,
+      canvasSize,
+      damage = 1,
+      isPlayer = false
+  ) {
     this.position = position;
-    return this.position;
+    this.image = image;
+    this.speed = speed;
+    this.ctx = ctx;
+    this.canvasSize = canvasSize;
+    this.damage = damage;
+    this.isPlayer = isPlayer;
+    this.destroy = false;
+    this.size = 5;
+    this.scale = 5;
+  }
+
+  /** Draw function for bullets. */
+  draw() {
+    if (!this.destroy && this._isInsideCanvas()) {
+      if (!this.isPlayer) {
+        this.position.x -= this.speed;
+      } else {
+        this.position.x += this.speed;
+      }
+      this.ctx.drawImage(
+          this.image,
+          0,
+          0,
+          this.size,
+          this.size,
+          this.position.x,
+          this.position.y,
+          this.size * this.scale,
+          this.size * this.scale
+      );
+    } else if (!this.destroy) {
+      this._destroy();
+    }
   }
 
   /**
-   * player Position at the time of generating bullet.
-   * @param {Position} position
+   * Check if player is inside canvas.
+   * @return {boolean}
    */
-  setPlayerPositionSnap(position) {
-    this.playerPositionSnap = position;
+  _isInsideCanvas() {
+    const EXTRA = 20;
+    const B = {
+      x1: 0 - EXTRA,
+      y1: 0 - EXTRA,
+      x2: this.canvasSize.width + EXTRA,
+      y2: this.canvasSize.height + EXTRA,
+    };
+    const P = {
+      x: this.position.x,
+      y: this.position.y,
+    };
+    if (P.x > B.x1 && P.y > B.y1 && P.x < B.x2 && P.y < B.y2) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  /**
-   * getbulletPosition
-   * @return {Position}
-   */
-  getBulletPosition() {
-    return this.position;
-  }
-
-  /**
-   * @override
-   */
-  fire() {
-    AudioEffects.playEnemyPewSound();
-    this.objectAnimation(this.context);
-  }
-
-  /**
-   * remove bullet
-   */
-  despawn() {
+  /** Called when bullet is out of canvas. */
+  _destroy() {
+    console.log('bullet destroyed');
     this.position = null;
-    this.sprite = null;
-    this.position = null;
-    this.pattern = null;
+    this.image = null;
     this.speed = null;
-    this.damage = null;
-    this.playerPositionSnap = null;
-    /* clear motion animation for bullet */
-    clearTimeout(this.animationTimerId);
+    this.isPlayer = null;
+    this.ctx = null;
+    this.destroy = true;
   }
+
+  /**
+   * @typedef {Object} position
+   * @property {number} x
+   * @property {number} y
+   */
 
   /**
    * detects collision with the given player coordinates
-  * @param {Position} playerPosition
-  * @return {boolean}
-  */
+   * @param {position} playerPosition
+   * @return {boolean}
+   */
   collideDetect(playerPosition) {
     if (playerPosition.x == null || this.position.x == null) {
       return false; /* dont proceed, if despawned */

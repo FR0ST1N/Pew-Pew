@@ -33,6 +33,7 @@ const jsConcat = [
   'src/js/bullet/bulletPattern.js',
   'src/js/bullet/bulletAnimationHelper.js',
   'src/js/bullet/bulletMovement.js',
+  'src/js/bullet/bulletManager.js',
   'src/js/bullet/bullet.js',
   'src/js/enemy/enemyAnimationHelper.js',
   'src/js/enemy/enemyMovement.js',

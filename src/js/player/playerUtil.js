@@ -21,59 +21,6 @@
 /** @file Utility methods for player. */
 class PlayerUtil {
   /**
-   * @typedef {Object} position
-   * @property {number} x
-   * @property {number} y
-   */
-
-  /**
-   * Ensures player stays inside the canvas.
-   * @param {string} direction Move Direction.
-   * @param {number} move Distance.
-   * @param {number} bound Bound value to stay inside.
-   * @param {number} spriteSize Sprite size.
-   * @param {number} scale Sprite scale.
-   * @param {position} position Player position.
-   * @param {canvasSize} canvasSize Canvas width and height.
-   * @return {boolean}
-   */
-  static bound(
-      direction,
-      move,
-      bound,
-      spriteSize,
-      scale,
-      position,
-      canvasSize
-  ) {
-    let result = false;
-    const MAX_BOUND = bound + (spriteSize * scale);
-    switch (direction) {
-      case 'left':
-        result = position.x - move > (0 + bound) ?
-          true :
-          false;
-        break;
-      case 'right':
-        result = position.x + move < (canvasSize.width - MAX_BOUND) ?
-          true :
-          false;
-        break;
-      case 'up':
-        result = position.y - move > (0 + bound) ?
-          true :
-          false;
-        break;
-      case 'down':
-        result = position.y + move < (canvasSize.height - MAX_BOUND) ?
-          true :
-          false;
-        break;
-    }
-    return result;
-  }
-
-  /**
    * @param {number} playerScale Player Scale.
    * @param {number} barrierScale Barrier Scale.
    * @param {number} size Sprite Size.

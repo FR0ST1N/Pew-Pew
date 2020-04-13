@@ -58,10 +58,6 @@ class Game {
     this.globalObject.ui.init();
     /** Create score instance and set it */
     this.globalObject.score = new Score();
-    /* Init level */
-    this.level = new Level(this);
-    /* setplayer Object's level */
-    this.globalObject.player.setLevel(this.level);
     /* Render game */
     this._render();
   }
@@ -89,11 +85,6 @@ class Game {
         this.resetScore = false;
       }
       this._drawGame(this.globalObject.player);
-      /* check level start status and start level trigger */
-      if (!this.level.gameEnd) {
-        this.level.triggerNextLevel();
-        this.level.gameEnd = true;
-      }
     }
     /* Draw UI */
     UI.draw(
@@ -117,8 +108,6 @@ class Game {
     player.playerMovement();
     /* Draw player */
     player._drawFrame();
-    /* Draw enemy and bullets Inside "EnemySpawner" class */
-    this.level.draw();
   }
 
   /**
@@ -168,8 +157,5 @@ class Game {
     /* Crerate new player */
     this.globalObject.player = this._createPlayer();
     this.globalObject.player.init();
-    /* Reset level */
-    this.level.reset(this.globalObject.player);
-    this.globalObject.player.setLevel(this.level);
   }
 }
