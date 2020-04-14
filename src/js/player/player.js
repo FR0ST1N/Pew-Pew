@@ -152,8 +152,6 @@ class Player {
     } else if (PlayerUtil.isIdleAnim(STATE)) {
       this.playerAnimator.idleAnimation();
     }
-    /** Draw bullets */
-    this.bulletManager.draw();
     /* Draw player in canvas */
     PlayerUtil.imgDrawCall(
         this.ctx,
@@ -183,6 +181,9 @@ class Player {
           this.scale.barrier
       );
     }
+    /* Draw bullets */
+    this.bulletManager.draw();
+    /* Increment frame counter */
     this.playerAnimator.incrementFrame = 1;
   }
 
