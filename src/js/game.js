@@ -53,6 +53,7 @@ class Game {
     };
     this.requestAnimationFrameId = null;
     this.version = 'v1.0.0-alpha.2';
+    this.enemy = null;
   }
 
   /** Game initialization. */
@@ -79,6 +80,30 @@ class Game {
     this.globalObject.ui.draw();
     /* UI input listener */
     this._uiInputListener();
+    /* Enemy test */
+    this.enemy = new Enemy(
+        this.ctx,
+        this.canvasSize,
+        {
+          image: null,
+          spriteSize: 32,
+          rows: 2,
+          columns: 2,
+        },
+        this.images.slice(5, 7),
+        {
+          x: 300,
+          y: 300,
+        },
+        1,
+        3,
+        3,
+        3
+    );
+    /* NOTE: For testing */
+    /* setInterval(() => {
+      this.enemy.pew();
+    }, 3000); */
   }
 
   /** Main render method. */
@@ -135,6 +160,7 @@ class Game {
     player.playerMovement();
     /* Draw player */
     player._drawFrame();
+    this.enemy.draw();
   }
 
   /**
@@ -151,10 +177,10 @@ class Game {
     const SPRITE_NAMES = [
       'idle1',
       'idle2',
-      'pop1',
-      'pop2',
-      'push1',
-      'push2',
+      'fire1',
+      'fire2',
+      'absorb1',
+      'absorb2',
       'shield',
       'blank',
     ];

@@ -108,7 +108,7 @@ class UserInterface {
   _drawLogo() {
     const SCALE = 20;
     const SIZE = this.logoSpriteSheet.spriteSize * SCALE;
-    PlayerUtil.imgDrawCall(
+    Util.imgDrawCall(
         this.ctx,
         this.logoSpriteSheet,
         'logo',
@@ -124,7 +124,7 @@ class UserInterface {
    * @param {number} value Player's current health.
    */
   _drawHealth(value) {
-    PlayerUtil.imgDrawCall(
+    Util.imgDrawCall(
         this.ctx,
         this.healthSpriteSheet,
         this.names[value],
@@ -140,7 +140,7 @@ class UserInterface {
    * @param {number} value Bullet count.
    */
   _drawBulletCount(value) {
-    PlayerUtil.imgDrawCall(
+    Util.imgDrawCall(
         this.ctx,
         this.countSpriteSheet,
         this.names[value],

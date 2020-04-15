@@ -142,18 +142,18 @@ class Player {
   /** Draw a single player frame. */
   _drawFrame() {
     const STATE = this.playerAnimator.state;
-    if (this.pressed.pew && PlayerUtil.isIdleAnim(STATE)) {
+    if (Util.exitFire(this.pressed.pew, STATE)) {
       this.pressed.pew = false;
     }
     if (this.pressed.absorb) {
       this.playerAnimator.absorbAnimation();
     } else if (this.pressed.pew) {
       this.playerAnimator.fireAnimation();
-    } else if (PlayerUtil.isIdleAnim(STATE)) {
+    } else if (Util.isIdleAnim(STATE)) {
       this.playerAnimator.idleAnimation();
     }
     /* Draw player in canvas */
-    PlayerUtil.imgDrawCall(
+    Util.imgDrawCall(
         this.ctx,
         this.playerSpriteSheet,
         this.spriteNames[STATE],
@@ -164,14 +164,14 @@ class Player {
     );
     /* Draw barrier on absorb */
     if (this.pressed.absorb) {
-      const CORRECTION = PlayerUtil.getBarrierPosition(
+      const CORRECTION = Util.getBarrierPosition(
           this.scale.player,
           this.scale.barrier,
           this.spriteSheet.spriteSize
       );
       const X = this.position.x - CORRECTION;
       const Y = this.position.y - CORRECTION;
-      PlayerUtil.imgDrawCall(
+      Util.imgDrawCall(
           this.ctx,
           this.playerSpriteSheet,
           this.spriteNames[6],
@@ -257,6 +257,7 @@ class Player {
     if (event.code === this.keys.pew && this.bulletCount > 0) {
       this.decrementBulletCount();
       this._fireBullet();
+      /* Begin fire animation. */
       this.playerAnimator.resetFrameCounter();
       this.pressed.pew = true;
       this.playerAnimator.fireAnimation();

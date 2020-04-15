@@ -26,8 +26,8 @@ window.onload = function() {
     'images/ui_heart.png',
     'images/ui_bullet_holder.png',
     'images/logo.png',
-    'images/enemy_bullet.png',
     'images/enemy1.png',
+    'images/enemy_bullet.png',
   ];
   loadImages(PATHS, main);
 };

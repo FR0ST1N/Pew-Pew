@@ -16,6 +16,7 @@ const log = require('fancy-log');
 
 let ignoreJsLintErrors = false;
 const jsConcat = [
+  'src/js/misc/util.js',
   'src/js/animator/animator.js',
   'src/js/audio/audioEffects.js',
   'src/js/score/score.js',
@@ -23,7 +24,6 @@ const jsConcat = [
   'src/js/misc/sprite.js',
   'src/js/misc/position.js',
   'src/js/animation/timer.js',
-  'src/js/player/playerUtil.js',
   'src/js/player/playerAnimator.js',
   'src/js/player/player.js',
   'src/js/font/font.js',

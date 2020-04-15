@@ -19,7 +19,7 @@
  */
 
 /** @file Utility methods for player. */
-class PlayerUtil {
+class Util {
   /**
    * @param {number} playerScale Player Scale.
    * @param {number} barrierScale Barrier Scale.
@@ -38,6 +38,20 @@ class PlayerUtil {
    */
   static isIdleAnim(state) {
     if (state === 0 || state === 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * Decides when to go back to idle anim form fire.
+   * @param {boolean} fire
+   * @param {number} state
+   * @return {boolean}
+   */
+  static exitFire(fire, state) {
+    if (fire && this.isIdleAnim(state)) {
       return true;
     } else {
       return false;
