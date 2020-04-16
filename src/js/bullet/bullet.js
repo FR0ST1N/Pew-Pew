@@ -21,7 +21,7 @@
 /** @file Main bullet class */
 class Bullet {
   /**
-   * @param {Object} position x and y.
+   * @param {position} position x and y.
    * @param {HTMLImageElement} image Image for bullet.
    * @param {number} speed Bullet speed.
    * @param {CanvasRenderingContext2D} ctx Canvas context.
@@ -106,34 +106,5 @@ class Bullet {
     this.isPlayer = null;
     this.ctx = null;
     this.destroy = true;
-  }
-
-  /**
-   * @typedef {Object} position
-   * @property {number} x
-   * @property {number} y
-   */
-
-  /**
-   * detects collision with the given player coordinates
-   * @param {position} playerPosition
-   * @return {boolean}
-   */
-  collideDetect(playerPosition) {
-    if (playerPosition.x == null || this.position.x == null) {
-      return false; /* dont proceed, if despawned */
-    }
-    const bulletObject = {'x': this.position.x,
-      'y': this.position.y,
-      'width': this.sprite.individualSpriteSize * this.sprite.scaleFactorX,
-      'height': this.sprite.individualSpriteSize * this.sprite.scaleFactorY,
-    };
-    const playerObject = {
-      'x': playerPosition.x,
-      'y': playerPosition.y,
-      'width': 32 * 2,
-      'height': 32 * 2,
-    };
-    return CollisionDetection.detect(bulletObject, playerObject);
   }
 }

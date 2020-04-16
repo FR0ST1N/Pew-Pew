@@ -24,7 +24,6 @@ class Enemy {
    * @param {CanvasRenderingContext2D} ctx Canvas context.
    * @param {canvasSize} canvasSize Canvas width and height.
    * @param {spriteSheet} spriteSheet Enemy sprite sheet.
-   * @param {HTMLImageElement[]} images Enemy images.
    * @param {position} position x and y.
    * @param {number} health Enemy health.
    * @param {number} movementSpeed Movement speed.
@@ -35,7 +34,6 @@ class Enemy {
       ctx,
       canvasSize,
       spriteSheet,
-      images,
       position,
       health,
       movementSpeed,
@@ -44,9 +42,7 @@ class Enemy {
   ) {
     this.ctx = ctx;
     this.canvasSize = canvasSize;
-    spriteSheet.image = images[0];
     this.spriteSheet = spriteSheet;
-    this.images = images;
     this.position = position;
     this.health = health;
     this.movementSpeed = movementSpeed;

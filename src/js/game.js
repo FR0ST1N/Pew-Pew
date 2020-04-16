@@ -45,6 +45,7 @@ class Game {
       player: null,
       ui: null,
       score: null,
+      level: null,
     };
     this.previous = {
       health: null,
@@ -80,30 +81,12 @@ class Game {
     this.globalObject.ui.draw();
     /* UI input listener */
     this._uiInputListener();
-    /* Enemy test */
-    this.enemy = new Enemy(
+    /* Init Level */
+    this.globalObject.level = new Level(
         this.ctx,
         this.canvasSize,
-        {
-          image: null,
-          spriteSize: 32,
-          rows: 2,
-          columns: 2,
-        },
-        this.images.slice(5, 7),
-        {
-          x: 300,
-          y: 300,
-        },
-        1,
-        3,
-        3,
-        3
-    );
-    /* NOTE: For testing */
-    /* setInterval(() => {
-      this.enemy.pew();
-    }, 3000); */
+        this.images.slice(5, 7));
+    this.globalObject.level.loadStage(0);
   }
 
   /** Main render method. */
@@ -160,7 +143,8 @@ class Game {
     player.playerMovement();
     /* Draw player */
     player._drawFrame();
-    this.enemy.draw();
+    /** Draw level */
+    this.globalObject.level.draw();
   }
 
   /**
