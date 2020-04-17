@@ -54,7 +54,7 @@ class Game {
     };
     this.requestAnimationFrameId = null;
     this.version = 'v1.0.0-alpha.2';
-    this.enemy = null;
+    this.collisionManager = null;
   }
 
   /** Game initialization. */
@@ -81,6 +81,18 @@ class Game {
     this.globalObject.ui.draw();
     /* UI input listener */
     this._uiInputListener();
+    /* Collision manager */
+    this.collisionManager = new CollisionManager(
+        this.ctx,
+        {
+          width: 64,
+          height: 64,
+        },
+        {
+          width: 48,
+          height: 48,
+        }
+    );
     /* Init Level */
     this.globalObject.level = new Level(
         this.ctx,
@@ -139,12 +151,17 @@ class Game {
    * @param {Player} player A Player instance.
    */
   _drawGame(player) {
+    /* Check collision */
+    this.collisionManager.checkCollision(
+        this.globalObject.player.bulletManager.bullets,
+        this.globalObject.level.bulletManager.bullets,
+        this.globalObject.level.enemies);
     /* Change player position */
     player.playerMovement();
     /* Draw player */
-    player._drawFrame();
+    player._drawFrame(this.collisionManager.playerBullets);
     /** Draw level */
-    this.globalObject.level.draw();
+    this.globalObject.level.draw(this.collisionManager.enemies);
   }
 
   /**

@@ -28,6 +28,7 @@ const jsConcat = [
   'src/js/player/player.js',
   'src/js/font/font.js',
   'src/js/ui/userInterface.js',
+  'src/js/collision/collisionManager.js',
   'src/js/collision/collisionDetection.js',
   'src/js/animation/animationHelper.js',
   'src/js/bullet/bulletPattern.js',

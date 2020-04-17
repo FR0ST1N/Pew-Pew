@@ -36,10 +36,14 @@ class Level {
     this.bulletManager = new BulletManager();
   }
 
-  /** Draw Level */
-  draw() {
-    for (const ENEMY of this.enemies) {
-      ENEMY.draw();
+  /**
+   * Draw Level
+   * @param {Enemy[]} enemies
+   */
+  draw(enemies) {
+    this.enemies = enemies;
+    for (let i = 0; i < this.enemies.length; i++) {
+      this.enemies[i].draw();
     }
   }
 

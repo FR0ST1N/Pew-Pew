@@ -21,15 +21,64 @@
 /** @file Collision Manager. */
 class CollisionManager {
   /**
-   * @param {number} playerScale
-   * @param {number} shieldScale
-   * @param {number} enemyScale
+   * @param {CanvasRenderingContext2D} ctx
+   * @param {Object} playerDimensions
+   * @param {Object} enemyDimensions
    */
-  constructor(playerScale, shieldScale, enemyScale) {
-    this.playerScale = playerScale;
-    this.shieldScale = shieldScale;
-    this.enemyScale = enemyScale;
+  constructor(ctx, playerDimensions, enemyDimensions) {
+    this.ctx = ctx;
+    this.playerDimensions = playerDimensions;
+    this.enemyDimensions = enemyDimensions;
+    this.enemies = [];
+    this.enemyBullets = [];
+    this.playerBullets = [];
   }
+
+  /**
+   * @param {Bullet[]} playerBullets
+   * @param {Bullet[]} enemyBullets
+   * @param {Enemy[]} enemies
+   */
+  checkCollision(playerBullets, enemyBullets, enemies) {
+    this.playerBullets = playerBullets;
+    this.enemyBullets = enemyBullets;
+    this.enemies = enemies;
+    this._checkPlayerBulletsCollision();
+    /* Removes dead enemies from array */
+    this.enemies = this.enemies.filter((enemy) => enemy.health > 0);
+    this.playerBullets = this.playerBullets.filter(
+        (bullet) => !bullet.destroy);
+  }
+
+  /** Checks for collision with enemies. */
+  _checkPlayerBulletsCollision() {
+    for (let i = 0; i < this.playerBullets.length; i++) {
+      if (!this.playerBullets[i].destroy) {
+        for (let j = 0; j < this.enemies.length; j++) {
+          if (this.enemies[j].health > 0 &&
+              this._isColliding(
+                  {
+                    x: this.enemies[j].position.x,
+                    y: this.enemies[j].position.y,
+                  },
+                  this.enemyDimensions,
+                  this.playerBullets[i])) {
+            this.enemies[j].health -= 1;
+            this.playerBullets[i].destroy = true;
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * Removes enemy from current array.
+   * @param {number} index
+   */
+  _removeEnemy(index) {
+    this.enemies.splice(index, 1);
+  }
+
   /**
    * @typedef {Object} position
    * @property {number} x
@@ -38,16 +87,20 @@ class CollisionManager {
 
   /**
    * Check for bullet collision with player/enemy.
+   * Outline drawn is not accurate because position is updated after this call.
    * @param {position} targetPosition
+   * @param {Object} targetDimensions
+   * @param {Bullet} bullet
    * @param {boolean} [outline=false]
    * @return {boolean}
    */
-  _isColliding(targetPosition, outline = false) {
+  _isColliding(targetPosition, targetDimensions, bullet,
+      outline = true) {
     const SOURCE = {
-      x: this.position.x,
-      y: this.position.y,
-      width: this.size * this.scale,
-      height: this.size * this.scale,
+      x: bullet.position.x,
+      y: bullet.position.y,
+      width: bullet.size * bullet.scale,
+      height: bullet.size,
     };
     const TARGET = {
       x: targetPosition.x,
@@ -56,9 +109,13 @@ class CollisionManager {
       height: targetDimensions.height,
     };
     if (outline) {
+      this.ctx.save();
+      this.ctx.strokeStyle = '#39FF14';
       this.ctx.beginPath();
+      this.ctx.rect(TARGET.x, TARGET.y, TARGET.width, TARGET.height);
       this.ctx.rect(SOURCE.x, SOURCE.y, SOURCE.width, SOURCE.height);
       this.ctx.stroke();
+      this.ctx.restore();
     }
     return CollisionDetection.detect(SOURCE, TARGET);
   }

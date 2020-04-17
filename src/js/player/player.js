@@ -139,8 +139,11 @@ class Player {
     }
   }
 
-  /** Draw a single player frame. */
-  _drawFrame() {
+  /**
+   * Draw a single player frame.
+   * @param {Bullet[]} bullets
+   */
+  _drawFrame(bullets) {
     const STATE = this.playerAnimator.state;
     if (Util.exitFire(this.pressed.pew, STATE)) {
       this.pressed.pew = false;
@@ -182,7 +185,7 @@ class Player {
       );
     }
     /* Draw bullets */
-    this.bulletManager.draw();
+    this.bulletManager.draw(bullets);
     /* Increment frame counter */
     this.playerAnimator.incrementFrame = 1;
   }

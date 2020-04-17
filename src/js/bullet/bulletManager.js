@@ -25,8 +25,12 @@ class BulletManager {
     this.bullets = [];
   }
 
-  /** Draws all bullets. */
-  draw() {
+  /**
+   * Draws all bullets.
+   * @param {Bullet[]} bullets
+  */
+  draw(bullets) {
+    this.bullets = bullets;
     for (let i = 0; i < this.bullets.length; i++) {
       if (!this.bullets[i].destroy) {
         this.bullets[i].draw();
