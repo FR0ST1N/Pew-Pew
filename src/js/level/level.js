@@ -30,21 +30,45 @@ class Level {
     this.canvasSize = canvasSize;
     this.images = images;
     this.stages = [
-      [{x: 200, y: 200}, {x: 300, y: 300}, {x: 400, y: 400}],
+      [{x: 200, y: 200}, {x: 300, y: 300}, {x: 400, y: 400}, {x: 500, y: 500}],
     ];
     this.enemies = [];
+    this.enemyBullets = [];
     this.bulletManager = new BulletManager();
+    this.stage = 0;
+    this.level = 1;
+    this.maxFrames = 30;
+    this.frame = 1;
   }
 
   /**
    * Draw Level
    * @param {Enemy[]} enemies
+   * @param {Bullet[]} enemyBullets
    */
-  draw(enemies) {
+  draw(enemies, enemyBullets) {
     this.enemies = enemies;
+    this.enemyBullets = enemyBullets;
     for (let i = 0; i < this.enemies.length; i++) {
+      if (this.enemies[i].interval === this.frame) {
+        this.enemyBullets[enemyBullets.length] = (new Bullet(
+            {
+              x: this.enemies[i].position.x - 15,
+              y: this.enemies[i].position.y + 10,
+            },
+            this.images[1],
+            this.enemies[i].bulletSpeed,
+            this.ctx,
+            this.canvasSize)
+        );
+        this.enemies[i].pew();
+      }
+      // this.bulletManager.draw(enemyBullets);
       this.enemies[i].draw();
     }
+    /* Draw bullets */
+    this.bulletManager.draw(enemyBullets);
+    this.frame = this.frame <= this.maxFrames ? ++this.frame : 1;
   }
 
   /**
@@ -67,10 +91,10 @@ class Level {
             x: STAGE[i].x,
             y: STAGE[i].y,
           },
+          this.level,
+          3,
           1,
-          3,
-          3,
-          3);
+          30);
     }
   }
 }

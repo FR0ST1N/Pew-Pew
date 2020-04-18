@@ -23,31 +23,57 @@ class CollisionManager {
   /**
    * @param {CanvasRenderingContext2D} ctx
    * @param {Object} playerDimensions
+   * @param {Object} playerAbsorbDimensions
    * @param {Object} enemyDimensions
    */
-  constructor(ctx, playerDimensions, enemyDimensions) {
+  constructor(ctx, playerDimensions, playerAbsorbDimensions, enemyDimensions) {
     this.ctx = ctx;
     this.playerDimensions = playerDimensions;
     this.enemyDimensions = enemyDimensions;
+    this.playerAbsorbDimensions = playerAbsorbDimensions;
     this.enemies = [];
     this.enemyBullets = [];
     this.playerBullets = [];
+    this.playerBulletCount = 0;
+    this.playerHealth = 0;
+    this.playerPosition = {
+      x: 0,
+      y: 0,
+    };
   }
 
   /**
    * @param {Bullet[]} playerBullets
    * @param {Bullet[]} enemyBullets
+   * @param {position} playerPosition
+   * @param {boolean} playerAbsorb
    * @param {Enemy[]} enemies
+   * @param {number} playerHealth
+   * @param {number} playerBulletCount
    */
-  checkCollision(playerBullets, enemyBullets, enemies) {
+  checkCollision(playerBullets, enemyBullets, playerPosition, playerAbsorb,
+      enemies, playerHealth, playerBulletCount) {
+    /* Set values */
     this.playerBullets = playerBullets;
     this.enemyBullets = enemyBullets;
+    this.playerPosition = playerPosition;
+    this.playerAbsorb = playerAbsorb;
     this.enemies = enemies;
+    this.playerHealth = playerHealth;
+    this.playerBulletCount = playerBulletCount;
+    /* Check collision */
     this._checkPlayerBulletsCollision();
-    /* Removes dead enemies from array */
+    this._checkEnemiesBulletsCollision(playerAbsorb);
+    /* Filter out stuff */
     this.enemies = this.enemies.filter((enemy) => enemy.health > 0);
-    this.playerBullets = this.playerBullets.filter(
-        (bullet) => !bullet.destroy);
+    if (this.playerBullets > 0) {
+      this.playerBullets = this.playerBullets.filter(
+          (bullet) => !bullet.destroy);
+    }
+    if (this.enemyBullets.length > 0) {
+      this.enemyBullets = this.enemyBullets.filter(
+          (bullet) => !bullet.destroy);
+    }
   }
 
   /** Checks for collision with enemies. */
@@ -57,18 +83,69 @@ class CollisionManager {
         for (let j = 0; j < this.enemies.length; j++) {
           if (this.enemies[j].health > 0 &&
               this._isColliding(
-                  {
-                    x: this.enemies[j].position.x,
-                    y: this.enemies[j].position.y,
-                  },
+                  this.enemies[j].position,
                   this.enemyDimensions,
                   this.playerBullets[i])) {
             this.enemies[j].health -= 1;
             this.playerBullets[i].destroy = true;
+            AudioEffects.playEnemyDamageSound();
           }
         }
       }
     }
+  }
+
+  /**
+   * Checks for collision with player
+   * @param {boolean} absorb
+   */
+  _checkEnemiesBulletsCollision(absorb) {
+    for (let i = 0; i < this.enemyBullets.length; i++) {
+      if (!this.enemyBullets[i].destroy) {
+        /* Set dimension and position */
+        let dimension = null;
+        let position = null;
+        if (!absorb) {
+          dimension = this.playerDimensions;
+          position = this.playerPosition;
+        } else {
+          dimension = this.playerAbsorbDimensions;
+          position = this._getPlayerBarrierPosition();
+        }
+        /* Check collision */
+        if (this._isColliding(
+            position,
+            dimension,
+            this.enemyBullets[i])) {
+          /* Reduce player health or absorb bullet */
+          if (absorb) {
+            this.playerBulletCount += 1;
+            AudioEffects.playBarrierSound();
+          } else {
+            if (this.playerHealth > 0) {
+              this.playerHealth -= 1;
+              AudioEffects.playPlayerDamageSound();
+            }
+          }
+          this.enemyBullets[i].destroy = true;
+        }
+      }
+    }
+  }
+
+  /**
+   * Calculate x and y and player absorb state.
+   * @return {position}
+   */
+  _getPlayerBarrierPosition() {
+    const CORRECTION = Util.getBarrierPosition(
+        this.playerDimensions.scale,
+        this.playerAbsorbDimensions.scale,
+        32);
+    return {
+      x: this.playerPosition.x - CORRECTION,
+      y: this.playerPosition.y - CORRECTION,
+    };
   }
 
   /**

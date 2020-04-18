@@ -70,16 +70,18 @@ class Util {
    */
   static imgDrawCall(ctx, spriteSheet, spriteName, size, x, y, scale) {
     const SPRITE = spriteSheet.getSprite(spriteName);
-    ctx.drawImage(
-        spriteSheet.image,
-        SPRITE.x,
-        SPRITE.y,
-        size,
-        size,
-        x,
-        y,
-        size * scale,
-        size * scale
-    );
+    if (SPRITE != undefined) {
+      ctx.drawImage(
+          spriteSheet.image,
+          SPRITE.x,
+          SPRITE.y,
+          size,
+          size,
+          x,
+          y,
+          size * scale,
+          size * scale
+      );
+    }
   }
 }

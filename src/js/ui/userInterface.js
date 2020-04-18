@@ -124,15 +124,17 @@ class UserInterface {
    * @param {number} value Player's current health.
    */
   _drawHealth(value) {
-    Util.imgDrawCall(
-        this.ctx,
-        this.healthSpriteSheet,
-        this.names[value],
-        this.healthSpriteSheet.spriteSize,
-        10,
-        550,
-        7
-    );
+    if (value > -1) {
+      Util.imgDrawCall(
+          this.ctx,
+          this.healthSpriteSheet,
+          this.names[value],
+          this.healthSpriteSheet.spriteSize,
+          10,
+          550,
+          7
+      );
+    }
   }
 
   /**
@@ -140,15 +142,17 @@ class UserInterface {
    * @param {number} value Bullet count.
    */
   _drawBulletCount(value) {
-    Util.imgDrawCall(
-        this.ctx,
-        this.countSpriteSheet,
-        this.names[value],
-        this.countSpriteSheet.spriteSize,
-        50,
-        540,
-        7
-    );
+    if (value > -1) {
+      Util.imgDrawCall(
+          this.ctx,
+          this.countSpriteSheet,
+          this.names[value],
+          this.countSpriteSheet.spriteSize,
+          50,
+          540,
+          7
+      );
+    }
   }
 
   /**

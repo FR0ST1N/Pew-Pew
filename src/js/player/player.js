@@ -142,8 +142,12 @@ class Player {
   /**
    * Draw a single player frame.
    * @param {Bullet[]} bullets
+   * @param {number} lives
+   * @param {number} bulletCount
    */
-  _drawFrame(bullets) {
+  _drawFrame(bullets, lives, bulletCount) {
+    this.lives = lives;
+    this.bulletCount = bulletCount;
     const STATE = this.playerAnimator.state;
     if (Util.exitFire(this.pressed.pew, STATE)) {
       this.pressed.pew = false;
@@ -165,6 +169,10 @@ class Player {
         this.position.y,
         this.scale.player
     );
+    if (this.pressed.absorb === true &&
+        this.bulletCount >= this.maxBulletSize) {
+      this._absorbKeyUp(new KeyboardEvent('keyup', {'code': this.keys.absorb}));
+    }
     /* Draw barrier on absorb */
     if (this.pressed.absorb) {
       const CORRECTION = Util.getBarrierPosition(
@@ -249,8 +257,8 @@ class Player {
    * @param {KeyboardEvent} event
    */
   _fireKeyDown(event) {
-    /* Block continuous fire */
-    if (event.repeat) {
+    /* Block continuous fire and don't fire on absorbing bullets */
+    if (event.repeat || this.pressed.absorb) {
       return;
     }
     /* Just for testing */
@@ -314,30 +322,6 @@ class Player {
     this.position = null;
     this.bulletCount = 0;
     this._stopInputListeners();
-  }
-
-  /**
-   * Decrement player's life by 1.
-   * @return {number} Remaining life after decrement.
-   */
-  decrementLife() {
-    if (this.lives > 0) {
-      this.lives--;
-      AudioEffects.playPlayerDamageSound();
-    }
-    return this.lives;
-  }
-
-  /** Increments bullet count if it can hold */
-  incrementBulletCount() {
-    if (this.bulletCount < this.maxBulletSize) {
-      this.bulletCount++;
-      AudioEffects.playBarrierSound();
-    }
-    if (this.pressed.absorb === true &&
-        this.bulletCount >= this.maxBulletSize) {
-      this._absorbKeyUp(new KeyboardEvent('keyup', {'code': this.keys.absorb}));
-    }
   }
 
   /** Decrements bullet count if > 0 */

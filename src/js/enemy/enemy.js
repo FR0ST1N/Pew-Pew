@@ -62,8 +62,8 @@ class Enemy {
     this.fire = false;
     this.scale = 1.5;
     this.move = 1;
-    this.counter = 0;
-    this.maxCounter = 30;
+    // this.counter = 0;
+    // this.maxCounter = 30;
   }
 
   /** Draw method for the enemy */
@@ -77,9 +77,9 @@ class Enemy {
     } else if (this.fire) {
       this.enemyAnimator.fireAnimation();
     }
-    this.position.y = this.counter < (this.maxCounter / 2) ?
+    /* this.position.y = this.counter < (this.maxCounter / 2) ?
         this.position.y + this.move :
-        this.position.y - this.move;
+        this.position.y - this.move; */
     Util.imgDrawCall(
         this.ctx,
         this.enemySpriteSheet,
@@ -89,7 +89,7 @@ class Enemy {
         this.position.y,
         this.scale
     );
-    this.counter = this.counter < this.maxCounter ? ++this.counter : 0;
+    // this.counter = this.counter < this.maxCounter ? ++this.counter : 0;
     this.enemyAnimator.incrementFrame = 1;
   }
 

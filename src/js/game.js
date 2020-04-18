@@ -85,8 +85,14 @@ class Game {
     this.collisionManager = new CollisionManager(
         this.ctx,
         {
-          width: 64,
-          height: 64,
+          scale: this.globalObject.player.scale.player,
+          width: this.globalObject.player.scale.player * 32,
+          height: this.globalObject.player.scale.player * 32,
+        },
+        {
+          scale: this.globalObject.player.scale.barrier,
+          width: this.globalObject.player.scale.barrier * 32,
+          height: this.globalObject.player.scale.barrier * 32,
         },
         {
           width: 48,
@@ -109,7 +115,7 @@ class Game {
       /* Check condition and redraw UI */
       this._redrawUI();
       /* Draw Game */
-      this._drawGame(this.globalObject.player);
+      this._drawGame();
       /* Refresh frame */
       this.requestAnimationFrameId =
           window.requestAnimationFrame(this._render.bind(this));
@@ -146,22 +152,28 @@ class Game {
     this.previous.score = SCORE;
   }
 
-  /**
-   * Draw Gameplay
-   * @param {Player} player A Player instance.
-   */
-  _drawGame(player) {
+  /** Check collision and draw gameplay. */
+  _drawGame() {
     /* Check collision */
     this.collisionManager.checkCollision(
         this.globalObject.player.bulletManager.bullets,
         this.globalObject.level.bulletManager.bullets,
-        this.globalObject.level.enemies);
+        this.globalObject.player.position,
+        this.globalObject.player.pressed.absorb,
+        this.globalObject.level.enemies,
+        this.globalObject.player.lives,
+        this.globalObject.player.bulletCount);
     /* Change player position */
-    player.playerMovement();
+    this.globalObject.player.playerMovement();
     /* Draw player */
-    player._drawFrame(this.collisionManager.playerBullets);
+    this.globalObject.player._drawFrame(
+        this.collisionManager.playerBullets,
+        this.collisionManager.playerHealth,
+        this.collisionManager.playerBulletCount);
     /** Draw level */
-    this.globalObject.level.draw(this.collisionManager.enemies);
+    this.globalObject.level.draw(
+        this.collisionManager.enemies,
+        this.collisionManager.enemyBullets);
   }
 
   /**
@@ -205,7 +217,7 @@ class Game {
     this.globalObject.score.resetScore();
     /* Destroy old player */
     this.globalObject.player.destroy();
-    /* Crerate new player */
+    /* Create new player */
     this.globalObject.player = this._createPlayer();
     this.globalObject.player.init();
   }
