@@ -30,14 +30,20 @@ class Level {
     this.canvasSize = canvasSize;
     this.images = images;
     this.stages = [
-      [{x: 200, y: 200}, {x: 300, y: 300}, {x: 400, y: 400}, {x: 500, y: 500}],
+      /* Stage 0 */
+      [{x: 700, y: 100}, {x: 600, y: 200}, {x: 550, y: 300}, {x: 600, y: 400},
+        {x: 700, y: 500}],
+      /* Stage 1 */
+      [{x: 300, y: 50}, {x: 350, y: canvasSize.height - 50}, {x: 400, y: 50},
+        {x: 450, y: canvasSize.height - 50}, {x: 500, y: 50},
+        {x: 550, y: canvasSize.height - 50}],
     ];
     this.enemies = [];
     this.enemyBullets = [];
     this.bulletManager = new BulletManager();
     this.stage = 0;
-    this.level = 1;
-    this.maxFrames = 30;
+    this.level = 0;
+    this.maxFrames = 60;
     this.frame = 1;
   }
 
@@ -63,12 +69,30 @@ class Level {
         );
         this.enemies[i].pew();
       }
-      // this.bulletManager.draw(enemyBullets);
       this.enemies[i].draw();
     }
     /* Draw bullets */
     this.bulletManager.draw(enemyBullets);
     this.frame = this.frame <= this.maxFrames ? ++this.frame : 1;
+    /* Load next stage if all enemies are dead */
+    if (this.enemies.length === 0) {
+      const N = ++this.stage % this.stages.length;
+      this.stage = N;
+      this.level = N === 0 ? ++this.level : this.level;
+      this.loadStage(this.stage);
+    }
+  }
+
+  /** Destroy level objects */
+  destroy() {
+    for (const ENEMY of this.enemies) {
+      ENEMY.position = null;
+    }
+    for (const BULLET of this.enemyBullets) {
+      BULLET.position = null;
+    }
+    this.enemies = null;
+    this.enemyBullets = null;
   }
 
   /**
@@ -93,8 +117,9 @@ class Level {
           },
           this.level,
           3,
-          1,
-          30);
+          10,
+          60,
+          this.stage);
     }
   }
 }

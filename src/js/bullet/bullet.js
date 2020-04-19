@@ -99,7 +99,6 @@ class Bullet {
 
   /** Called when bullet is out of canvas. */
   _destroy() {
-    console.log('Bullet Destroyed: Out of bounds.');
     this.position = null;
     this.image = null;
     this.speed = null;

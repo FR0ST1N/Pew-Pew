@@ -50,9 +50,11 @@ class CollisionManager {
    * @param {Enemy[]} enemies
    * @param {number} playerHealth
    * @param {number} playerBulletCount
+   * @param {Score} score
+   * @param {number} level
    */
   checkCollision(playerBullets, enemyBullets, playerPosition, playerAbsorb,
-      enemies, playerHealth, playerBulletCount) {
+      enemies, playerHealth, playerBulletCount, score, level) {
     /* Set values */
     this.playerBullets = playerBullets;
     this.enemyBullets = enemyBullets;
@@ -61,6 +63,8 @@ class CollisionManager {
     this.enemies = enemies;
     this.playerHealth = playerHealth;
     this.playerBulletCount = playerBulletCount;
+    this.score = score;
+    this.level = level;
     /* Check collision */
     this._checkPlayerBulletsCollision();
     this._checkEnemiesBulletsCollision(playerAbsorb);
@@ -86,8 +90,13 @@ class CollisionManager {
                   this.enemies[j].position,
                   this.enemyDimensions,
                   this.playerBullets[i])) {
+            /* Reduce enemy health and remove bullet */
             this.enemies[j].health -= 1;
             this.playerBullets[i].destroy = true;
+            /* If enemy dead then increment score */
+            if (this.enemies[j].health <= 0) {
+              this.score.setScore(this.level);
+            }
             AudioEffects.playEnemyDamageSound();
           }
         }
@@ -172,7 +181,7 @@ class CollisionManager {
    * @return {boolean}
    */
   _isColliding(targetPosition, targetDimensions, bullet,
-      outline = true) {
+      outline = false) {
     const SOURCE = {
       x: bullet.position.x,
       y: bullet.position.y,

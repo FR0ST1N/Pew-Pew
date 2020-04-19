@@ -82,29 +82,10 @@ class Game {
     /* UI input listener */
     this._uiInputListener();
     /* Collision manager */
-    this.collisionManager = new CollisionManager(
-        this.ctx,
-        {
-          scale: this.globalObject.player.scale.player,
-          width: this.globalObject.player.scale.player * 32,
-          height: this.globalObject.player.scale.player * 32,
-        },
-        {
-          scale: this.globalObject.player.scale.barrier,
-          width: this.globalObject.player.scale.barrier * 32,
-          height: this.globalObject.player.scale.barrier * 32,
-        },
-        {
-          width: 48,
-          height: 48,
-        }
-    );
+    this.collisionManager = this._createCollisionManager();
     /* Init Level */
-    this.globalObject.level = new Level(
-        this.ctx,
-        this.canvasSize,
-        this.images.slice(5, 7));
-    this.globalObject.level.loadStage(0);
+    this.globalObject.level = this._createLevel();
+    // this.globalObject.level.loadStage(0);
   }
 
   /** Main render method. */
@@ -131,7 +112,7 @@ class Game {
       window.cancelAnimationFrame(this.requestAnimationFrameId);
       this.requestAnimationFrameId = null;
       this.globalObject.ui.currentState = this.globalObject.ui.states.GAMEOVER;
-      this.globalObject.ui.draw();
+      this.globalObject.ui.draw(0, 0, this.globalObject.score.getScore());
       return true;
     } else {
       return false;
@@ -162,7 +143,11 @@ class Game {
         this.globalObject.player.pressed.absorb,
         this.globalObject.level.enemies,
         this.globalObject.player.lives,
-        this.globalObject.player.bulletCount);
+        this.globalObject.player.bulletCount,
+        this.globalObject.score,
+        this.globalObject.level.level);
+    /* Reassign the score object */
+    this.globalObject.score = this.collisionManager.score;
     /* Change player position */
     this.globalObject.player.playerMovement();
     /* Draw player */
@@ -174,6 +159,41 @@ class Game {
     this.globalObject.level.draw(
         this.collisionManager.enemies,
         this.collisionManager.enemyBullets);
+  }
+
+  /**
+   * Create a new collision manager.
+   * @return {CollisionManager}
+   */
+  _createCollisionManager() {
+    return new CollisionManager(
+        this.ctx,
+        {
+          scale: this.globalObject.player.scale.player,
+          width: this.globalObject.player.scale.player * 32,
+          height: this.globalObject.player.scale.player * 32,
+        },
+        {
+          scale: this.globalObject.player.scale.barrier,
+          width: this.globalObject.player.scale.barrier * 32,
+          height: this.globalObject.player.scale.barrier * 32,
+        },
+        {
+          width: 48,
+          height: 48,
+        }
+    );
+  }
+
+  /**
+   * Create a new Level instance.
+   * @return {Level}
+   */
+  _createLevel() {
+    return new Level(
+        this.ctx,
+        this.canvasSize,
+        this.images.slice(5, 7));
   }
 
   /**
@@ -213,13 +233,23 @@ class Game {
 
   /** Reset game. */
   _resetGame() {
-    /** Reset score */
+    /* Reset score */
     this.globalObject.score.resetScore();
-    /* Destroy old player */
-    this.globalObject.player.destroy();
     /* Create new player */
+    this.globalObject.player.destroy();
     this.globalObject.player = this._createPlayer();
     this.globalObject.player.init();
+    /* Reset previous values */
+    this.previous = {
+      health: null,
+      bullets: null,
+      score: null,
+    };
+    /* Reset level */
+    this.globalObject.level.destroy();
+    this.globalObject.level = this._createLevel();
+    /* Reset collision manager */
+    this.collisionManager = this._createCollisionManager();
   }
 
   /** Listener for start and restart game. */

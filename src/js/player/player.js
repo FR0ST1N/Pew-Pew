@@ -103,7 +103,7 @@ class Player {
       boundLeft: 10,
       boundRight: 70,
       boundDown: 45,
-      move: 5,
+      move: 10,
     };
   }
 
@@ -286,7 +286,7 @@ class Player {
           y: this.position.y + 35,
         },
         this.images[1],
-        1,
+        10,
         this.ctx,
         this.canvasSize,
         1,

@@ -77,7 +77,6 @@ class UserInterface {
    * @param {number} score Current score.
    */
   draw(currHealth = 0, bulletCount = 0, score = 0) {
-    console.log('Now Drawing UI: ' + this.currentState);
     this.ctx.clearRect(0, 0, this.canvasSize.width, this.canvasSize.height);
     switch (this.currentState) {
       case this.states.START:

@@ -29,6 +29,7 @@ class Enemy {
    * @param {number} movementSpeed Movement speed.
    * @param {number} bulletSpeed Speed of each bullet.
    * @param {number} interval Interval between each bullet fired.
+   * @param {number} movementIndex To call enemy movement function.
    */
   constructor(
       ctx,
@@ -38,7 +39,8 @@ class Enemy {
       health,
       movementSpeed,
       bulletSpeed,
-      interval
+      interval,
+      movementIndex
   ) {
     this.ctx = ctx;
     this.canvasSize = canvasSize;
@@ -48,6 +50,7 @@ class Enemy {
     this.movementSpeed = movementSpeed;
     this.bulletSpeed = bulletSpeed;
     this.interval = interval;
+    this.movementIndex = movementIndex;
     this.enemyAnimator = new Animator();
     this.enemySpriteSheet = new SpriteSheet(
         spriteSheet.image,
@@ -61,9 +64,7 @@ class Enemy {
     );
     this.fire = false;
     this.scale = 1.5;
-    this.move = 1;
-    // this.counter = 0;
-    // this.maxCounter = 30;
+    this.up = true;
   }
 
   /** Draw method for the enemy */
@@ -77,9 +78,7 @@ class Enemy {
     } else if (this.fire) {
       this.enemyAnimator.fireAnimation();
     }
-    /* this.position.y = this.counter < (this.maxCounter / 2) ?
-        this.position.y + this.move :
-        this.position.y - this.move; */
+    this._updatePosition();
     Util.imgDrawCall(
         this.ctx,
         this.enemySpriteSheet,
@@ -89,8 +88,36 @@ class Enemy {
         this.position.y,
         this.scale
     );
-    // this.counter = this.counter < this.maxCounter ? ++this.counter : 0;
     this.enemyAnimator.incrementFrame = 1;
+  }
+
+  /** increment or decrement y */
+  _setUpDownTriggers() {
+    if (this.position.y == 0) {
+      this.up = true;
+    } else if (this.position.y == this.canvasSize.height - 50) {
+      this.up = false;
+    }
+  }
+
+  /** Enemy Movement. Update position fo the enemy. */
+  _updatePosition() {
+    switch (this.movementIndex) {
+      case 0:
+        this.position = EnemyMovement.default(this.position.x,
+            this.position.y);
+        break;
+      case 1:
+        this._setUpDownTriggers();
+        if (this.up) {
+          this.position = EnemyMovement.up(this.position.x,
+              this.position.y, 10);
+        } else {
+          this.position = EnemyMovement.down(this.position.x,
+              this.position.y, 10);
+        }
+        break;
+    }
   }
 
   /** Fire method for enemy */
