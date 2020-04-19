@@ -85,7 +85,6 @@ class Game {
     this.collisionManager = this._createCollisionManager();
     /* Init Level */
     this.globalObject.level = this._createLevel();
-    // this.globalObject.level.loadStage(0);
   }
 
   /** Main render method. */

@@ -73,7 +73,7 @@ class Player {
     this.images = images;
     this.lives = lives;
     this.maxBulletSize = maxBulletSize;
-    this.bulletCount = 5;
+    this.bulletCount = 0;
     this.absorbState = false;
     this.pressed = {
       left: false,
