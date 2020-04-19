@@ -16,6 +16,7 @@ const log = require('fancy-log');
 
 let ignoreJsLintErrors = false;
 const jsConcat = [
+  'src/js/misc/util.js',
   'src/js/animator/animator.js',
   'src/js/audio/audioEffects.js',
   'src/js/score/score.js',
@@ -23,16 +24,17 @@ const jsConcat = [
   'src/js/misc/sprite.js',
   'src/js/misc/position.js',
   'src/js/animation/timer.js',
-  'src/js/player/playerUtil.js',
   'src/js/player/playerAnimator.js',
   'src/js/player/player.js',
   'src/js/font/font.js',
   'src/js/ui/userInterface.js',
+  'src/js/collision/collisionManager.js',
   'src/js/collision/collisionDetection.js',
   'src/js/animation/animationHelper.js',
   'src/js/bullet/bulletPattern.js',
   'src/js/bullet/bulletAnimationHelper.js',
   'src/js/bullet/bulletMovement.js',
+  'src/js/bullet/bulletManager.js',
   'src/js/bullet/bullet.js',
   'src/js/enemy/enemyAnimationHelper.js',
   'src/js/enemy/enemyMovement.js',

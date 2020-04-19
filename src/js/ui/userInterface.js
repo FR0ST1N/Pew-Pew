@@ -22,11 +22,13 @@
 class UserInterface {
   /**
    * @param {CanvasRenderingContext2D} ctx
+   * @param {canvasSize} canvasSize
    * @param {number} version
    * @param {HTMLImageElement[]} images
    */
-  constructor(ctx, version, images) {
+  constructor(ctx, canvasSize, version, images) {
     this.ctx = ctx;
+    this.canvasSize = canvasSize;
     this.version = version;
     this.healthSpriteSheet = new SpriteSheet(
         images[0],
@@ -66,22 +68,16 @@ class UserInterface {
       x: 0,
       y: 0,
     });
-    this._uiInputListener();
   }
 
   /**
    * Draw UI based on the state.
    * @param {number} currHealth Player's current health/lives.
-   * @param {number} count Bullet count.
+   * @param {number} bulletCount Player's current bullet count.
    * @param {number} score Current score.
    */
-  draw(currHealth, count, score) {
-    if (currHealth === null) {
-      currHealth = 0;
-      count = 0;
-      score = 0;
-    }
-    this.ctx.save();
+  draw(currHealth = 0, bulletCount = 0, score = 0) {
+    this.ctx.clearRect(0, 0, this.canvasSize.width, this.canvasSize.height);
     switch (this.currentState) {
       case this.states.START:
         this._drawLogo();
@@ -94,7 +90,7 @@ class UserInterface {
         break;
       case this.states.GAME:
         this._drawHealth(currHealth);
-        this._drawBulletCount(count);
+        this._drawBulletCount(bulletCount);
         this._drawScore(score.toString(), 5);
         break;
       case this.states.GAMEOVER:
@@ -105,38 +101,13 @@ class UserInterface {
         Font.draw(score.toString(), 5, this.ctx, 300, 300);
         break;
     }
-    this.ctx.restore();
-  }
-
-  /** Listener for start and restart game. */
-  _uiInputListener() {
-    document.addEventListener('keydown', this._uiInput.bind(this), false);
-  }
-
-  /**
-   * UI Input Listener
-   * @param {KeyboardEvent} event
-   */
-  _uiInput(event) {
-    if (event.repeat) {
-      return;
-    }
-    if (event.code === 'Space') {
-      if (
-        this.currentState === this.states.START ||
-        this.currentState === this.states.GAMEOVER
-      ) {
-        AudioEffects.playUiSound();
-        this.currentState = this.states.GAME;
-      }
-    }
   }
 
   /** Draw Logo on start screen. */
   _drawLogo() {
     const SCALE = 20;
     const SIZE = this.logoSpriteSheet.spriteSize * SCALE;
-    PlayerUtil.imgDrawCall(
+    Util.imgDrawCall(
         this.ctx,
         this.logoSpriteSheet,
         'logo',
@@ -152,15 +123,17 @@ class UserInterface {
    * @param {number} value Player's current health.
    */
   _drawHealth(value) {
-    PlayerUtil.imgDrawCall(
-        this.ctx,
-        this.healthSpriteSheet,
-        this.names[value],
-        this.healthSpriteSheet.spriteSize,
-        10,
-        550,
-        7
-    );
+    if (value > -1) {
+      Util.imgDrawCall(
+          this.ctx,
+          this.healthSpriteSheet,
+          this.names[value],
+          this.healthSpriteSheet.spriteSize,
+          10,
+          550,
+          7
+      );
+    }
   }
 
   /**
@@ -168,15 +141,17 @@ class UserInterface {
    * @param {number} value Bullet count.
    */
   _drawBulletCount(value) {
-    PlayerUtil.imgDrawCall(
-        this.ctx,
-        this.countSpriteSheet,
-        this.names[value],
-        this.countSpriteSheet.spriteSize,
-        50,
-        540,
-        7
-    );
+    if (value > -1) {
+      Util.imgDrawCall(
+          this.ctx,
+          this.countSpriteSheet,
+          this.names[value],
+          this.countSpriteSheet.spriteSize,
+          50,
+          540,
+          7
+      );
+    }
   }
 
   /**

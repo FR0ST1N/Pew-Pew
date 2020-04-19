@@ -19,60 +19,7 @@
  */
 
 /** @file Utility methods for player. */
-class PlayerUtil {
-  /**
-   * @typedef {Object} position
-   * @property {number} x
-   * @property {number} y
-   */
-
-  /**
-   * Ensures player stays inside the canvas.
-   * @param {string} direction Move Direction.
-   * @param {number} move Distance.
-   * @param {number} bound Bound value to stay inside.
-   * @param {number} spriteSize Sprite size.
-   * @param {number} scale Sprite scale.
-   * @param {position} position Player position.
-   * @param {canvasSize} canvasSize Canvas width and height.
-   * @return {boolean}
-   */
-  static bound(
-      direction,
-      move,
-      bound,
-      spriteSize,
-      scale,
-      position,
-      canvasSize
-  ) {
-    let result = false;
-    const MAX_BOUND = bound + (spriteSize * scale);
-    switch (direction) {
-      case 'left':
-        result = position.x - move > (0 + bound) ?
-          true :
-          false;
-        break;
-      case 'right':
-        result = position.x + move < (canvasSize.width - MAX_BOUND) ?
-          true :
-          false;
-        break;
-      case 'up':
-        result = position.y - move > (0 + bound) ?
-          true :
-          false;
-        break;
-      case 'down':
-        result = position.y + move < (canvasSize.height - MAX_BOUND) ?
-          true :
-          false;
-        break;
-    }
-    return result;
-  }
-
+class Util {
   /**
    * @param {number} playerScale Player Scale.
    * @param {number} barrierScale Barrier Scale.
@@ -98,6 +45,20 @@ class PlayerUtil {
   }
 
   /**
+   * Decides when to go back to idle anim form fire.
+   * @param {boolean} fire
+   * @param {number} state
+   * @return {boolean}
+   */
+  static exitFire(fire, state) {
+    if (fire && this.isIdleAnim(state)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
    * drawImage() Helper.
    * @param {CanvasRenderingContext2D} ctx
    * @param {SpriteSheet} spriteSheet
@@ -109,16 +70,18 @@ class PlayerUtil {
    */
   static imgDrawCall(ctx, spriteSheet, spriteName, size, x, y, scale) {
     const SPRITE = spriteSheet.getSprite(spriteName);
-    ctx.drawImage(
-        spriteSheet.image,
-        SPRITE.x,
-        SPRITE.y,
-        size,
-        size,
-        x,
-        y,
-        size * scale,
-        size * scale
-    );
+    if (SPRITE != undefined) {
+      ctx.drawImage(
+          spriteSheet.image,
+          SPRITE.x,
+          SPRITE.y,
+          size,
+          size,
+          x,
+          y,
+          size * scale,
+          size * scale
+      );
+    }
   }
 }

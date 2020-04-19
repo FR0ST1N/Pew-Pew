@@ -18,46 +18,41 @@
  * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** @file Calculate movement for enemy. */
-class EnemyMovement {
-  /**
-   * Enemy default. Does not move.
-   * @param {number} x
-   * @param {number} y
-   * @return {position}
-   */
-  static default(x, y) {
-    return {
-      x: x,
-      y: y,
-    };
+/** @file Bullet Manager Class. */
+class BulletManager {
+  /** Bullet Manager constructor. */
+  constructor() {
+    this.bullets = [];
   }
 
   /**
-   * Move UP.
-   * @param {number} x
-   * @param {number} y
-   * @param {number} v Increment value
-   * @return {position}
-   */
-  static up(x, y, v) {
-    return {
-      x: x,
-      y: y + v,
-    };
+   * Draws all bullets.
+   * @param {Bullet[]} bullets
+  */
+  draw(bullets) {
+    this.bullets = bullets;
+    for (let i = 0; i < this.bullets.length; i++) {
+      if (!this.bullets[i].destroy) {
+        this.bullets[i].draw();
+      } else {
+        this._removeBullet(i);
+      }
+    }
   }
 
   /**
-   * Move DOWN.
-   * @param {number} x
-   * @param {number} y
-   * @param {number} v Increment value
-   * @return {position}
+   * Add bullet to array.
+   * @param {Bullet} bullet Bullet class instance.
    */
-  static down(x, y, v) {
-    return {
-      x: x,
-      y: y - v,
-    };
+  addBullet(bullet) {
+    this.bullets[this.bullets.length] = bullet;
+  }
+
+  /**
+   * Remove a bullet from array.
+   * @param {number} index Index of the bullet.
+   */
+  _removeBullet(index) {
+    this.bullets.splice(index, 1);
   }
 }

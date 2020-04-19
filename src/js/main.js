@@ -26,8 +26,8 @@ window.onload = function() {
     'images/ui_heart.png',
     'images/ui_bullet_holder.png',
     'images/logo.png',
-    'images/enemy_bullet.png',
     'images/enemy1.png',
+    'images/enemy_bullet.png',
   ];
   loadImages(PATHS, main);
 };
@@ -58,7 +58,8 @@ function loadImages(paths, cb) {
  * @param {HTMLImageElement[]} images Array of loaded images.
  */
 function main(images) {
-  const CANVAS = document.getElementById('game');
-  const GAME = new Game(CANVAS, 800, 600, images);
+  const GAME_LAYER = document.getElementById('game');
+  const UI_LAYER = document.getElementById('ui');
+  const GAME = new Game(GAME_LAYER, UI_LAYER, 800, 600, images);
   GAME.init();
 }

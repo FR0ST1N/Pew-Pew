@@ -22,31 +22,46 @@
 class Game {
   /**
    * @param {HTMLCanvasElement} canvas Game canvas element.
+   * @param {HTMLCanvasElement} uiCanvas UI canvas element.
    * @param {number} width Canvas width.
    * @param {number} height Canvas height.
    * @param {HTMLImageElement[]} images Game images.
    */
-  constructor(canvas, width, height, images) {
+  constructor(canvas, uiCanvas, width, height, images) {
     canvas.width = width;
     canvas.height = height;
+    uiCanvas.width = width;
+    uiCanvas.height = height;
     this.width = width;
     this.height = height;
     this.ctx = canvas.getContext('2d');
+    this.uiCtx = uiCanvas.getContext('2d');
+    this.canvasSize = {
+      width: this.width,
+      height: this.height,
+    };
     this.images = images;
     this.globalObject = {
       player: null,
       ui: null,
       score: null,
+      level: null,
+    };
+    this.previous = {
+      health: null,
+      bullets: null,
+      score: null,
     };
     this.requestAnimationFrameId = null;
     this.version = 'v1.0.0-alpha.2';
-    this.resetScore = false;
+    this.collisionManager = null;
   }
 
   /** Game initialization. */
   init() {
     /* Make pixel art crispy */
     this.ctx.imageSmoothingEnabled = false;
+    this.uiCtx.imageSmoothingEnabled = false;
     /* Make movements smooth */
     this.ctx.globalCompositeOperation = 'source-over';
     /* Create and init player */
@@ -54,71 +69,130 @@ class Game {
     this.globalObject.player.init();
     /* Create and init UI */
     const UI_IMAGES = this.images.slice(2, 5);
-    this.globalObject.ui = new UserInterface(this.ctx, this.version, UI_IMAGES);
+    this.globalObject.ui = new UserInterface(
+        this.uiCtx,
+        this.canvasSize,
+        this.version,
+        UI_IMAGES);
     this.globalObject.ui.init();
-    /** Create score instance and set it */
+    /* Create score instance and set it */
     this.globalObject.score = new Score();
-    /* Init level */
-    this.level = new Level(this);
-    /* setplayer Object's level */
-    this.globalObject.player.setLevel(this.level);
-    /* Render game */
-    this._render();
+    /* Draw start screen */
+    this.globalObject.ui.draw();
+    /* UI input listener */
+    this._uiInputListener();
+    /* Collision manager */
+    this.collisionManager = this._createCollisionManager();
+    /* Init Level */
+    this.globalObject.level = this._createLevel();
   }
 
   /** Main render method. */
   _render() {
     /* Clear canvas */
     this.ctx.clearRect(0, 0, this.width, this.height);
-    /* Paint BG */
-    this.ctx.fillStyle = '#260016';
-    this.ctx.fillRect(0, 0, this.width, this.height);
-    /* Assign UI instance to a const */
-    const UI = this.globalObject.ui;
-    /* GameOver screen when player dies and reset game */
-    if (this.globalObject.player.lives <= 0 &&
-        UI.currentState === UI.states.GAME) {
-      UI.currentState = UI.states.GAMEOVER;
-      this._resetGame();
+    if (!this._isDead()) {
+      /* Check condition and redraw UI */
+      this._redrawUI();
+      /* Draw Game */
+      this._drawGame();
+      /* Refresh frame */
+      this.requestAnimationFrameId =
+          window.requestAnimationFrame(this._render.bind(this));
     }
-    /* Draw actual game only if the current UI state says so */
-    if (UI.currentState === UI.states.GAME) {
-      /* Reset score when gameover -> game state */
-      if (this.resetScore) {
-        this.globalObject.score.resetScore();
-        this.resetScore = false;
-      }
-      this._drawGame(this.globalObject.player);
-      /* check level start status and start level trigger */
-      if (!this.level.gameEnd) {
-        this.level.triggerNextLevel();
-        this.level.gameEnd = true;
-      }
-    }
-    /* Draw UI */
-    UI.draw(
-        this.globalObject.player.lives,
-        this.globalObject.player.bulletCount,
-        this.globalObject.score.getScore()
-    );
-    /* Refresh frame */
-    this.requestAnimationFrameId =
-        window.requestAnimationFrame(this._render.bind(this));
   }
 
   /**
-   * Draw Gameplay
-   * @param {Player} player A Player instance.
+   * Stop render and set ui to gameover
+   * @return {boolean}
    */
-  _drawGame(player) {
-    /* increment player frame */
-    player.frameCounter++;
+  _isDead() {
+    if (this.globalObject.player.lives <= 0) {
+      window.cancelAnimationFrame(this.requestAnimationFrameId);
+      this.requestAnimationFrameId = null;
+      this.globalObject.ui.currentState = this.globalObject.ui.states.GAMEOVER;
+      this.globalObject.ui.draw(0, 0, this.globalObject.score.getScore());
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /** Check condition and redraw UI. Also stores values of previous frame. */
+  _redrawUI() {
+    const HEALTH = this.globalObject.player.lives;
+    const BULLETS = this.globalObject.player.bulletCount;
+    const SCORE = this.globalObject.score.getScore();
+    if (this.previous.health != HEALTH || this.previous.bullets != BULLETS ||
+        this.previous.score != SCORE) {
+      this.globalObject.ui.draw(HEALTH, BULLETS, SCORE);
+    }
+    this.previous.health = HEALTH;
+    this.previous.bullets = BULLETS;
+    this.previous.score = SCORE;
+  }
+
+  /** Check collision and draw gameplay. */
+  _drawGame() {
+    /* Check collision */
+    this.collisionManager.checkCollision(
+        this.globalObject.player.bulletManager.bullets,
+        this.globalObject.level.bulletManager.bullets,
+        this.globalObject.player.position,
+        this.globalObject.player.pressed.absorb,
+        this.globalObject.level.enemies,
+        this.globalObject.player.lives,
+        this.globalObject.player.bulletCount,
+        this.globalObject.score,
+        this.globalObject.level.level);
+    /* Reassign the score object */
+    this.globalObject.score = this.collisionManager.score;
     /* Change player position */
-    player.playerMovement();
+    this.globalObject.player.playerMovement();
     /* Draw player */
-    player._drawFrame();
-    /* Draw enemy and bullets Inside "EnemySpawner" class */
-    this.level.draw();
+    this.globalObject.player._drawFrame(
+        this.collisionManager.playerBullets,
+        this.collisionManager.playerHealth,
+        this.collisionManager.playerBulletCount);
+    /** Draw level */
+    this.globalObject.level.draw(
+        this.collisionManager.enemies,
+        this.collisionManager.enemyBullets);
+  }
+
+  /**
+   * Create a new collision manager.
+   * @return {CollisionManager}
+   */
+  _createCollisionManager() {
+    return new CollisionManager(
+        this.ctx,
+        {
+          scale: this.globalObject.player.scale.player,
+          width: this.globalObject.player.scale.player * 32,
+          height: this.globalObject.player.scale.player * 32,
+        },
+        {
+          scale: this.globalObject.player.scale.barrier,
+          width: this.globalObject.player.scale.barrier * 32,
+          height: this.globalObject.player.scale.barrier * 32,
+        },
+        {
+          width: 48,
+          height: 48,
+        }
+    );
+  }
+
+  /**
+   * Create a new Level instance.
+   * @return {Level}
+   */
+  _createLevel() {
+    return new Level(
+        this.ctx,
+        this.canvasSize,
+        this.images.slice(5, 7));
   }
 
   /**
@@ -135,17 +209,13 @@ class Game {
     const SPRITE_NAMES = [
       'idle1',
       'idle2',
-      'pop1',
-      'pop2',
-      'push1',
-      'push2',
+      'fire1',
+      'fire2',
+      'absorb1',
+      'absorb2',
       'shield',
       'blank',
     ];
-    const CANVAS_SIZE = {
-      width: this.width,
-      height: this.height,
-    };
     const KEYS = {
       left: 'ArrowLeft',
       up: 'ArrowUp',
@@ -155,21 +225,58 @@ class Game {
       absorb: 'KeyZ',
     };
     const PLAYER_IMAGES = this.images.slice(0, 2);
-    const PLAYER = new Player(P_SS, SPRITE_NAMES, this.ctx, CANVAS_SIZE, KEYS,
-        PLAYER_IMAGES);
+    const PLAYER = new Player(P_SS, SPRITE_NAMES, this.ctx, this.canvasSize,
+        KEYS, PLAYER_IMAGES);
     return PLAYER;
   }
 
   /** Reset game. */
   _resetGame() {
-    this.resetScore = true;
-    /* Destroy old player */
+    /* Reset score */
+    this.globalObject.score.resetScore();
+    /* Create new player */
     this.globalObject.player.destroy();
-    /* Crerate new player */
     this.globalObject.player = this._createPlayer();
     this.globalObject.player.init();
+    /* Reset previous values */
+    this.previous = {
+      health: null,
+      bullets: null,
+      score: null,
+    };
     /* Reset level */
-    this.level.reset(this.globalObject.player);
-    this.globalObject.player.setLevel(this.level);
+    this.globalObject.level.destroy();
+    this.globalObject.level = this._createLevel();
+    /* Reset collision manager */
+    this.collisionManager = this._createCollisionManager();
+  }
+
+  /** Listener for start and restart game. */
+  _uiInputListener() {
+    document.addEventListener('keydown', this._uiInput.bind(this), false);
+  }
+
+  /**
+   * UI Input Listener
+   * @param {KeyboardEvent} event
+   */
+  _uiInput(event) {
+    if (event.repeat) {
+      return;
+    }
+    const UI = this.globalObject.ui;
+    if (event.code === 'Space') {
+      if (
+        UI.currentState === UI.states.START ||
+        UI.currentState === UI.states.GAMEOVER
+      ) {
+        AudioEffects.playUiSound();
+        if (UI.currentState == UI.states.GAMEOVER) {
+          this._resetGame();
+        }
+        UI.currentState = UI.states.GAME;
+        this._render();
+      }
+    }
   }
 }
