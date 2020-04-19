@@ -53,7 +53,7 @@ class Game {
       score: null,
     };
     this.requestAnimationFrameId = null;
-    this.version = 'v1.0.0-alpha.2';
+    this.version = 'v1.0.0';
     this.collisionManager = null;
   }
 
