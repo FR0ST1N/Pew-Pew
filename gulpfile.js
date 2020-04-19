@@ -12,29 +12,26 @@ const rimraf = require('gulp-rimraf');
 const checkSize = require('gulp-check-filesize');
 const imageMin = require('gulp-imagemin');
 const jsdoc = require('gulp-jsdoc3');
+const log = require('fancy-log');
 
+let ignoreJsLintErrors = false;
 const jsConcat = [
+  'src/js/misc/util.js',
+  'src/js/animator/animator.js',
   'src/js/audio/audioEffects.js',
   'src/js/score/score.js',
-  'src/js/player/spriteSheet.js',
-  'src/js/enemy/common/sprite.js',
-  'src/js/enemy/common/position.js',
-  'src/js/enemy/common/timer.js',
-  'src/js/player/playerUtil.js',
+  'src/js/spritesheet/spriteSheet.js',
+  'src/js/player/playerAnimator.js',
   'src/js/player/player.js',
   'src/js/font/font.js',
   'src/js/ui/userInterface.js',
+  'src/js/collision/collisionManager.js',
   'src/js/collision/collisionDetection.js',
-  'src/js/enemy/common/animationHelper.js',
-  'src/js/enemy/bulletSpeed.js',
-  'src/js/enemy/bulletPattern.js',
-  'src/js/enemy/bulletAnimationHelper.js',
-  'src/js/enemy/bulletMovement.js',
-  'src/js/enemy/bullet.js',
-  'src/js/enemy/enemyAnimationHelper.js',
+  'src/js/bullet/bulletManager.js',
+  'src/js/bullet/bullet.js',
   'src/js/enemy/enemyMovement.js',
   'src/js/enemy/enemy.js',
-  'src/js/enemy/level.js',
+  'src/js/level/level.js',
   'src/js/game.js',
   'src/js/main.js',
 ];
@@ -52,11 +49,21 @@ gulp.task('cssLint', function() {
 });
 
 gulp.task('jsLint', function() {
-  return gulp.src('src/js/**/*.js')
-      .pipe(concat('main.js'))
-      .pipe(jsLint())
-      .pipe(jsLint.format())
-      .pipe(jsLint.failAfterError());
+  if (process.argv.includes('--ignoreJsErrors')) {
+    log('WARNING: Ignoring JS Errors.');
+    ignoreJsLintErrors = true;
+  }
+
+  return ignoreJsLintErrors ?
+      (gulp.src('src/js/**/*.js')
+          .pipe(concat('main.js'))
+          .pipe(jsLint())
+          .pipe(jsLint.format())) :
+      (gulp.src('src/js/**/*.js')
+          .pipe(concat('main.js'))
+          .pipe(jsLint())
+          .pipe(jsLint.format())
+          .pipe(jsLint.failAfterError()));
 });
 
 gulp.task('jsLintNoConcat', function() {
@@ -66,7 +73,7 @@ gulp.task('jsLintNoConcat', function() {
 });
 
 gulp.task('genDocs', function() {
-  var config = require('./jsdoc.json');
+  const config = require('./jsdoc.json');
   return gulp.src('src/js/**/*.js', {read: false})
       .pipe(jsdoc(config));
 });
@@ -121,14 +128,14 @@ gulp.task('zip', function() {
 });
 
 gulp.task('jsfxr', function() {
-  console.log('Added jsfxr to build!');
+  log('Added jsfxr to build!');
 
   return gulp.src('src/jsfxr/jsfxr.min.js', {allowEmpty: true})
       .pipe(gulp.dest('build/jsfxr/'));
 });
 
 gulp.task('watch', function() {
-  console.log('Now Watching!');
+  log('Now Watching!');
   gulp.watch('src/index.html', gulp.series('htmlLint', 'htmlBuild'));
   gulp.watch('src/css/*.css', gulp.series('cssLint', 'cssBuild'));
   gulp.watch('src/js/**/*.js', gulp.series('jsLint', 'jsBuild'));

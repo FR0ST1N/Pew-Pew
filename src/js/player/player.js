@@ -1,13 +1,28 @@
-/**
- * @file Main player file. Contains player animations and other stuffs.
- * @author Frostin <iamfrostin@gmail.com>
+/*
+ * Pew-Pew
+ * Copyright (C) 2019 Frostin
+ *
+ * This file is part of Pew-Pew.
+ *
+ * Pew-Pew is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Pew-Pew is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Pew-Pew.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** Contains basic controls and other player functions. */
+/** @file Contains basic controls and other player functions. */
 class Player {
   /**
    * @typedef {Object} spriteSheet
-   * @property {string} image Sprite sheet path.
+   * @property {HTMLImageElement} image Sprite sheet.
    * @property {number} spriteSize Size of each sprite(x = y).
    * @property {number} rows No. of rows in sprite sheet.
    * @property {number} columns No. of columns in sprite sheet.
@@ -35,6 +50,7 @@ class Player {
    * @param {CanvasRenderingContext2D} ctx Canvas context.
    * @param {canvasSize} canvasSize Canvas width and height.
    * @param {playerKeys} keys Keys for player control and action.
+   * @param {HTMLImageElement[]} images Player images.
    * @param {number} [lives=3] Player's life count.
    * @param {number} [maxBulletSize=5] Max bullets player can hold.
    */
@@ -44,19 +60,20 @@ class Player {
       ctx,
       canvasSize,
       keys,
+      images,
       lives = 3,
       maxBulletSize = 5
   ) {
+    spriteSheet.image = images[0];
     this.spriteSheet = spriteSheet;
     this.spriteNames = spriteNames;
     this.ctx = ctx;
     this.canvasSize = canvasSize;
     this.keys = keys;
+    this.images = images;
     this.lives = lives;
     this.maxBulletSize = maxBulletSize;
     this.bulletCount = 0;
-    this.firedBulletStack = [];
-    this.level = null;
     this.absorbState = false;
     this.pressed = {
       left: false,
@@ -67,8 +84,8 @@ class Player {
       absorb: false,
     };
     this.scale = {
-      player: 3,
-      barrier: 3.5,
+      player: 2,
+      barrier: 3,
     };
     this.position = {
       x: 15,
@@ -79,8 +96,15 @@ class Player {
         spriteSheet.image,
         spriteSheet.spriteSize
     );
-    this.animState = 0;
-    this.frameCounter = 0;
+    this.playerAnimator = new PlayerAnimator();
+    this.bulletManager = new BulletManager();
+    this.movement = {
+      boundUp: -30,
+      boundLeft: 10,
+      boundRight: 70,
+      boundDown: 45,
+      move: 10,
+    };
   }
 
   /** Player initialization. */
@@ -98,94 +122,67 @@ class Player {
    * Called in render method.
    */
   playerMovement() {
-    const MOVE = 4;
-    const BOUND = 10;
-    if (
-      this.pressed.left &&
-        PlayerUtil.bound(
-            'left',
-            MOVE,
-            BOUND,
-            this.spriteSheet.spriteSize,
-            this.scale.player,
-            this.position,
-            this.canvasSize
-        )
-    ) {
-      this.position.x -= MOVE;
-    } else if (
-      this.pressed.right &&
-        PlayerUtil.bound(
-            'right',
-            MOVE,
-            BOUND,
-            this.spriteSheet.spriteSize,
-            this.scale.player,
-            this.position,
-            this.canvasSize
-        )
-    ) {
-      this.position.x += MOVE;
-    } else if (
-      this.pressed.up &&
-        PlayerUtil.bound(
-            'up',
-            MOVE,
-            BOUND,
-            this.spriteSheet.spriteSize,
-            this.scale.player,
-            this.position,
-            this.canvasSize
-        )
-    ) {
-      this.position.y -= MOVE;
-    } else if (
-      this.pressed.down &&
-        PlayerUtil.bound(
-            'down',
-            MOVE,
-            BOUND,
-            this.spriteSheet.spriteSize,
-            this.scale.player,
-            this.position,
-            this.canvasSize
-        )
-    ) {
-      this.position.y += MOVE;
+    if (this.pressed.left &&
+          this.position.x > this.movement.boundLeft) {
+      this.position.x -= this.movement.move;
+    } else if (this.pressed.right &&
+          this.position.x <
+          this.canvasSize.width - this.movement.boundRight) {
+      this.position.x += this.movement.move;
+    } else if (this.pressed.up &&
+          this.position.y > this.movement.boundUp) {
+      this.position.y -= this.movement.move;
+    } else if (this.pressed.down &&
+          this.position.y <
+          this.canvasSize.height - this.movement.boundDown) {
+      this.position.y += this.movement.move;
     }
   }
 
-  /** Draw a single player frame. */
-  _drawFrame() {
-    if (this.pressed.absorb) {
-      this._absorbAnimation();
-    } else if (this.pressed.pew) {
-      this._fireAnimation();
-    } else if (PlayerUtil.isIdleAnim(this.animState)) {
-      this._idleAnimation();
+  /**
+   * Draw a single player frame.
+   * @param {Bullet[]} bullets
+   * @param {number} lives
+   * @param {number} bulletCount
+   */
+  _drawFrame(bullets, lives, bulletCount) {
+    this.lives = lives;
+    this.bulletCount = bulletCount;
+    const STATE = this.playerAnimator.state;
+    if (Util.exitFire(this.pressed.pew, STATE)) {
+      this.pressed.pew = false;
     }
-    /* Draw bullet */
-    this._bulletDraw();
+    if (this.pressed.absorb) {
+      this.playerAnimator.absorbAnimation();
+    } else if (this.pressed.pew) {
+      this.playerAnimator.fireAnimation();
+    } else if (Util.isIdleAnim(STATE)) {
+      this.playerAnimator.idleAnimation();
+    }
     /* Draw player in canvas */
-    PlayerUtil.imgDrawCall(
+    Util.imgDrawCall(
         this.ctx,
         this.playerSpriteSheet,
-        this.spriteNames[this.animState],
+        this.spriteNames[STATE],
         this.spriteSheet.spriteSize,
         this.position.x,
         this.position.y,
         this.scale.player
     );
+    if (this.pressed.absorb === true &&
+        this.bulletCount >= this.maxBulletSize) {
+      this._absorbKeyUp(new KeyboardEvent('keyup', {'code': this.keys.absorb}));
+    }
     /* Draw barrier on absorb */
     if (this.pressed.absorb) {
-      const CORRECTION = PlayerUtil.getBarrierPosition(
+      const CORRECTION = Util.getBarrierPosition(
           this.scale.player,
           this.scale.barrier,
           this.spriteSheet.spriteSize
       );
       const X = this.position.x - CORRECTION;
       const Y = this.position.y - CORRECTION;
-      PlayerUtil.imgDrawCall(
+      Util.imgDrawCall(
           this.ctx,
           this.playerSpriteSheet,
           this.spriteNames[6],
@@ -195,68 +192,17 @@ class Player {
           this.scale.barrier
       );
     }
-  }
-
-  /** Idle animation logic */
-  _idleAnimation() {
-    if (this.frameCounter <= 15) {
-      this.animState = 0;
-    } else if (this.frameCounter >= 16 && this.frameCounter <= 30) {
-      this.animState = 1;
-    }
-    if (this.frameCounter === 30) {
-      this.frameCounter = 0;
-    }
-  }
-
-  /** Fire animation logic */
-  _fireAnimation() {
-    const ANIM_TIME = 7;
-    if (this.frameCounter <= ANIM_TIME) {
-      if (this.animState === 0) {
-        this.animState = 2;
-      } else if (this.animState === 1) {
-        this.animState = 3;
-      }
-    } else if (this.frameCounter > ANIM_TIME) {
-      this._returnToIdle(2, 3);
-      this.pressed.pew = false;
-    }
-  }
-
-  /** Absorb animation */
-  _absorbAnimation() {
-    if (this.frameCounter <= 15) {
-      this.animState = 4;
-    } else if (this.frameCounter >= 16 && this.frameCounter <= 30) {
-      this.animState = 5;
-    }
-    if (this.frameCounter === 30) {
-      this.frameCounter = 0;
-    }
-  }
-
-  /**
-   * Returns back to idle animation.
-   * @param {number} a State 1.
-   * @param {number} b State 2.
-   */
-  _returnToIdle(a, b) {
-    if (this.animState === a) {
-      this.animState = 1;
-      /* For smooth transition to idle state */
-      this.frameCounter = 15;
-    } else if (this.animState === b) {
-      this.animState = 0;
-      this.frameCounter = 0;
-    }
+    /* Draw bullets */
+    this.bulletManager.draw(bullets);
+    /* Increment frame counter */
+    this.playerAnimator.incrementFrame = 1;
   }
 
   /** Listens for input from player. */
   _startInputListeners() {
     /* Movement */
-    document.addEventListener('keydown', this._moveKeyDown.bind(this), false);
-    document.addEventListener('keyup', this._moveKeyUp.bind(this), false);
+    document.addEventListener('keydown', this._moveKey.bind(this), false);
+    document.addEventListener('keyup', this._moveKey.bind(this), false);
     /* Fire */
     document.addEventListener('keydown', this._fireKeyDown.bind(this), false);
     /* Absorb */
@@ -267,9 +213,9 @@ class Player {
   /** Stop listening for inputs from player. */
   _stopInputListeners() {
     /* Movement */
-    document.removeEventListener('keydown', this._moveKeyDown.bind(this),
+    document.removeEventListener('keydown', this._moveKey.bind(this),
         false);
-    document.removeEventListener('keyup', this._moveKeyUp.bind(this), false);
+    document.removeEventListener('keyup', this._moveKey.bind(this), false);
     /* Fire */
     document.removeEventListener('keydown', this._fireKeyDown.bind(this),
         false);
@@ -280,52 +226,30 @@ class Player {
   }
 
   /**
-   * Player movement on key down.
+   * Player movements on key up and down.
    * @param {KeyboardEvent} event
    */
-  _moveKeyDown(event) {
+  _moveKey(event) {
+    let value;
+    if (event.type == 'keydown') {
+      value = true;
+    } else if (event.type == 'keyup') {
+      value = false;
+    }
     switch (event.code) {
       case this.keys.left:
-        this.pressed.left = true;
+        this.pressed.left = value;
         break;
       case this.keys.right:
-        this.pressed.right = true;
+        this.pressed.right = value;
         break;
       case this.keys.up:
-        this.pressed.up = true;
+        this.pressed.up = value;
         break;
       case this.keys.down:
-        this.pressed.down = true;
+        this.pressed.down = value;
         break;
     }
-  }
-
-  /**
-   * Player movement on key up.
-   * @param {KeyboardEvent} event
-   */
-  _moveKeyUp(event) {
-    switch (event.code) {
-      case this.keys.left:
-        this.pressed.left = false;
-        break;
-      case this.keys.right:
-        this.pressed.right = false;
-        break;
-      case this.keys.up:
-        this.pressed.up = false;
-        break;
-      case this.keys.down:
-        this.pressed.down = false;
-        break;
-    }
-  }
-
-  /**
-   * @param {Level} level
-   */
-  setLevel(level) {
-    this.level = level;
   }
 
   /**
@@ -333,8 +257,8 @@ class Player {
    * @param {KeyboardEvent} event
    */
   _fireKeyDown(event) {
-    /* Block continuous fire */
-    if (event.repeat) {
+    /* Block continuous fire and don't fire on absorbing bullets */
+    if (event.repeat || this.pressed.absorb) {
       return;
     }
     /* Just for testing */
@@ -344,86 +268,30 @@ class Player {
     if (event.code === this.keys.pew && this.bulletCount > 0) {
       this.decrementBulletCount();
       this._fireBullet();
-      if (this.animState === 0) {
-        this.animState = 2;
-      } else if (this.animState === 1) {
-        this.animState = 3;
-      }
-      this.frameCounter = 0;
+      /* Begin fire animation. */
+      this.playerAnimator.resetFrameCounter();
       this.pressed.pew = true;
+      this.playerAnimator.fireAnimation();
       AudioEffects.playPlayerPewSound();
     }
   }
 
   /**
-   * fire player bullet
+   * Adds a bullet to bullet manager.
    */
   _fireBullet() {
-    const bulletSprite = new Sprite('player_bullet.png', 1, 5,
-        5, 5, new Position(0, 0), 10, 10);
-    const bullet = new Bullet(bulletSprite, new Position(this.position.x + 35,
-        this.position.y + 45), this.bulletpattern, 5, 1);
-    bullet.setContext(this.ctx);
-    bullet.setPlayerMode();
-    bullet.fire();
-    this.firedBulletStack.push(bullet);
-  }
-
-  /**
-   * draws bullets.
-   */
-  _bulletDraw() {
-    this.firedBulletStack = this.firedBulletStack
-        .filter(this._bulletsDraw.bind(this));
-  }
-
-  /**
-   * @param {Bullet} playerBullet
-   * @return {boolean}
-   */
-  _bulletsDraw(playerBullet) {
-    if (playerBullet != null || playerBullet != undefined) {
-      if (!this.isBulletInsideCanvas(playerBullet)) {
-        playerBullet.despawn();
-        return false;
-      } /* collision detection with player before draw */
-      this._checkCollisionWithEnemy(playerBullet);
-      return true;
-    }
-  }
-
-  /**
-   * check bullets postion in-relattion to canvas.
-   * @param {Bullet} bullet
-   * @return {boolean}
-   */
-  isBulletInsideCanvas(bullet) {
-    if (bullet.position == null) {
-      return false;
-    }
-    if (bullet.getBulletPosition().x < 800 && /* check only right side*/
-       bullet.getBulletPosition().y < 800) {
-      return true;
-    } return false;
-  }
-
-  /**
-   * @param {Bullet} bullet
-   */
-  _checkCollisionWithEnemy(bullet) {
-    this._playerBulletCollisionWithEnemy(bullet);
-  }
-
-  /**
-   * @param {Bullet} bullet
-   */
-  _playerBulletCollisionWithEnemy(bullet) {
-    this.level.drawableObjects.forEach((enemy) => {
-      if (enemy.collideDetect(bullet)) {
-        enemy.takeDamage(bullet.damage);
-        bullet.despawn();
-      } bullet.wDraw();
-    });
+    this.bulletManager.addBullet(new Bullet(
+        {
+          x: this.position.x + 35,
+          y: this.position.y + 35,
+        },
+        this.images[1],
+        10,
+        this.ctx,
+        this.canvasSize,
+        1,
+        true)
+    );
   }
 
   /**
@@ -444,40 +312,16 @@ class Player {
   _absorbKeyUp(event) {
     if (event.code === this.keys.absorb && this.pressed.absorb) {
       this.pressed.absorb = false;
-      this._returnToIdle(4, 5);
+      this.playerAnimator.resetFrameCounter();
+      this.playerAnimator.returnToIdle(4, 5);
     }
   }
 
   /** Called when player is dead. */
   destroy() {
-    this.level = null;
     this.position = null;
     this.bulletCount = 0;
     this._stopInputListeners();
-  }
-
-  /**
-   * Decrement player's life by 1.
-   * @return {number} Remaining life after decrement.
-   */
-  decrementLife() {
-    if (this.lives > 0) {
-      this.lives--;
-      AudioEffects.playPlayerDamageSound();
-    }
-    return this.lives;
-  }
-
-  /** Increments bullet count if it can hold */
-  incrementBulletCount() {
-    if (this.bulletCount < this.maxBulletSize) {
-      this.bulletCount++;
-      AudioEffects.playBarrierSound();
-    }
-    if (this.pressed.absorb === true &&
-        this.bulletCount >= this.maxBulletSize) {
-      this._absorbKeyUp(new KeyboardEvent('keyup', {'code': this.keys.absorb}));
-    }
   }
 
   /** Decrements bullet count if > 0 */

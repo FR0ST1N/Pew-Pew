@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.0.0] - 2020-04-19
+
+### Added
+
+- Repo link at start screen UI.
+- `--ignoreJsErrors` can now be passes as argument to ignore JS linting errors.
+- Resource Loader.
+- Separate canvas for game and UI.
+- `CC-BY-SA-4.0` license for images.
+- Basic level progression with 2 stages.
+
+### Changed
+
+- Most classes have been refactored/rewritten.
+- A lot of dependency updates.
+
+### Removed
+
+- Unused classes/files have been removed as part of the refactor/rewrite.
+- Removed CI.
+
 ## [v1.0.0-alpha.2] - 2019-11-14
 
 ### Added
@@ -70,6 +91,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Prototype for [Js13kGames](https://js13kgames.com/).
 
 [unreleased]: https://github.com/FR0ST1N/Pew-Pew/compare/master...develop
+[v1.0.0]: https://github.com/FR0ST1N/Pew-Pew/compare/v1.0.0-alpha.2...v1.0.0
 [v1.0.0-alpha.2]: https://github.com/FR0ST1N/Pew-Pew/compare/v1.0.0-alpha.1...v1.0.0-alpha.2
 [v1.0.0-alpha.1]: https://github.com/FR0ST1N/Pew-Pew/compare/v1.0.0-alpha...v1.0.0-alpha.1
 [1.0.0-alpha]: https://github.com/FR0ST1N/Pew-Pew/releases/tag/v1.0.0-alpha

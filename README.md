@@ -2,7 +2,7 @@
 
 ![Pew-Pew](banner.png "Pew-Pew")
 
-[![GitHub release][release badge]][release link] [![GitHub license][license badge]][license link]
+[![GitHub release][release badge]][release link]
 
 ## Table of Contents
 
@@ -96,10 +96,10 @@ npx gulp build
 ### Workflow
 
 1. Fork the repo.
-2. Create a branch.
+2. Create a branch (use `develop` as parent).
 3. Make changes.
 4. Submit a pull request.
-  
+
 Open an issue if you want to discuss something and check for lint errors before making a pull request.
 
 ### Code Style (JavaScript)
@@ -112,9 +112,8 @@ See [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 
-[**GPL-3.0**](https://github.com/FR0ST1N/Pew-Pew/blob/master/LICENSE)
+- All Code is licensed under [**GPL-3.0-or-later**](https://github.com/FR0ST1N/Pew-Pew/blob/master/LICENSE).
+- Images are licensed under [**CC-BY-SA-4.0**](https://creativecommons.org/licenses/by-sa/4.0/).
 
-[license link]: https://github.com/FR0ST1N/Pew-Pew/blob/master/LICENSE
-[license badge]: https://img.shields.io/github/license/FR0ST1N/Pew-Pew?color=260016&style=for-the-badge
-[release badge]: https://img.shields.io/github/v/release/FR0ST1N/Pew-Pew?color=260016&include_prereleases&style=for-the-badge
+[release badge]: https://img.shields.io/github/v/release/FR0ST1N/Pew-Pew?color=260016&include_prereleases&label=%20&logo=github&style=for-the-badge
 [release link]: https://github.com/FR0ST1N/Pew-Pew/releases

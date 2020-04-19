@@ -7,7 +7,6 @@
   "extends": "google",
   "rules": {
     "space-infix-ops": 2,
-    "operator-linebreak": 2,
     "new-parens": 2
   }
 }
