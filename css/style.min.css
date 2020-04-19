@@ -1,1 +1,1 @@
-html{background-color:#260016}#game{display:block;margin:0 auto;border-left:1px dashed #ed008c;border-bottom:1px dashed #ed008c;border-top:1px dashed #00bff3;border-right:1px dashed #00bff3}
+html{background-color:#260016}canvas{position:absolute;left:0;right:0;margin-left:auto;margin-right:auto}#game{z-index:1}#ui{z-index:2;display:block;border-left:1px dashed #ed008c;border-bottom:1px dashed #ed008c;border-top:1px dashed #00bff3;border-right:1px dashed #00bff3}#layers{position:relative}

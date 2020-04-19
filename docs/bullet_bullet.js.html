@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Bullet - Pew Pew Docs</title>
+    <title>bullet/bullet.js - Pew Pew Docs</title>
     
     <meta name="description" content="Docementation for Pew Pew (JavaScript Game)." />
     
@@ -44,703 +44,128 @@
 
 <div id="main">
     
-    <h1 class="page-title">Bullet</h1>
-    
-
-    
-
-
-
-
-<section>
-
-<header>
-    
-        <h2>
-        Bullet
-        </h2>
-        
-    
-</header>
-
-<article>
-    
-        <div class="container-overview">
-        
-            
-
-    
-
-    <h4 class="name" id="Bullet"><span class="type-signature"></span>new Bullet<span class="signature">(position, image, speed, ctx, canvasSize, damage<span class="signature-attributes">opt</span>, isPlayer<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="bullet_bullet.js.html">bullet/bullet.js</a>, <a href="bullet_bullet.js.html#line32">line 32</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>position</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#position">position</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>x and y.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>image</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">HTMLImageElement</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Image for bullet.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>speed</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Bullet speed.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>ctx</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">CanvasRenderingContext2D</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Canvas context.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>canvasSize</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#canvasSize">canvasSize</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Canvas width and height.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>damage</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>1</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>Bullet damage to collided object.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>isPlayer</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>false</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>Does the bullet belong to player?</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        </div>
-    
-
-    
-
-    
-
-    
-    
-    
-
-     
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    <h4 class="name" id="_destroy"><span class="type-signature"></span>_destroy<span class="signature">()</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="bullet_bullet.js.html">bullet/bullet.js</a>, <a href="bullet_bullet.js.html#line101">line 101</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Called when bullet is out of canvas.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="_isInsideCanvas"><span class="type-signature"></span>_isInsideCanvas<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="bullet_bullet.js.html">bullet/bullet.js</a>, <a href="bullet_bullet.js.html#line81">line 81</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Check if player is inside canvas.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="draw"><span class="type-signature"></span>draw<span class="signature">()</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="bullet_bullet.js.html">bullet/bullet.js</a>, <a href="bullet_bullet.js.html#line54">line 54</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Draw function for bullets.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
-
-    
-
-    
-</article>
-
-</section>
+    <h1 class="page-title">bullet/bullet.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*
+ * Pew-Pew
+ * Copyright (C) 2019 Frostin
+ *
+ * This file is part of Pew-Pew.
+ *
+ * Pew-Pew is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Pew-Pew is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Pew-Pew.  If not, see &lt;http://www.gnu.org/licenses/>.
+ */
+
+/** @file Main bullet class */
+class Bullet {
+  /**
+   * @param {position} position x and y.
+   * @param {HTMLImageElement} image Image for bullet.
+   * @param {number} speed Bullet speed.
+   * @param {CanvasRenderingContext2D} ctx Canvas context.
+   * @param {canvasSize} canvasSize Canvas width and height.
+   * @param {number} [damage=1] Bullet damage to collided object.
+   * @param {boolean} [isPlayer=false] Does the bullet belong to player?
+   */
+  constructor(
+      position,
+      image,
+      speed,
+      ctx,
+      canvasSize,
+      damage = 1,
+      isPlayer = false
+  ) {
+    this.position = position;
+    this.image = image;
+    this.speed = speed;
+    this.ctx = ctx;
+    this.canvasSize = canvasSize;
+    this.damage = damage;
+    this.isPlayer = isPlayer;
+    this.destroy = false;
+    this.size = 5;
+    this.scale = 5;
+  }
+
+  /** Draw function for bullets. */
+  draw() {
+    if (!this.destroy &amp;&amp; this._isInsideCanvas()) {
+      if (!this.isPlayer) {
+        this.position.x -= this.speed;
+      } else {
+        this.position.x += this.speed;
+      }
+      this.ctx.drawImage(
+          this.image,
+          0,
+          0,
+          this.size,
+          this.size,
+          this.position.x,
+          this.position.y,
+          this.size * this.scale,
+          this.size * this.scale
+      );
+    } else if (!this.destroy) {
+      this._destroy();
+    }
+  }
+
+  /**
+   * Check if player is inside canvas.
+   * @return {boolean}
+   */
+  _isInsideCanvas() {
+    const EXTRA = 20;
+    const B = {
+      x1: 0 - EXTRA,
+      y1: 0 - EXTRA,
+      x2: this.canvasSize.width + EXTRA,
+      y2: this.canvasSize.height + EXTRA,
+    };
+    const P = {
+      x: this.position.x,
+      y: this.position.y,
+    };
+    if (P.x > B.x1 &amp;&amp; P.y > B.y1 &amp;&amp; P.x &lt; B.x2 &amp;&amp; P.y &lt; B.y2) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /** Called when bullet is out of canvas. */
+  _destroy() {
+    this.position = null;
+    this.image = null;
+    this.speed = null;
+    this.isPlayer = null;
+    this.ctx = null;
+    this.destroy = true;
+  }
+}
+</code></pre>
+        </article>
+    </section>
 
 
 

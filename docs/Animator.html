@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Bullet - Pew Pew Docs</title>
+    <title>Animator - Pew Pew Docs</title>
     
     <meta name="description" content="Docementation for Pew Pew (JavaScript Game)." />
     
@@ -44,7 +44,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Bullet</h1>
+    <h1 class="page-title">Animator</h1>
     
 
     
@@ -57,7 +57,7 @@
 <header>
     
         <h2>
-        Bullet
+        Animator
         </h2>
         
     
@@ -71,7 +71,7 @@
 
     
 
-    <h4 class="name" id="Bullet"><span class="type-signature"></span>new Bullet<span class="signature">(position, image, speed, ctx, canvasSize, damage<span class="signature-attributes">opt</span>, isPlayer<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Animator"><span class="type-signature"></span>new Animator<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
 
@@ -83,7 +83,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="bullet_bullet.js.html">bullet/bullet.js</a>, <a href="bullet_bullet.js.html#line32">line 32</a>
+        <a href="animator_animator.js.html">animator/animator.js</a>, <a href="animator_animator.js.html#line24">line 24</a>
     </li></ul></dd>
     
 
@@ -122,6 +122,9 @@
 
 
 
+<div class="description usertext">
+    <p>No params for constructor</p>
+</div>
 
 
 
@@ -131,288 +134,6 @@
 
 
 
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>position</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#position">position</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>x and y.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>image</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">HTMLImageElement</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Image for bullet.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>speed</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Bullet speed.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>ctx</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">CanvasRenderingContext2D</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Canvas context.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>canvasSize</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#canvasSize">canvasSize</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>Canvas width and height.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>damage</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>1</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>Bullet damage to collided object.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>isPlayer</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>false</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>Does the bullet belong to player?</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -449,6 +170,136 @@
     
 
     
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="incrementFrame"><span class="type-signature"></span>incrementFrame<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="animator_animator.js.html">animator/animator.js</a>, <a href="animator_animator.js.html#line90">line 90</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Used to increment the frame counter.</p>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="state"><span class="type-signature"></span>state<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="animator_animator.js.html">animator/animator.js</a>, <a href="animator_animator.js.html#line82">line 82</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Returns the current animation state.</p>
+</div>
+
+
+
+
+
+
+
+
+        
+    
 
     
         <h3 class="subsection-title">Methods</h3>
@@ -458,7 +309,7 @@
 
     
 
-    <h4 class="name" id="_destroy"><span class="type-signature"></span>_destroy<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="fireAnimation"><span class="type-signature"></span>fireAnimation<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
 
@@ -470,7 +321,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="bullet_bullet.js.html">bullet/bullet.js</a>, <a href="bullet_bullet.js.html#line101">line 101</a>
+        <a href="animator_animator.js.html">animator/animator.js</a>, <a href="animator_animator.js.html#line47">line 47</a>
     </li></ul></dd>
     
 
@@ -510,7 +361,7 @@
 
 
 <div class="description usertext">
-    <p>Called when bullet is out of canvas.</p>
+    <p>Fire animation logic</p>
 </div>
 
 
@@ -545,7 +396,7 @@
 
     
 
-    <h4 class="name" id="_isInsideCanvas"><span class="type-signature"></span>_isInsideCanvas<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="idleAnimation"><span class="type-signature"></span>idleAnimation<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
 
@@ -557,7 +408,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="bullet_bullet.js.html">bullet/bullet.js</a>, <a href="bullet_bullet.js.html#line81">line 81</a>
+        <a href="animator_animator.js.html">animator/animator.js</a>, <a href="animator_animator.js.html#line35">line 35</a>
     </li></ul></dd>
     
 
@@ -597,7 +448,7 @@
 
 
 <div class="description usertext">
-    <p>Check if player is inside canvas.</p>
+    <p>Idle animation logic</p>
 </div>
 
 
@@ -624,24 +475,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -650,7 +483,7 @@
 
     
 
-    <h4 class="name" id="draw"><span class="type-signature"></span>draw<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="resetFrameCounter"><span class="type-signature"></span>resetFrameCounter<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
 
@@ -662,7 +495,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="bullet_bullet.js.html">bullet/bullet.js</a>, <a href="bullet_bullet.js.html#line54">line 54</a>
+        <a href="animator_animator.js.html">animator/animator.js</a>, <a href="animator_animator.js.html#line77">line 77</a>
     </li></ul></dd>
     
 
@@ -702,7 +535,7 @@
 
 
 <div class="description usertext">
-    <p>Draw function for bullets.</p>
+    <p>Reset frame counter to 0.</p>
 </div>
 
 
@@ -713,6 +546,165 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="returnToIdle"><span class="type-signature"></span>returnToIdle<span class="signature">(a, b)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="animator_animator.js.html">animator/animator.js</a>, <a href="animator_animator.js.html#line65">line 65</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Returns back to idle animation.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>a</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>State 1.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>b</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>State 2.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 

@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>UserInterface - Pew Pew Docs</title>
+    <title>CollisionManager - Pew Pew Docs</title>
     
     <meta name="description" content="Docementation for Pew Pew (JavaScript Game)." />
     
@@ -44,7 +44,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">UserInterface</h1>
+    <h1 class="page-title">CollisionManager</h1>
     
 
     
@@ -57,7 +57,7 @@
 <header>
     
         <h2>
-        UserInterface
+        CollisionManager
         </h2>
         
     
@@ -71,7 +71,7 @@
 
     
 
-    <h4 class="name" id="UserInterface"><span class="type-signature"></span>new UserInterface<span class="signature">(ctx, canvasSize, version, images)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="CollisionManager"><span class="type-signature"></span>new CollisionManager<span class="signature">(ctx, playerDimensions, playerAbsorbDimensions, enemyDimensions)</span><span class="type-signature"></span></h4>
 
     
 
@@ -83,7 +83,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ui_userInterface.js.html">ui/userInterface.js</a>, <a href="ui_userInterface.js.html#line29">line 29</a>
+        <a href="collision_collisionManager.js.html">collision/collisionManager.js</a>, <a href="collision_collisionManager.js.html#line29">line 29</a>
     </li></ul></dd>
     
 
@@ -180,13 +180,13 @@
 
         <tr>
             
-                <td class="name"><code>canvasSize</code></td>
+                <td class="name"><code>playerDimensions</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="global.html#canvasSize">canvasSize</a></span>
+<span class="param-type">Object</span>
 
 
             
@@ -203,13 +203,13 @@
 
         <tr>
             
-                <td class="name"><code>version</code></td>
+                <td class="name"><code>playerAbsorbDimensions</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">Object</span>
 
 
             
@@ -226,13 +226,13 @@
 
         <tr>
             
-                <td class="name"><code>images</code></td>
+                <td class="name"><code>enemyDimensions</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array.&lt;HTMLImageElement></span>
+<span class="param-type">Object</span>
 
 
             
@@ -293,7 +293,7 @@
 
     
 
-    <h4 class="name" id="_drawBulletCount"><span class="type-signature"></span>_drawBulletCount<span class="signature">(value)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="_checkEnemiesBulletsCollision"><span class="type-signature"></span>_checkEnemiesBulletsCollision<span class="signature">(absorb)</span><span class="type-signature"></span></h4>
 
     
 
@@ -305,7 +305,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ui_userInterface.js.html">ui/userInterface.js</a>, <a href="ui_userInterface.js.html#line143">line 143</a>
+        <a href="collision_collisionManager.js.html">collision/collisionManager.js</a>, <a href="collision_collisionManager.js.html#line111">line 111</a>
     </li></ul></dd>
     
 
@@ -345,7 +345,7 @@
 
 
 <div class="description usertext">
-    <p>Draw player's bullet count.</p>
+    <p>Checks for collision with player</p>
 </div>
 
 
@@ -383,172 +383,13 @@
 
         <tr>
             
-                <td class="name"><code>value</code></td>
+                <td class="name"><code>absorb</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Bullet count.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="_drawControls"><span class="type-signature"></span>_drawControls<span class="signature">(x, y)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ui_userInterface.js.html">ui/userInterface.js</a>, <a href="ui_userInterface.js.html#line173">line 173</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Draw controls in UI</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>x</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>y</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
+<span class="param-type">boolean</span>
 
 
             
@@ -588,7 +429,7 @@
 
     
 
-    <h4 class="name" id="_drawHealth"><span class="type-signature"></span>_drawHealth<span class="signature">(value)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="_checkPlayerBulletsCollision"><span class="type-signature"></span>_checkPlayerBulletsCollision<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
 
@@ -600,7 +441,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ui_userInterface.js.html">ui/userInterface.js</a>, <a href="ui_userInterface.js.html#line125">line 125</a>
+        <a href="collision_collisionManager.js.html">collision/collisionManager.js</a>, <a href="collision_collisionManager.js.html#line84">line 84</a>
     </li></ul></dd>
     
 
@@ -640,7 +481,200 @@
 
 
 <div class="description usertext">
-    <p>Draw player health.</p>
+    <p>Checks for collision with enemies.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="_getPlayerBarrierPosition"><span class="type-signature"></span>_getPlayerBarrierPosition<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#position">position</a>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="collision_collisionManager.js.html">collision/collisionManager.js</a>, <a href="collision_collisionManager.js.html#line149">line 149</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Calculate x and y and player absorb state.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="global.html#position">position</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="_isColliding"><span class="type-signature"></span>_isColliding<span class="signature">(targetPosition, targetDimensions, bullet, outline<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="collision_collisionManager.js.html">collision/collisionManager.js</a>, <a href="collision_collisionManager.js.html#line183">line 183</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Check for bullet collision with player/enemy.
+Outline drawn is not accurate because position is updated after this call.</p>
 </div>
 
 
@@ -666,387 +700,7 @@
         <th>Type</th>
 
         
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>value</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Player's current health.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="_drawLogo"><span class="type-signature"></span>_drawLogo<span class="signature">()</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ui_userInterface.js.html">ui/userInterface.js</a>, <a href="ui_userInterface.js.html#line107">line 107</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Draw Logo on start screen.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="_drawScore"><span class="type-signature"></span>_drawScore<span class="signature">(value, size)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ui_userInterface.js.html">ui/userInterface.js</a>, <a href="ui_userInterface.js.html#line162">line 162</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Draw current score.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>value</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Score.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>size</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Font size.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="draw"><span class="type-signature"></span>draw<span class="signature">(currHealth, bulletCount, score)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ui_userInterface.js.html">ui/userInterface.js</a>, <a href="ui_userInterface.js.html#line79">line 79</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Draw UI based on the state.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
+        <th>Attributes</th>
         
 
         
@@ -1062,87 +716,144 @@
 
         <tr>
             
-                <td class="name"><code>currHealth</code></td>
+                <td class="name"><code>targetPosition</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type"><a href="global.html#position">position</a></span>
 
 
             
             </td>
 
             
-
-            
-                <td class="default">
+                <td class="attributes">
                 
-                    <code>0</code>
+
+                
+
                 
                 </td>
             
 
-            <td class="description last"><p>Player's current health/lives.</p></td>
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>bulletCount</code></td>
+                <td class="name"><code>targetDimensions</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">Object</span>
 
 
             
             </td>
 
             
-
-            
-                <td class="default">
+                <td class="attributes">
                 
-                    <code>0</code>
+
+                
+
                 
                 </td>
             
 
-            <td class="description last"><p>Player's current bullet count.</p></td>
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>score</code></td>
+                <td class="name"><code>bullet</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type"><a href="Bullet.html">Bullet</a></span>
 
 
             
             </td>
 
             
-
-            
-                <td class="default">
+                <td class="attributes">
                 
-                    <code>0</code>
+
+                
+
                 
                 </td>
             
 
-            <td class="description last"><p>Current score.</p></td>
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>outline</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>false</code>
+                
+                </td>
+            
+
+            <td class="description last"></td>
         </tr>
 
     
@@ -1164,6 +875,24 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -1172,7 +901,7 @@
 
     
 
-    <h4 class="name" id="init"><span class="type-signature"></span>init<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="_removeEnemy"><span class="type-signature"></span>_removeEnemy<span class="signature">(index)</span><span class="type-signature"></span></h4>
 
     
 
@@ -1184,7 +913,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ui_userInterface.js.html">ui/userInterface.js</a>, <a href="ui_userInterface.js.html#line55">line 55</a>
+        <a href="collision_collisionManager.js.html">collision/collisionManager.js</a>, <a href="collision_collisionManager.js.html#line164">line 164</a>
     </li></ul></dd>
     
 
@@ -1224,7 +953,7 @@
 
 
 <div class="description usertext">
-    <p>Initialize UI.</p>
+    <p>Removes enemy from current array.</p>
 </div>
 
 
@@ -1235,6 +964,371 @@
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="checkCollision"><span class="type-signature"></span>checkCollision<span class="signature">(playerBullets, enemyBullets, playerPosition, playerAbsorb, enemies, playerHealth, playerBulletCount, score, level)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="collision_collisionManager.js.html">collision/collisionManager.js</a>, <a href="collision_collisionManager.js.html#line56">line 56</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>playerBullets</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="Bullet.html">Bullet</a>></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>enemyBullets</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="Bullet.html">Bullet</a>></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>playerPosition</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#position">position</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>playerAbsorb</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>enemies</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="Enemy.html">Enemy</a>></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>playerHealth</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>playerBulletCount</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>score</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Score.html">Score</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>level</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
