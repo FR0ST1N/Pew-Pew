@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.0.1] - 2020-04-20
+
+### Fixed
+
+- Incorrect initial stage value in `Level` class that loaded wrong stage with 0 health enemies.
+
 ## [v1.0.0] - 2020-04-19
 
 ### Added
@@ -91,6 +97,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Prototype for [Js13kGames](https://js13kgames.com/).
 
 [unreleased]: https://github.com/FR0ST1N/Pew-Pew/compare/master...develop
+[v1.0.1]: https://github.com/FR0ST1N/Pew-Pew/compare/v1.0.0...v1.0.1
 [v1.0.0]: https://github.com/FR0ST1N/Pew-Pew/compare/v1.0.0-alpha.2...v1.0.0
 [v1.0.0-alpha.2]: https://github.com/FR0ST1N/Pew-Pew/compare/v1.0.0-alpha.1...v1.0.0-alpha.2
 [v1.0.0-alpha.1]: https://github.com/FR0ST1N/Pew-Pew/compare/v1.0.0-alpha...v1.0.0-alpha.1

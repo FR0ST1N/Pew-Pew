@@ -41,7 +41,7 @@ class Level {
     this.enemies = [];
     this.enemyBullets = [];
     this.bulletManager = new BulletManager();
-    this.stage = 0;
+    this.stage = this.stages.length - 1;
     this.level = 0;
     this.maxFrames = 60;
     this.frame = 1;
