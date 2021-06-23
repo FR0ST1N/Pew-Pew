@@ -87,13 +87,14 @@ class Level {
     this.images = images;
     this.stages = [
       /* Stage 0 */
-      [{x: 700, y: 100}, {x: 600, y: 200}, {x: 550, y: 300}, {x: 600, y: 400},
-        {x: 700, y: 500}],
+      [{x: 700, y: 75}, {x: 600, y: 175}, {x: 550, y: 275}, {x: 600, y: 375},
+        {x: 700, y: 475}],
       /* Stage 1 */
       [{x: 300, y: 50}, {x: 350, y: canvasSize.height - 50}, {x: 400, y: 50},
         {x: 450, y: canvasSize.height - 50}, {x: 500, y: 50},
         {x: 550, y: canvasSize.height - 50}],
     ];
+    this.movementSpeeds = [1, 10];
     this.enemies = [];
     this.enemyBullets = [];
     this.bulletManager = new BulletManager();
@@ -157,6 +158,7 @@ class Level {
    */
   loadStage(n) {
     const STAGE = this.stages[n];
+    const MOVEMENT_SPEED = this.movementSpeeds[n];
     for (let i = 0; i &lt; STAGE.length; i++) {
       this.enemies[i] = new Enemy(
           this.ctx,
@@ -172,7 +174,7 @@ class Level {
             y: STAGE[i].y,
           },
           this.level,
-          3,
+          MOVEMENT_SPEED,
           10,
           60,
           this.stage);
