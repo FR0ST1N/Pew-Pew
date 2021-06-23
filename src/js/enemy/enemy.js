@@ -93,7 +93,8 @@ class Enemy {
   }
 
   /**
-   * Tells ememy to move up or down.
+   * Sets trigger to move up or down.
+   * maxPos must be greater than minPos.
    * @param {number} minPos
    * @param {number} maxPos
    */
@@ -105,7 +106,7 @@ class Enemy {
     }
   }
 
-  /** Enemy Movement. Update position fo the enemy. */
+  /** Enemy Movement. Update position for the enemy. */
   _updatePosition() {
     switch (this.movementIndex) {
       case 0:
@@ -122,7 +123,7 @@ class Enemy {
     }
   }
 
-  /** Fire method for enemy */
+  /** Fire method for the enemy */
   pew() {
     this.enemyAnimator.resetFrameCounter();
     this.fire = true;

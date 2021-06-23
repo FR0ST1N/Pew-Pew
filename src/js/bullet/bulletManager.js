@@ -41,7 +41,7 @@ class BulletManager {
   }
 
   /**
-   * Add bullet to array.
+   * Add a bullet to array.
    * @param {Bullet} bullet Bullet class instance.
    */
   addBullet(bullet) {
