@@ -91,11 +91,15 @@ class Enemy {
     this.enemyAnimator.incrementFrame = 1;
   }
 
-  /** increment or decrement y */
-  _setUpDownTriggers() {
-    if (this.position.y == 0) {
+  /**
+   * Tells ememy to move up or down.
+   * @param {number} minPos
+   * @param {number} maxPos
+   */
+  _setUpDownTriggers(minPos, maxPos) {
+    if (this.position.y == minPos) {
       this.up = true;
-    } else if (this.position.y == this.canvasSize.height - 50) {
+    } else if (this.position.y == maxPos) {
       this.up = false;
     }
   }
@@ -108,7 +112,7 @@ class Enemy {
             this.position.y);
         break;
       case 1:
-        this._setUpDownTriggers();
+        this._setUpDownTriggers(0, this.canvasSize.height - 50);
         if (this.up) {
           this.position = EnemyMovement.up(this.position.x,
               this.position.y, this.movementSpeed);
