@@ -111,10 +111,10 @@ class Enemy {
         this._setUpDownTriggers();
         if (this.up) {
           this.position = EnemyMovement.up(this.position.x,
-              this.position.y, 10);
+              this.position.y, this.movementSpeed);
         } else {
           this.position = EnemyMovement.down(this.position.x,
-              this.position.y, 10);
+              this.position.y, this.movementSpeed);
         }
         break;
     }

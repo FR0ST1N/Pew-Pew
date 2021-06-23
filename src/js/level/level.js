@@ -116,7 +116,7 @@ class Level {
             y: STAGE[i].y,
           },
           this.level,
-          3,
+          10,
           10,
           60,
           this.stage);

@@ -38,7 +38,6 @@ window.onload = function() {
  * @param {mainCallback} cb Callback after images have been loaded.
  */
 function loadImages(paths, cb) {
-  /* NOTE: Not tested yet. */
   const IMAGES = [];
   let loaded = 0;
   for (let i = 0; i < paths.length; i++) {
