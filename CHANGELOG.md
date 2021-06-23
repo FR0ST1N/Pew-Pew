@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.1.0] - 2021-06-23
+
+### Added
+
+- Added movement to first stage enemies.
+
+### Changed
+
+- Refactor enemy movement related code.
+
 ## [v1.0.1] - 2020-04-20
 
 ### Fixed
@@ -97,6 +107,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Prototype for [Js13kGames](https://js13kgames.com/).
 
 [unreleased]: https://github.com/FR0ST1N/Pew-Pew/compare/master...develop
+[v1.1.0]: https://github.com/FR0ST1N/Pew-Pew/compare/v1.0.1...v1.1.0
 [v1.0.1]: https://github.com/FR0ST1N/Pew-Pew/compare/v1.0.0...v1.0.1
 [v1.0.0]: https://github.com/FR0ST1N/Pew-Pew/compare/v1.0.0-alpha.2...v1.0.0
 [v1.0.0-alpha.2]: https://github.com/FR0ST1N/Pew-Pew/compare/v1.0.0-alpha.1...v1.0.0-alpha.2
