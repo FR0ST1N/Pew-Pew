@@ -51,7 +51,7 @@ class EnemyMovement {
    * Move DOWN.
    * @param {number} x
    * @param {number} y
-   * @param {number} v Increment value
+   * @param {number} v Decrement value
    * @return {position}
    */
   static down(x, y, v) {
@@ -59,5 +59,20 @@ class EnemyMovement {
       x: x,
       y: y - v,
     };
+  }
+
+  /**
+   * Move UP and DOWN.
+   * @param {position} position
+   * @param {boolean} goUp
+   * @param {number} movementSpeed
+   * @return {position}
+   */
+  static upDown(position, goUp, movementSpeed) {
+    if (goUp) {
+      return this.up(position.x, position.y, movementSpeed);
+    } else {
+      return this.down(position.x, position.y, movementSpeed);
+    }
   }
 }

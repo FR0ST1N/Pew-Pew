@@ -46,6 +46,7 @@ class Enemy {
     this.canvasSize = canvasSize;
     this.spriteSheet = spriteSheet;
     this.position = position;
+    this.originalPosition = position;
     this.health = health;
     this.movementSpeed = movementSpeed;
     this.bulletSpeed = bulletSpeed;
@@ -91,36 +92,38 @@ class Enemy {
     this.enemyAnimator.incrementFrame = 1;
   }
 
-  /** increment or decrement y */
-  _setUpDownTriggers() {
-    if (this.position.y == 0) {
+  /**
+   * Sets trigger to move up or down.
+   * maxPos must be greater than minPos.
+   * @param {number} minPos
+   * @param {number} maxPos
+   */
+  _setUpDownTriggers(minPos, maxPos) {
+    if (this.position.y == minPos) {
       this.up = true;
-    } else if (this.position.y == this.canvasSize.height - 50) {
+    } else if (this.position.y == maxPos) {
       this.up = false;
     }
   }
 
-  /** Enemy Movement. Update position fo the enemy. */
+  /** Enemy Movement. Update position for the enemy. */
   _updatePosition() {
     switch (this.movementIndex) {
       case 0:
-        this.position = EnemyMovement.default(this.position.x,
-            this.position.y);
+        this._setUpDownTriggers(this.originalPosition.y,
+            this.originalPosition.y + 25);
+        this.position = EnemyMovement.upDown(this.position, this.up,
+            this.movementSpeed);
         break;
       case 1:
-        this._setUpDownTriggers();
-        if (this.up) {
-          this.position = EnemyMovement.up(this.position.x,
-              this.position.y, 10);
-        } else {
-          this.position = EnemyMovement.down(this.position.x,
-              this.position.y, 10);
-        }
+        this._setUpDownTriggers(0, this.canvasSize.height - 50);
+        this.position = EnemyMovement.upDown(this.position, this.up,
+            this.movementSpeed);
         break;
     }
   }
 
-  /** Fire method for enemy */
+  /** Fire method for the enemy */
   pew() {
     this.enemyAnimator.resetFrameCounter();
     this.fire = true;
