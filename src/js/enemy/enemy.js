@@ -113,13 +113,15 @@ class Enemy {
         break;
       case 1:
         this._setUpDownTriggers(0, this.canvasSize.height - 50);
-        if (this.up) {
+        this.position = EnemyMovement.upDown(this.position, this.up,
+            this.movementSpeed);
+        /* if (this.up) {
           this.position = EnemyMovement.up(this.position.x,
               this.position.y, this.movementSpeed);
         } else {
           this.position = EnemyMovement.down(this.position.x,
               this.position.y, this.movementSpeed);
-        }
+        } */
         break;
     }
   }
